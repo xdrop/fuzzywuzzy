@@ -11,7 +11,6 @@ import static java.lang.Math.round;
 @SuppressWarnings("WeakerAccess")
 public class FuzzySearch {
 
-
     public static final double UNBASE_SCALE = .95;
     public static final double PARTIAL_SCALE = .90;
     public static final boolean TRY_PARTIALS = true;
@@ -120,13 +119,11 @@ public class FuzzySearch {
         String sorted1to2 = (sortedInter + " " + Utils.sortAndJoin(diff1to2, " ")).trim();
         String sorted2to1 = (sortedInter + " " + Utils.sortAndJoin(diff2to1, " ")).trim();
 
-
         List<Integer> results = new ArrayList<>();
 
         results.add(ratio.apply(sortedInter, sorted1to2));
         results.add(ratio.apply(sortedInter, sorted2to1));
         results.add(ratio.apply(sorted1to2, sorted2to1));
-
 
         return Collections.max(results);
 
@@ -172,8 +169,7 @@ public class FuzzySearch {
             double partialSet = tokenSetPartial(s1, s2) * unbaseScale * partialScale;
 
             return (int) round(max(partial, partialSor, partialSet));
-
-
+            
         } else {
 
             double tokenSort = tokenSortRatio(s1, s2) * unbaseScale;
@@ -183,8 +179,6 @@ public class FuzzySearch {
 
         }
 
-
     }
-
 
 }
