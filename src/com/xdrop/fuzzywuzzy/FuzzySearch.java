@@ -2,12 +2,11 @@ package com.xdrop.fuzzywuzzy;
 
 import com.xdrop.diffutils.DiffUtils;
 import com.xdrop.diffutils.structs.MatchingBlock;
+import com.xdrop.fuzzywuzzy.ratios.PartialRatio;
+import com.xdrop.fuzzywuzzy.ratios.SimpleRatio;
 import org.apache.commons.lang.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @SuppressWarnings("WeakerAccess")
 public class FuzzySearch {
@@ -23,7 +22,7 @@ public class FuzzySearch {
      */
     public static int ratio(String s1, String s2) {
 
-        return (int) Math.round(100 * DiffUtils.getRatio(s1, s2));
+        return new SimpleRatio().apply(s1, s2);
 
     }
 
@@ -36,45 +35,7 @@ public class FuzzySearch {
      */
     public static int partialRatio(String s1, String s2) {
 
-        String shorter;
-        String longer;
-
-        if (s1.length() < s2.length()){
-
-            shorter = s1;
-            longer = s2;
-
-        } else {
-
-            shorter = s2;
-            longer = s1;
-
-        }
-
-        MatchingBlock[] matchingBlocks = DiffUtils.getMatchingBlocks(s1, s2);
-
-        List<Double> scores = new ArrayList<Double>();
-
-        for (MatchingBlock mb : matchingBlocks) {
-
-            int dist = mb.dpos - mb.spos;
-
-            int long_start = dist > 0 ? dist : 0;
-            int long_end = long_start + shorter.length();
-
-            String long_substr = longer.substring(long_start, long_end);
-
-            double ratio = ratio(shorter, long_substr);
-
-            if (ratio > .995) {
-                return 100;
-            } else {
-                scores.add(ratio);
-            }
-
-        }
-
-        return (int) Math.round(100 * Collections.max(scores));
+        return new PartialRatio().apply(s1, s2);
 
     }
 
@@ -84,14 +45,22 @@ public class FuzzySearch {
         String[] wordsArray = in.split("\\s+");
 
         List<String> words = Arrays.asList(wordsArray);
-        Collections.sort(words);
-
-        String joined = StringUtils.join(words, " ");
+        String joined = Utils.sortAndJoin(words, " ");
 
         return joined.trim();
 
     }
 
+    /**
+     * Find all alphanumeric tokens in the string and sort
+     * those tokens and then take ratio of resulting
+     * joined strings.
+     *
+     * @param s1
+     * @param s2
+     * @param partial Whether to apply partial ratio or not
+     * @return The ratio of the strings
+     */
     private int tokenSort(String s1, String s2, boolean partial) {
 
         String sorted1 = processAndSort(s1);
@@ -100,6 +69,77 @@ public class FuzzySearch {
         return partial ? partialRatio(sorted1, sorted2) : ratio(sorted1, sorted2);
 
     }
+
+    /**
+     * Find all alphanumeric tokens in the string and sort
+     * those tokens and then take ratio of resulting
+     * joined strings.
+     *
+     * @param s1
+     * @param s2
+     * @return The partial ratio of the strings
+     */
+    public int tokenSortPartial(String s1, String s2) {
+
+        return tokenSort(s1, s2, true);
+
+    }
+
+    /**
+     * Find all alphanumeric tokens in the string and sort
+     * those tokens and then take ratio of resulting
+     * joined strings.
+     *
+     * @param s1
+     * @param s2
+     * @return The full ratio of the strings
+     */
+    public int tokenSortFull(String s1, String s2) {
+
+        return tokenSort(s1, s2, false);
+
+    }
+
+    private int tokenSet(String s1, String s2, Ratio ratio) {
+
+        s1 = Utils.processString(s1, false);
+        s2 = Utils.processString(s2, false);
+
+        Set<String> tokens1 = Utils.tokenizeSet(s1);
+        Set<String> tokens2 = Utils.tokenizeSet(s2);
+
+        Set<String> intersection = SetUtils.intersection(tokens1, tokens2);
+        Set<String> diff1to2 = SetUtils.difference(tokens1, tokens2);
+        Set<String> diff2to1 = SetUtils.difference(tokens2, tokens1);
+
+        String sortedInter = Utils.sortAndJoin(intersection, " ").trim();
+        String sorted1to2 = (sortedInter + " " + Utils.sortAndJoin(diff1to2, " ")).trim();
+        String sorted2to1 = (sortedInter + " " + Utils.sortAndJoin(diff2to1, " ")).trim();
+
+
+        List<Integer> results = new ArrayList<>();
+
+        results.add(ratio.apply(sortedInter, sorted1to2));
+        results.add(ratio.apply(sortedInter, sorted2to1));
+        results.add(ratio.apply(sorted1to2, sorted2to1));
+
+
+        return Collections.max(results);
+
+    }
+
+    public int tokenSetRatio(String s1, String s2) {
+
+        return tokenSet(s1, s2, new SimpleRatio());
+
+    }
+
+    public int tokenSetPartial(String s1, String s2) {
+
+        return tokenSet(s1, s2, new PartialRatio());
+
+    }
+
 
 
 
