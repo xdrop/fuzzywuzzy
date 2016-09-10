@@ -211,6 +211,12 @@ public class DiffUtils {
 
     }
 
+    public static MatchingBlock[] getMatchingBlocks(String s1, String s2){
+
+        return getMatchingBlocks(s1.length(), s2.length(), getEditOps(s1, s2));
+
+    }
+
     public static MatchingBlock[] getMatchingBlocks(int len1, int len2, OpCode[] ops) {
 
         int n = ops.length;
