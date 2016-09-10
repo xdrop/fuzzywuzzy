@@ -1,16 +1,20 @@
 package com.xdrop.fuzzywuzzy;
 
-import com.xdrop.diffutils.DiffUtils;
-import com.xdrop.diffutils.structs.MatchingBlock;
 import com.xdrop.fuzzywuzzy.ratios.PartialRatio;
 import com.xdrop.fuzzywuzzy.ratios.SimpleRatio;
-import org.apache.commons.lang.StringUtils;
 
 import java.util.*;
+
+import static com.xdrop.fuzzywuzzy.Utils.max;
+import static java.lang.Math.round;
 
 @SuppressWarnings("WeakerAccess")
 public class FuzzySearch {
 
+
+    public static final double UNBASE_SCALE = .95;
+    public static final double PARTIAL_SCALE = .90;
+    public static final boolean TRY_PARTIALS = true;
 
     /**
      * Calculates a Levenshtein simple ratio between the strings.
@@ -94,7 +98,7 @@ public class FuzzySearch {
      * @param s2
      * @return The full ratio of the strings
      */
-    public int tokenSortFull(String s1, String s2) {
+    public int tokenSortRatio(String s1, String s2) {
 
         return tokenSort(s1, s2, false);
 
@@ -140,7 +144,47 @@ public class FuzzySearch {
 
     }
 
+    public int weightedRatio(String s1, String s2) {
 
+        s1 = Utils.processString(s1, false);
+        s2 = Utils.processString(s2, false);
+
+        int len1 = s1.length();
+        int len2 = s2.length();
+
+        boolean tryPartials = TRY_PARTIALS;
+        double unbaseScale = UNBASE_SCALE;
+        double partialScale = PARTIAL_SCALE;
+
+        int base = ratio(s1, s2);
+        double lenRatio = (double) (Math.max(len1, len2) / Math.min(len1, len2));
+
+        // if strings are similar length don't use partials
+        if (lenRatio < 1.5) tryPartials = false;
+
+        // if one string is much shorter than the other
+        if (lenRatio > 8) partialScale = .6;
+
+        if (tryPartials) {
+
+            double partial = partialRatio(s1, s2) * partialScale;
+            double partialSor = tokenSortPartial(s1, s2) * unbaseScale * partialScale;
+            double partialSet = tokenSetPartial(s1, s2) * unbaseScale * partialScale;
+
+            return (int) round(max(partial, partialSor, partialSet));
+
+
+        } else {
+
+            double tokenSort = tokenSortRatio(s1, s2) * unbaseScale;
+            double tokenSet = tokenSetRatio(s1, s2) * unbaseScale;
+
+            return (int) round(max(tokenSort, tokenSet));
+
+        }
+
+
+    }
 
 
 }

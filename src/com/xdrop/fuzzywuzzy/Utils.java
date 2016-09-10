@@ -52,5 +52,37 @@ class Utils {
 
     }
 
+    static <T extends Comparable<? super T>> T max(T ... elems) {
+
+        if (elems.length == 0) return null;
+
+        T best = elems[0];
+
+        for(T t : elems){
+            if (t.compareTo(best) > 0) {
+                best = t;
+            }
+        }
+
+        return best;
+
+    }
+
+    static double max(double ... elems) {
+
+        if (elems.length == 0) return 0;
+
+        double best = elems[0];
+
+        for(double t : elems){
+            if (t > best) {
+                best = t;
+            }
+        }
+
+        return best;
+
+    }
+
 
 }
