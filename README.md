@@ -70,24 +70,24 @@ FuzzySearch.weightedRatio("The quick brown fox jimps ofver the small lazy dog", 
 
 FuzzySearch.extractOne("cowboys", ["Atlanta Falcons", "New York Jets", "New York Giants", "Dallas Cowboys"])
 (string: Dallas Cowboys, score: 90)
-
+```
+```groovy
 FuzzySearch.extractTop("goolge", ["google", "bing", "facebook", "linkedin", "twitter", "googleplus", "bingnews", "plexoogl"], 3)
 [(string: google, score:83), (string: googleplus, score:63), (string: plexoogl, score:43)]
-
+```
+```groovy
 FuzzySearch.extractAll("goolge", ["google", "bing", "facebook", "linkedin", "twitter", "googleplus", "bingnews", "plexoogl"]);
 [(string: google, score:83), (string: bing, score:20), (string: facebook, score:29), (string: linkedin, score:29), (string: twitter, score:15), (string: googleplus, score:63), (string: bingnews, score:29), (string: plexoogl, score:43)]
 // score cutoff
 FuzzySearch.extractAll("goolge", ["google", "bing", "facebook", "linkedin", "twitter", "googleplus", "bingnews", "plexoogl"], 40) 
 [(string: google, score:83), (string: googleplus, score:63), (string: plexoogl, score:43)]
-
+```
+```groovy
 FuzzySearch.extractSorted("goolge", ["google", "bing", "facebook", "linkedin", "twitter", "googleplus", "bingnews", "plexoogl"]);
 [(string: google, score:83), (string: googleplus, score:63), (string: plexoogl, score:43), (string: facebook, score:29), (string: linkedin, score:29), (string: bingnews, score:29), (string: bing, score:20), (string: twitter, score:15)]
 // score cutoff
 FuzzySearch.extractSorted("goolge", ["google", "bing", "facebook", "linkedin", "twitter", "googleplus", "bingnews", "plexoogl"], 3);
 [(string: google, score:83), (string: googleplus, score:63), (string: plexoogl, score:43)]
-
-
-
 ```
 
 ## Credits
