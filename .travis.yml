@@ -5,4 +5,4 @@ jdk:
   - openjdk7
 
 script:
-  - cd build && mvn clean test
+  - mvn clean test -f build/pom.xml
