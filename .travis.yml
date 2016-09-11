@@ -5,5 +5,4 @@ jdk:
   - openjdk7
 
 script:
-  - cd build
-  - mvn clean test
+  - cd build && mvn clean test
