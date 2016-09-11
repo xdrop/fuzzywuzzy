@@ -97,8 +97,6 @@ class FuzzySearchTest extends GroovyTestCase {
 
         assert FuzzySearch.extractSorted("goolge", choices, 40).size() == 3
 
-        print(FuzzySearch.extractSorted("goolge", choices, 40))
-
     }
 
 
