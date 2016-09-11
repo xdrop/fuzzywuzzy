@@ -1,5 +1,6 @@
 package com.xdrop.fuzzywuzzy
 import com.xdrop.fuzzywuzzy.algorithms.WeightedRatio
+import com.xdrop.fuzzywuzzy.model.ExtractedResult
 
 class ExtractorTest extends GroovyTestCase {
 
@@ -14,7 +15,7 @@ class ExtractorTest extends GroovyTestCase {
 
     void testExtractWithoutOrder() {
 
-        List<Extractor.ExtractedResult> res = extractor.extractWithoutOrder("goolge", choices, new WeightedRatio());
+        List<ExtractedResult> res = extractor.extractWithoutOrder("goolge", choices, new WeightedRatio());
 
         assert res.size() == choices.size()
         assert res.get(0).score > 0
@@ -23,7 +24,7 @@ class ExtractorTest extends GroovyTestCase {
 
     void testExtractOne() {
 
-        Extractor.ExtractedResult res = extractor.extractOne("goolge", choices, new WeightedRatio());
+        ExtractedResult res = extractor.extractOne("goolge", choices, new WeightedRatio());
 
         assert res.string == "google"
 
