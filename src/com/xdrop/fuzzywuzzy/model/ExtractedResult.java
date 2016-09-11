@@ -26,4 +26,9 @@ public class ExtractedResult implements Comparable<ExtractedResult> {
     public int getScore() {
         return score;
     }
+
+    @Override
+    public String toString() {
+        return "(string: " + string + ", score:" + score + ")";
+    }
 }

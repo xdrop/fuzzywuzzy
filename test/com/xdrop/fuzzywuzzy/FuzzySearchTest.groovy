@@ -7,6 +7,7 @@ class FuzzySearchTest extends GroovyTestCase {
 
 
     def choices = ["google", "bing", "facebook", "linkedin", "twitter", "googleplus", "bingnews", "plexoogl"]
+    def moreChoices = ["Atlanta Falcons", "New York Jets", "New York Giants", "Dallas Cowboys"]
 
 
 
@@ -82,24 +83,35 @@ class FuzzySearchTest extends GroovyTestCase {
         assert res.size() == choices.size()
         assert res.get(0).string == "google"
 
+        assert FuzzySearch.extractAll("goolge", choices, 40).size() == 3
+
     }
 
-    void testExtractWithoutOrder() {
+    void testExtractSorted() {
 
-        def res = FuzzySearch.extractWithoutOrder("twitter", choices);
+        def res = FuzzySearch.extractSorted("goolge", choices);
 
         assert res.size() == choices.size()
-        assert res.get(0).string != "twitter"
+        assert res.get(0).string == "google"
+        assert res.get(1).string == "googleplus"
+
+        assert FuzzySearch.extractSorted("goolge", choices, 40).size() == 3
+
+        print(FuzzySearch.extractSorted("goolge", choices, 40))
 
     }
+
+
 
     void testExtractOne() {
 
         def res = FuzzySearch.extractOne("twiter", choices, new SimpleRatio());
         def res2 = FuzzySearch.extractOne("twiter", choices);
+        def res3 = FuzzySearch.extractOne("cowboys", moreChoices)
 
         assert res.string == "twitter"
         assert res2.string == "twitter"
+        assert res3.string == "Dallas Cowboys" && res3.score == 90
 
     }
 }

@@ -217,7 +217,7 @@ public class FuzzySearch {
      * @return A list of the results
      */
     public static List<ExtractedResult> extractTop(String query, Collection<String> choices,
-                                                    Applicable func, int limit, int cutoff) {
+                                                   Applicable func, int limit, int cutoff) {
 
         Extractor extractor = new Extractor(cutoff);
         return extractor.extractBests(query, choices, func, limit);
@@ -247,11 +247,11 @@ public class FuzzySearch {
      * @param query   The query string
      * @param choices A list of choices
      * @param func    The scoring function
-     * @param limit       The number of results to return
+     * @param limit   The number of results to return
      * @return A list of the results
      */
     public static List<ExtractedResult> extractTop(String query, Collection<String> choices,
-                                                     Applicable func, int limit) {
+                                                   Applicable func, int limit) {
 
         Extractor extractor = new Extractor();
 
@@ -265,7 +265,7 @@ public class FuzzySearch {
      *
      * @param query   The query string
      * @param choices A list of choices
-     * @param limit       The number of results to return
+     * @param limit   The number of results to return
      * @return A list of the results
      */
     public static List<ExtractedResult> extractTop(String query, Collection<String> choices,
@@ -286,9 +286,29 @@ public class FuzzySearch {
      * @param func    The scoring function
      * @return A list of the results
      */
-    public static List<ExtractedResult> extractAll(String query, Collection<String> choices, Applicable func) {
+    public static List<ExtractedResult> extractSorted(String query, Collection<String> choices, Applicable func) {
 
         Extractor extractor = new Extractor();
+
+        return extractor.extractBests(query, choices, func);
+
+    }
+
+
+    /**
+     * Creates a <b>sorted</b> list of {@see ExtractedResult} which contain all the choices
+     * with their corresponding score where higher is more similar
+     *
+     * @param query   The query string
+     * @param choices A list of choices
+     * @param func    The scoring function
+     * @param cutoff  Keep only scores above cutoff
+     * @return A list of the results
+     */
+    public static List<ExtractedResult> extractSorted(String query, Collection<String> choices, Applicable func,
+                                                      int cutoff) {
+
+        Extractor extractor = new Extractor(cutoff);
 
         return extractor.extractBests(query, choices, func);
 
@@ -297,6 +317,76 @@ public class FuzzySearch {
     /**
      * Creates a <b>sorted</b> list of {@see ExtractedResult} which contain all the choices
      * with their corresponding score where higher is more similar
+     *
+     * @param query   The query string
+     * @param choices A list of choices
+     * @return A list of the results
+     */
+    public static List<ExtractedResult> extractSorted(String query, Collection<String> choices) {
+
+        Extractor extractor = new Extractor();
+
+        return extractor.extractBests(query, choices, new WeightedRatio());
+
+    }
+
+    /**
+     * Creates a <b>sorted</b> list of {@see ExtractedResult} which contain all the choices
+     * with their corresponding score where higher is more similar
+     *
+     * @param query   The query string
+     * @param choices A list of choices
+     * @param cutoff  Keep only scores above cutoff
+     * @return A list of the results
+     */
+    public static List<ExtractedResult> extractSorted(String query, Collection<String> choices,
+                                                      int cutoff) {
+
+        Extractor extractor = new Extractor(cutoff);
+
+        return extractor.extractBests(query, choices, new WeightedRatio());
+
+    }
+
+    /**
+     * Creates a list of {@see ExtractedResult} which contain all the choices with
+     * their corresponding score where higher is more similar
+     *
+     * @param query   The query string
+     * @param choices A list of choices
+     * @param func    The scoring function
+     * @return A list of the results
+     */
+    public static List<ExtractedResult> extractAll(String query, Collection<String> choices, Applicable func) {
+
+        Extractor extractor = new Extractor();
+
+        return extractor.extractWithoutOrder(query, choices, func);
+
+    }
+
+    /**
+     * Creates a list of {@see ExtractedResult} which contain all the choices with
+     * their corresponding score where higher is more similar
+     *
+     * @param query   The query string
+     * @param choices A list of choices
+     * @param func    The scoring function
+     * @param cutoff  Keep only scores above cutoff
+     * @return A list of the results
+     */
+    public static List<ExtractedResult> extractAll(String query, Collection<String> choices, Applicable func,
+                                                   int cutoff) {
+
+        Extractor extractor = new Extractor(cutoff);
+
+        return extractor.extractWithoutOrder(query, choices, func);
+
+    }
+
+    /**
+     * Creates a list of {@see ExtractedResult} which contain all the choices with
+     * their corresponding score where higher is more similar
      *
      * @param query   The query string
      * @param choices A list of choices
@@ -316,28 +406,12 @@ public class FuzzySearch {
      *
      * @param query   The query string
      * @param choices A list of choices
-     * @param func    The scoring function
+     * @param cutoff  Keep only scores above cutoff
      * @return A list of the results
      */
-    public static List<ExtractedResult> extractWithoutOrder(String query, Collection<String> choices, Applicable func) {
+    public static List<ExtractedResult> extractAll(String query, Collection<String> choices, int cutoff) {
 
-        Extractor extractor = new Extractor();
-
-        return extractor.extractWithoutOrder(query, choices, func);
-
-    }
-
-    /**
-     * Creates a list of {@see ExtractedResult} which contain all the choices with
-     * their corresponding score where higher is more similar
-     *
-     * @param query   The query string
-     * @param choices A list of choices
-     * @return A list of the results
-     */
-    public static List<ExtractedResult> extractWithoutOrder(String query, Collection<String> choices) {
-
-        Extractor extractor = new Extractor();
+        Extractor extractor = new Extractor(cutoff);
 
         return extractor.extractWithoutOrder(query, choices, new WeightedRatio());
 
