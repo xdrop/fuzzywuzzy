@@ -68,21 +68,21 @@ class Utils {
 
     }
 
-    static double max(double ... elems) {
-
-        if (elems.length == 0) return 0;
-
-        double best = elems[0];
-
-        for(double t : elems){
-            if (t > best) {
-                best = t;
-            }
-        }
-
-        return best;
-
-    }
+//    static double max(double ... elems) {
+//
+//        if (elems.length == 0) return 0;
+//
+//        double best = elems[0];
+//
+//        for(double t : elems){
+//            if (t > best) {
+//                best = t;
+//            }
+//        }
+//
+//        return best;
+//
+//    }
 
 
 }

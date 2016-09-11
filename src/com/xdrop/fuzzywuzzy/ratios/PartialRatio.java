@@ -29,7 +29,7 @@ public class PartialRatio implements Ratio {
 
         MatchingBlock[] matchingBlocks = DiffUtils.getMatchingBlocks(s1, s2);
 
-        List<Double> scores = new ArrayList<Double>();
+        List<Double> scores = new ArrayList<>();
 
         for (MatchingBlock mb : matchingBlocks) {
 
@@ -38,9 +38,12 @@ public class PartialRatio implements Ratio {
             int long_start = dist > 0 ? dist : 0;
             int long_end = long_start + shorter.length();
 
+
             String long_substr = longer.substring(long_start, long_end);
 
-            double ratio = new SimpleRatio().apply(shorter, long_substr);
+            double ratio = DiffUtils.getRatio(shorter, long_substr);
+
+            System.out.println("Ratio(" + shorter + "," + long_substr + ")=" + ratio);
 
             if (ratio > .995) {
                 return 100;
