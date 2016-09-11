@@ -1,5 +1,5 @@
 # JavaWuzzy
-[![Build Status](https://travis-ci.org/xdrop/fuzzywuzzy.svg?branch=master)](https://travis-ci.org/xdrop/fuzzywuzzy)
+[![Build Status](https://travis-ci.org/xdrop/fuzzywuzzy.svg?branch=master)](https://travis-ci.org/xdrop/fuzzywuzzy) [![Bintray](https://img.shields.io/bintray/v/xdrop/FuzzyWuzzy-Java/fuzzywuzzy.svg?maxAge=2592000)]()
 ## FuzzyWuzzy Java Implementation
 Fuzzy string matching for java based on the [FuzzyWuzzy](https://github.com/seatgeek/fuzzywuzzy) Python algorithm.
 
