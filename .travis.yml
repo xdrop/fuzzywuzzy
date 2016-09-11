@@ -4,7 +4,5 @@ sudo: false
 jdk:
   - openjdk7
 
-install: true
-
 script:
-  - mvn clean test -f build/pom.xml
+  - mvn clean test
