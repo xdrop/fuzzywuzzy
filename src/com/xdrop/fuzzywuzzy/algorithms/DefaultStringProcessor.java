@@ -1,11 +1,11 @@
 package com.xdrop.fuzzywuzzy.algorithms;
 
-import java.util.Arrays;
-import java.util.List;
+import com.xdrop.fuzzywuzzy.StringProcessor;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class StringProcess {
+public class DefaultStringProcessor implements StringProcessor {
 
     private final static String pattern = "[\\p{IsAlphabetic}|\\p{Digit}]";
     private final static Pattern r = Pattern.compile(pattern);
@@ -18,7 +18,7 @@ class StringProcess {
      * @param sub The string to substitute with
      * @return The replaced string
      */
-    static String subNonAlphaNumeric(String in, String sub) {
+    public static String subNonAlphaNumeric(String in, String sub) {
 
         Matcher m = r.matcher(in);
 
@@ -30,15 +30,14 @@ class StringProcess {
 
     }
 
-    static String processAndSort(String in) {
+    @Override
+    public String process(String in) {
 
-        in = Utils.processString(in, false);
-        String[] wordsArray = in.split("\\s+");
+        in = subNonAlphaNumeric(in, " ");
+        in = in.toLowerCase();
+        in = in.trim();
 
-        List<String> words = Arrays.asList(wordsArray);
-        String joined = Utils.sortAndJoin(words, " ");
-
-        return joined.trim();
+        return in;
 
     }
 

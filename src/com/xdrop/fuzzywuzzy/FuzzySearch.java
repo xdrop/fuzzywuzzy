@@ -10,7 +10,6 @@ import com.xdrop.fuzzywuzzy.ratios.SimpleRatio;
 /**
  * FuzzySearch facade class
  */
-@SuppressWarnings("WeakerAccess")
 public class FuzzySearch {
 
 
@@ -65,11 +64,45 @@ public class FuzzySearch {
      *
      * @param s1 Input string
      * @param s2 Input string
+     * @param stringProcessor Functor which transforms strings before
+     *                        calculating the ratio
+     * @return The partial ratio of the strings
+     */
+    public static int tokenSortPartialRatio(String s1, String s2, StringProcessor stringProcessor) {
+
+        return new TokenSort().apply(s1, s2, new PartialRatio(), stringProcessor);
+
+    }
+
+    /**
+     * Find all alphanumeric tokens in the string and sort
+     * those tokens and then take ratio of resulting
+     * joined strings.
+     *
+     * @param s1 Input string
+     * @param s2 Input string
      * @return The full ratio of the strings
      */
     public static int tokenSortRatio(String s1, String s2) {
 
         return new TokenSort().apply(s1, s2, new SimpleRatio());
+
+    }
+
+    /**
+     * Find all alphanumeric tokens in the string and sort
+     * those tokens and then take ratio of resulting
+     * joined strings.
+     *
+     * @param s1 Input string
+     * @param s2 Input string
+     * @param stringProcessor Functor which transforms strings before
+     *                        calculating the ratio
+     * @return The full ratio of the strings
+     */
+    public static int tokenSortRatio(String s1, String s2, StringProcessor stringProcessor) {
+
+        return new TokenSort().apply(s1, s2, new SimpleRatio(), stringProcessor);
 
     }
 
@@ -98,11 +131,47 @@ public class FuzzySearch {
      *
      * @param s1 Input string
      * @param s2 Input string
+     * @param stringProcessor Functor which transforms strings before
+     *                        calculating the ratio
+     * @return The ratio of similarity
+     */
+    public static int tokenSetRatio(String s1, String s2, StringProcessor stringProcessor) {
+
+        return new TokenSet().apply(s1, s2, new SimpleRatio(), stringProcessor);
+
+    }
+
+    /**
+     * Splits the strings into tokens and computes intersections and remainders
+     * between the tokens of the two strings. A comparison string is then
+     * built up and is compared using the simple ratio algorithm.
+     * Useful for strings where words appear redundantly.
+     *
+     * @param s1 Input string
+     * @param s2 Input string
      * @return The ratio of similarity
      */
     public static int tokenSetPartialRatio(String s1, String s2) {
 
         return new TokenSet().apply(s1, s2, new PartialRatio());
+
+    }
+
+    /**
+     * Splits the strings into tokens and computes intersections and remainders
+     * between the tokens of the two strings. A comparison string is then
+     * built up and is compared using the simple ratio algorithm.
+     * Useful for strings where words appear redundantly.
+     *
+     * @param s1 Input string
+     * @param s2 Input string
+     * @param stringProcessor Functor which transforms strings before
+     *                        calculating the ratio
+     * @return The ratio of similarity
+     */
+    public static int tokenSetPartialRatio(String s1, String s2, StringProcessor stringProcessor) {
+
+        return new TokenSet().apply(s1, s2, new PartialRatio(), stringProcessor);
 
     }
 
@@ -116,6 +185,21 @@ public class FuzzySearch {
     public static int weightedRatio(String s1, String s2) {
 
         return new WeightedRatio().apply(s1, s2);
+
+    }
+
+    /**
+     * Calculates a weighted ratio between the different algorithms for best results
+     *
+     * @param s1 Input string
+     * @param s2 Input string
+     * @param stringProcessor Functor which transforms strings before
+     *                        calculating the ratio
+     * @return The ratio of similarity
+     */
+    public static int weightedRatio(String s1, String s2, StringProcessor stringProcessor) {
+
+        return new WeightedRatio().apply(s1, s2, stringProcessor);
 
     }
 

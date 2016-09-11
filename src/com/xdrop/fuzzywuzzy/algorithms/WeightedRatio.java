@@ -1,13 +1,15 @@
 package com.xdrop.fuzzywuzzy.algorithms;
 
 
+import com.xdrop.fuzzywuzzy.StringProcessor;
+
 import static com.xdrop.fuzzywuzzy.FuzzySearch.*;
 import static com.xdrop.fuzzywuzzy.algorithms.PrimitiveUtils.max;
 import static java.lang.Math.round;
 
 
 @SuppressWarnings("WeakerAccess")
-public class WeightedRatio implements CombinationAlgorithm {
+public class WeightedRatio implements BasicAlgorithm {
 
     public static final double UNBASE_SCALE = .95;
     public static final double PARTIAL_SCALE = .90;
@@ -16,8 +18,15 @@ public class WeightedRatio implements CombinationAlgorithm {
     @Override
     public int apply(String s1, String s2) {
 
-        s1 = Utils.processString(s1, false);
-        s2 = Utils.processString(s2, false);
+        return apply(s1, s2, new DefaultStringProcessor());
+
+    }
+
+    @Override
+    public int apply(String s1, String s2, StringProcessor stringProcessor) {
+
+        s1 = stringProcessor.process(s1);
+        s2 = stringProcessor.process(s2);
 
         int len1 = s1.length();
         int len2 = s2.length();
