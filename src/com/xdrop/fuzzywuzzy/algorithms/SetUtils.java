@@ -1,4 +1,4 @@
-package com.xdrop.fuzzywuzzy;
+package com.xdrop.fuzzywuzzy.algorithms;
 
 import java.util.HashSet;
 import java.util.Set;

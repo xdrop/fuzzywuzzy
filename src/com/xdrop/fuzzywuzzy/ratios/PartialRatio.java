@@ -12,6 +12,7 @@ public class PartialRatio implements Ratio {
 
     @Override
     public int apply(String s1, String s2) {
+
         String shorter;
         String longer;
 
@@ -52,6 +53,8 @@ public class PartialRatio implements Ratio {
         }
 
         return (int) Math.round(100 * Collections.max(scores));
+
     }
+
 
 }
