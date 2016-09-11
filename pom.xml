@@ -7,7 +7,7 @@
     <groupId>com.xdrop</groupId>
     <artifactId>fuzzywuzzy</artifactId>
     <name>fuzzywuzzy - parent</name>
-    <version>1.2-RELEASE</version>
+    <version>1.0.1-RELEASE</version>
     <build>
         <plugins>
             <plugin>
