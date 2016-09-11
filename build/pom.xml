@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.xdrop</groupId>
     <artifactId>fuzzywuzzy-build</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.3-SNAPSHOT</version>
     <name>fuzzywuzzy - build</name>
     <description>Fuzzy string matching algorithm for Java</description>
     <inceptionYear>2016</inceptionYear>
