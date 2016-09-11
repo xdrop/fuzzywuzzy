@@ -30,7 +30,9 @@ public class FuzzySearch {
     }
 
     /**
-     * Returns a partial ratio.
+     * Inconsistent substrings lead to problems in matching. This ratio
+     * uses a heuristic called "best partial" for when two strings
+     * are of noticeably different lengths.
      *
      * @param s1 Input string
      * @param s2 Input string
@@ -39,18 +41,6 @@ public class FuzzySearch {
     public static int partialRatio(String s1, String s2) {
 
         return new PartialRatio().apply(s1, s2);
-
-    }
-
-    private static String processAndSort(String in) {
-
-        in = Utils.processString(in, false);
-        String[] wordsArray = in.split("\\s+");
-
-        List<String> words = Arrays.asList(wordsArray);
-        String joined = Utils.sortAndJoin(words, " ");
-
-        return joined.trim();
 
     }
 
@@ -82,7 +72,7 @@ public class FuzzySearch {
      * @param s2
      * @return The partial ratio of the strings
      */
-    public static int tokenSortPartial(String s1, String s2) {
+    public static int tokenSortPartialRatio(String s1, String s2) {
 
         return tokenSort(s1, s2, true);
 
@@ -103,6 +93,17 @@ public class FuzzySearch {
 
     }
 
+    /**
+     * Splits the strings into tokens and computes intersections and remainders
+     * between the tokens of the two strings. A comparison string is then
+     * built up and is compared using the simple ratio algorithm.
+     * Useful for strings where words appear redundantly.
+     *
+     * @param s1 Input string
+     * @param s2 Input string
+     * @param ratio A Ratio functor
+     * @return The ratio of similarity
+     */
     private static int tokenSet(String s1, String s2, Ratio ratio) {
 
         s1 = Utils.processString(s1, false);
@@ -129,13 +130,33 @@ public class FuzzySearch {
 
     }
 
+    /**
+     * Splits the strings into tokens and computes intersections and remainders
+     * between the tokens of the two strings. A comparison string is then
+     * built up and is compared using the simple ratio algorithm.
+     * Useful for strings where words appear redundantly.
+     *
+     * @param s1 Input string
+     * @param s2 Input string
+     * @return The ratio of similarity
+     */
     public static int tokenSetRatio(String s1, String s2) {
 
         return tokenSet(s1, s2, new SimpleRatio());
 
     }
 
-    public static int tokenSetPartial(String s1, String s2) {
+    /**
+     * Splits the strings into tokens and computes intersections and remainders
+     * between the tokens of the two strings. A comparison string is then
+     * built up and is compared using the simple ratio algorithm.
+     * Useful for strings where words appear redundantly.
+     *
+     * @param s1 Input string
+     * @param s2 Input string
+     * @return The ratio of similarity
+     */
+    public static int tokenSetPartialRatio(String s1, String s2) {
 
         return tokenSet(s1, s2, new PartialRatio());
 
@@ -165,19 +186,31 @@ public class FuzzySearch {
         if (tryPartials) {
 
             double partial = partialRatio(s1, s2) * partialScale;
-            double partialSor = tokenSortPartial(s1, s2) * unbaseScale * partialScale;
-            double partialSet = tokenSetPartial(s1, s2) * unbaseScale * partialScale;
+            double partialSor = tokenSortPartialRatio(s1, s2) * unbaseScale * partialScale;
+            double partialSet = tokenSetPartialRatio(s1, s2) * unbaseScale * partialScale;
 
-            return (int) round(max(partial, partialSor, partialSet));
-            
+            return (int) round(max(base, partial, partialSor, partialSet));
+
         } else {
 
             double tokenSort = tokenSortRatio(s1, s2) * unbaseScale;
             double tokenSet = tokenSetRatio(s1, s2) * unbaseScale;
 
-            return (int) round(max(tokenSort, tokenSet));
+            return (int) round(max(base, tokenSort, tokenSet));
 
         }
+
+    }
+
+    private static String processAndSort(String in) {
+
+        in = Utils.processString(in, false);
+        String[] wordsArray = in.split("\\s+");
+
+        List<String> words = Arrays.asList(wordsArray);
+        String joined = Utils.sortAndJoin(words, " ");
+
+        return joined.trim();
 
     }
 
