@@ -4,7 +4,6 @@ import com.xdrop.diffutils.structs.EditOp;
 import com.xdrop.diffutils.structs.EditType;
 import com.xdrop.diffutils.structs.MatchingBlock;
 import com.xdrop.diffutils.structs.OpCode;
-import org.apache.commons.lang.StringUtils;
 
 public class DiffUtils {
 
@@ -618,7 +617,7 @@ public class DiffUtils {
 
     }
 
-    public static int levEditDistance(String s1, String s2, int xcost) {
+    private static int levEditDistance(String s1, String s2, int xcost) {
 
         int i;
         int half;
@@ -666,6 +665,10 @@ public class DiffUtils {
             str1 = str2;
             str2 = temp;
 
+            char[] t = c2;
+            c2 = c1;
+            c1 = t;
+
         }
 
         /* check len1 == 1 separately */
@@ -687,6 +690,7 @@ public class DiffUtils {
         for(i = 0; i < len2 - (xcost != 0 ? 0 : half); i++)
             row[i] = i;
 
+
         /* go through the matrix and compute the costs.  yes, this is an extremely
          * obfuscated version, but also extremely memory-conservative and relatively
          * fast.  */
@@ -705,10 +709,12 @@ public class DiffUtils {
 
                 while(p <= end) {
 
-                    if(ch1 == c2[c2p++])
+                    if(ch1 == c2[c2p++]) {
                         x = --D;
-                    else
+                    }
+                    else {
                         x++;
+                    }
                     D = row[p];
                     D++;
 
