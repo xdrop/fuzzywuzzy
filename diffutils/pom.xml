@@ -10,6 +10,8 @@
     <version>1.0-SNAPSHOT</version>
 
     <build>
+        <sourceDirectory>${basedir}/src</sourceDirectory>
+        <testSourceDirectory>${basedir}/test</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -47,7 +49,7 @@
                         <artifactId>groovy-all</artifactId>
                         <!-- any version of Groovy \>= 1.5.0 should work here -->
                         <version>2.4.6</version>
-                        <scope>test</scope>
+                        <scope>compile</scope>
                     </dependency>
                 </dependencies>
             </plugin>

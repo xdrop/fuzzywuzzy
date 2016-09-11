@@ -4,4 +4,6 @@ sudo: false
 jdk:
   - openjdk7
 
-script: mvn clean test
+script:
+  - cd build
+  - mvn clean test

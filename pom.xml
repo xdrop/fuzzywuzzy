@@ -3,13 +3,51 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <groupId>xdrop</groupId>
+    <artifactId>fuzzywuzzy</artifactId>
+    <version>1.1-SNAPSHOT</version>
+    <name>fuzzywuzzy-core</name>
+    <description>Fuzzy string matching algorithm for Java</description>
+    <inceptionYear>2016</inceptionYear>
+    <packaging>jar</packaging>
 
-    <name>fuzzywuzzy</name>
+
+    <licenses>
+        <license>
+            <name>GPL 3</name>
+            <url>https://www.gnu.org/licenses/gpl-3.0.en.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>xdrop</id>
+            <name>Panayiotis P</name>
+            <url>http://www.github.com/xdrop</url>
+            <timezone>0</timezone>
+        </developer>
+    </developers>
+
+    <issueManagement>
+        <system>Github</system>
+        <url>https://github.com/xdrop/fuzzywuzzy/issues</url>
+    </issueManagement>
+
+    <scm>
+        <url>https://github.com/xdrop/fuzzywuzzy</url>
+        <developerConnection>scm:git:git@github.com:xdrop/fuzzywuzzy.git</developerConnection>
+        <connection>scm:git:git://github.com/fuzzywuzzy/fuzzywuzzy.git</connection>
+    </scm>
+
     <build>
+        <sourceDirectory>${basedir}/src</sourceDirectory>
+        <testSourceDirectory>${basedir}/test</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
@@ -30,7 +68,7 @@
                 <configuration>
                     <testSources>
                         <testSource>
-                            <directory>${project.basedir}/test</directory>
+                            <directory>${basedir}/test</directory>
                             <includes>
                                 <include>**/*.groovy</include>
                             </includes>
@@ -43,15 +81,46 @@
                         <artifactId>groovy-all</artifactId>
                         <!-- any version of Groovy \>= 1.5.0 should work here -->
                         <version>2.4.6</version>
-                        <scope>test</scope>
+                        <scope>compile</scope>
                     </dependency>
                 </dependencies>
             </plugin>
+            <plugin>
+                <groupId>com.mycila.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <version>1.10.b1</version>
+                <configuration>
+                    <header>${project.basedir}/header.txt</header>
+                    <strictCheck>true</strictCheck>
+                    <includes>
+                        <!-- Only copyright the java -->
+                        <include>src/**</include>
+                    </includes>
+                    <properties>
+                        <inceptionYear>${project.inceptionYear}</inceptionYear>
+                        <year>${year}</year>
+                    </properties>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>check</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.2</version>
+                <configuration>
+                    <preparationGoals>clean verify</preparationGoals>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-    <groupId>xdrop</groupId>
-    <artifactId>fuzzywuzzy</artifactId>
-    <version>1.0-SNAPSHOT</version>
+
 
 
     <dependencies>
@@ -61,13 +130,6 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>xdrop</groupId>
-            <artifactId>diffutils</artifactId>
-            <version>LATEST</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/diffutils/pom.xml</systemPath>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/com.google.guava/guava-collections -->
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
@@ -75,6 +137,11 @@
             <!-- any version of Groovy \>= 1.5.0 should work here -->
             <version>2.4.6</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>xdrop</groupId>
+            <artifactId>diffutils</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>
