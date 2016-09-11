@@ -5,7 +5,7 @@ import com.xdrop.fuzzywuzzy.ratios.SimpleRatio;
 
 import java.util.*;
 
-import static com.xdrop.fuzzywuzzy.Primitives.max;
+import static com.xdrop.fuzzywuzzy.PrimitiveUtils.max;
 import static java.lang.Math.round;
 
 @SuppressWarnings("WeakerAccess")

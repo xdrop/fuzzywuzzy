@@ -1,6 +1,6 @@
 package com.xdrop.fuzzywuzzy;
 
-public class Primitives {
+final class PrimitiveUtils {
 
     static double max(double ... elems) {
 

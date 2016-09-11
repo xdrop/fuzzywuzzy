@@ -4,7 +4,7 @@ import org.apache.commons.lang.StringUtils;
 
 import java.util.*;
 
-public class Utils {
+final class Utils {
 
     /**
      * Process a string by
@@ -16,7 +16,7 @@ public class Utils {
      * @param forceAscii Force to ascii (if true)
      * @return The processed string
      */
-    protected static String processString(String in, boolean forceAscii) {
+    static String processString(String in, boolean forceAscii) {
 
         in = StringProcess.subNonAlphaNumeric(in, " ");
         in = in.toLowerCase();

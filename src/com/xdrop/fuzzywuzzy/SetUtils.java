@@ -3,7 +3,7 @@ package com.xdrop.fuzzywuzzy;
 import java.util.HashSet;
 import java.util.Set;
 
-public class SetUtils {
+final class SetUtils {
 
     static <T> Set<T> intersection (Set<T> s1, Set<T> s2){
 
