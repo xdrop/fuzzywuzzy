@@ -1,8 +1,14 @@
 package com.xdrop.fuzzywuzzy
 
+import com.xdrop.fuzzywuzzy.ratios.SimpleRatio
+
+
 class FuzzySearchTest extends GroovyTestCase {
 
-    def fuzzy = new FuzzySearch();
+
+    def choices = ["google", "bing", "facebook", "linkedin", "twitter", "googleplus", "bingnews", "plexoogl"]
+
+
 
     void testRatio() {
 
@@ -51,6 +57,49 @@ class FuzzySearchTest extends GroovyTestCase {
         assertEquals 40, FuzzySearch.weightedRatio("mvn","www;'l3;4;.4;23.4/23.4/234//////www.mavencentral.comm")
         assertEquals 97, FuzzySearch.weightedRatio("The quick brown fox jimps ofver the small lazy dog",
                 "the quick brown fox jumps over the small lazy dog")
+
+    }
+
+    void testExtractTop() {
+
+        def res = FuzzySearch.extractTop("goolge", choices, 2);
+        def res2 = FuzzySearch.extractTop("goolge", choices, new SimpleRatio(), 2);
+
+        assert res.size() == 2
+        assert res.get(0).string == "google" && res.get(1).string == "googleplus"
+
+        assert res2.size() == 2
+        assert res2.get(0).string == "google" && res2.get(1).string == "googleplus"
+
+        assert FuzzySearch.extractTop("goolge", choices, 2, 100).size() == 0
+
+    }
+
+    void testExtractAll() {
+
+        def res = FuzzySearch.extractAll("goolge", choices);
+
+        assert res.size() == choices.size()
+        assert res.get(0).string == "google"
+
+    }
+
+    void testExtractWithoutOrder() {
+
+        def res = FuzzySearch.extractWithoutOrder("twitter", choices);
+
+        assert res.size() == choices.size()
+        assert res.get(0).string != "twitter"
+
+    }
+
+    void testExtractOne() {
+
+        def res = FuzzySearch.extractOne("twiter", choices, new SimpleRatio());
+        def res2 = FuzzySearch.extractOne("twiter", choices);
+
+        assert res.string == "twitter"
+        assert res2.string == "twitter"
 
     }
 }

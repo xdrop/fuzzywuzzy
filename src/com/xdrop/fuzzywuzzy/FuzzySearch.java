@@ -306,7 +306,7 @@ public class FuzzySearch {
 
         Extractor extractor = new Extractor();
 
-        return extractor.extractBests(query, choices, new WeightedRatio());
+        return extractor.extractWithoutOrder(query, choices, new WeightedRatio());
 
     }
 
@@ -319,11 +319,11 @@ public class FuzzySearch {
      * @param func    The scoring function
      * @return A list of the results
      */
-    public List<ExtractedResult> extractWithoutOrder(String query, Collection<String> choices, Applicable func) {
+    public static List<ExtractedResult> extractWithoutOrder(String query, Collection<String> choices, Applicable func) {
 
         Extractor extractor = new Extractor();
 
-        return extractor.extractBests(query, choices, func);
+        return extractor.extractWithoutOrder(query, choices, func);
 
     }
 
@@ -335,11 +335,11 @@ public class FuzzySearch {
      * @param choices A list of choices
      * @return A list of the results
      */
-    public List<ExtractedResult> extractWithoutOrder(String query, Collection<String> choices) {
+    public static List<ExtractedResult> extractWithoutOrder(String query, Collection<String> choices) {
 
         Extractor extractor = new Extractor();
 
-        return extractor.extractBests(query, choices, new WeightedRatio());
+        return extractor.extractWithoutOrder(query, choices, new WeightedRatio());
 
     }
 
@@ -351,7 +351,7 @@ public class FuzzySearch {
      * @param func    Scoring function
      * @return An object containing the best match and it's score
      */
-    public ExtractedResult extractOne(String query, Collection<String> choices, Applicable func) {
+    public static ExtractedResult extractOne(String query, Collection<String> choices, Applicable func) {
 
         Extractor extractor = new Extractor();
 
@@ -366,7 +366,7 @@ public class FuzzySearch {
      * @param choices A list of choices
      * @return An object containing the best match and it's score
      */
-    public ExtractedResult extractOne(String query, Collection<String> choices) {
+    public static ExtractedResult extractOne(String query, Collection<String> choices) {
 
         Extractor extractor = new Extractor();
 
