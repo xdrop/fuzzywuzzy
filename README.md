@@ -27,7 +27,7 @@ Download the latest release [here](https://github.com/xdrop/fuzzywuzzy/releases)
 ## Usage
 
 #### Simple Ratio
-```java
+```groovy
 FuzzySearch.ratio("mysmilarstring","myawfullysimilarstirng")
 72
 
@@ -37,13 +37,13 @@ FuzzySearch.ratio("mysmilarstring","mysimilarstring")
 ```
 
 #### Partial Ratio
-```java
+```groovy
 FuzzySearch.partialRatio("similar", "somewhresimlrbetweenthisstring")
 71
 ```
 
 #### Token Sort Ratio
-```java
+```groovy
 FuzzySearch.tokenSortPartialRatio("order words out of","  words out of order")
 100
 FuzzySearch.tokenSortRatio("order words out of","  words out of order")
@@ -51,7 +51,7 @@ FuzzySearch.tokenSortRatio("order words out of","  words out of order")
 ```
 
 #### Token Set Ratio
-```java
+```groovy
 FuzzySearch.tokenSetRatio("fuzzy was a bear", "fuzzy fuzzy fuzzy bear")
 100
 FuzzySearch.tokenSetPartialRatio("fuzzy was a bear", "fuzzy fuzzy fuzzy bear")
@@ -59,14 +59,41 @@ FuzzySearch.tokenSetPartialRatio("fuzzy was a bear", "fuzzy fuzzy fuzzy bear")
 ```
 
 #### Weighted Ratio
-```java
+```groovy
 FuzzySearch.weightedRatio("The quick brown fox jimps ofver the small lazy dog", "the quick brown fox jumps over the small lazy dog")
 97
+```
+
+#### Extract
+```groovy
+// groovy
+
+FuzzySearch.extractOne("cowboys", ["Atlanta Falcons", "New York Jets", "New York Giants", "Dallas Cowboys"])
+(string: Dallas Cowboys, score: 90)
+
+FuzzySearch.extractTop("goolge", ["google", "bing", "facebook", "linkedin", "twitter", "googleplus", "bingnews", "plexoogl"], 3)
+[(string: google, score:83), (string: googleplus, score:63), (string: plexoogl, score:43)]
+
+FuzzySearch.extractAll("goolge", ["google", "bing", "facebook", "linkedin", "twitter", "googleplus", "bingnews", "plexoogl"]);
+[(string: google, score:83), (string: bing, score:20), (string: facebook, score:29), (string: linkedin, score:29), (string: twitter, score:15), (string: googleplus, score:63), (string: bingnews, score:29), (string: plexoogl, score:43)]
+// score cutoff
+FuzzySearch.extractAll("goolge", ["google", "bing", "facebook", "linkedin", "twitter", "googleplus", "bingnews", "plexoogl"], 40) 
+[(string: google, score:83), (string: googleplus, score:63), (string: plexoogl, score:43)]
+
+FuzzySearch.extractSorted("goolge", ["google", "bing", "facebook", "linkedin", "twitter", "googleplus", "bingnews", "plexoogl"]);
+[(string: google, score:83), (string: googleplus, score:63), (string: plexoogl, score:43), (string: facebook, score:29), (string: linkedin, score:29), (string: bingnews, score:29), (string: bing, score:20), (string: twitter, score:15)]
+// score cutoff
+FuzzySearch.extractSorted("goolge", ["google", "bing", "facebook", "linkedin", "twitter", "googleplus", "bingnews", "plexoogl"], 3);
+[(string: google, score:83), (string: googleplus, score:63), (string: plexoogl, score:43)]
+
+
+
 ```
 
 ## Credits
 
 - seatgeek
+- Adam Cohen
 - David Necas (python-Levenshtein)
 - Mikko Ohtamaa (python-Levenshtein)
 - Antti Haapala (python-Levenshtein)

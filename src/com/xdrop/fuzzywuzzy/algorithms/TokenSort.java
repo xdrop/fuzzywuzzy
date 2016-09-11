@@ -2,33 +2,11 @@ package com.xdrop.fuzzywuzzy.algorithms;
 
 import com.xdrop.fuzzywuzzy.Ratio;
 import com.xdrop.fuzzywuzzy.StringProcessor;
-import com.xdrop.fuzzywuzzy.ratios.SimpleRatio;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class TokenSort implements RatioAlgorithm {
-
-    @Override
-    public int apply(String s1, String s2) {
-
-        return apply(s1, s2, new SimpleRatio());
-
-    }
-
-    @Override
-    public int apply(String s1, String s2, StringProcessor stringProcessor) {
-
-        return apply(s1, s2, new SimpleRatio(), stringProcessor);
-
-    }
-
-    @Override
-    public int apply(String s1, String s2, Ratio ratio) {
-
-        return apply(s1, s2, ratio, new DefaultStringProcessor());
-
-    }
+public class TokenSort extends RatioAlgorithm {
 
     @Override
     public int apply(String s1, String s2, Ratio ratio, StringProcessor stringProcessor) {

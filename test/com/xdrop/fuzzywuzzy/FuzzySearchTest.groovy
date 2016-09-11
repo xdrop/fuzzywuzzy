@@ -1,8 +1,15 @@
 package com.xdrop.fuzzywuzzy
 
+import com.xdrop.fuzzywuzzy.ratios.SimpleRatio
+
+
 class FuzzySearchTest extends GroovyTestCase {
 
-    def fuzzy = new FuzzySearch();
+
+    def choices = ["google", "bing", "facebook", "linkedin", "twitter", "googleplus", "bingnews", "plexoogl"]
+    def moreChoices = ["Atlanta Falcons", "New York Jets", "New York Giants", "Dallas Cowboys"]
+
+
 
     void testRatio() {
 
@@ -51,6 +58,58 @@ class FuzzySearchTest extends GroovyTestCase {
         assertEquals 40, FuzzySearch.weightedRatio("mvn","www;'l3;4;.4;23.4/23.4/234//////www.mavencentral.comm")
         assertEquals 97, FuzzySearch.weightedRatio("The quick brown fox jimps ofver the small lazy dog",
                 "the quick brown fox jumps over the small lazy dog")
+
+    }
+
+    void testExtractTop() {
+
+        def res = FuzzySearch.extractTop("goolge", choices, 2);
+        def res2 = FuzzySearch.extractTop("goolge", choices, new SimpleRatio(), 2);
+
+        assert res.size() == 2
+        assert res.get(0).string == "google" && res.get(1).string == "googleplus"
+
+        assert res2.size() == 2
+        assert res2.get(0).string == "google" && res2.get(1).string == "googleplus"
+
+        assert FuzzySearch.extractTop("goolge", choices, 2, 100).size() == 0
+
+    }
+
+    void testExtractAll() {
+
+        def res = FuzzySearch.extractAll("goolge", choices);
+
+        assert res.size() == choices.size()
+        assert res.get(0).string == "google"
+
+        assert FuzzySearch.extractAll("goolge", choices, 40).size() == 3
+
+    }
+
+    void testExtractSorted() {
+
+        def res = FuzzySearch.extractSorted("goolge", choices);
+
+        assert res.size() == choices.size()
+        assert res.get(0).string == "google"
+        assert res.get(1).string == "googleplus"
+
+        assert FuzzySearch.extractSorted("goolge", choices, 40).size() == 3
+
+    }
+
+
+
+    void testExtractOne() {
+
+        def res = FuzzySearch.extractOne("twiter", choices, new SimpleRatio());
+        def res2 = FuzzySearch.extractOne("twiter", choices);
+        def res3 = FuzzySearch.extractOne("cowboys", moreChoices)
+
+        assert res.string == "twitter"
+        assert res2.string == "twitter"
+        assert res3.string == "Dallas Cowboys" && res3.score == 90
 
     }
 }

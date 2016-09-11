@@ -2,13 +2,14 @@ package com.xdrop.fuzzywuzzy.ratios;
 
 import com.xdrop.diffutils.DiffUtils;
 import com.xdrop.diffutils.structs.MatchingBlock;
+import com.xdrop.fuzzywuzzy.Applicable;
 import com.xdrop.fuzzywuzzy.Ratio;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class PartialRatio implements Ratio {
+public class PartialRatio implements Ratio, Applicable {
 
     @Override
     public int apply(String s1, String s2) {

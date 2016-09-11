@@ -3,8 +3,12 @@ package com.xdrop.fuzzywuzzy;
 import com.xdrop.fuzzywuzzy.algorithms.TokenSet;
 import com.xdrop.fuzzywuzzy.algorithms.TokenSort;
 import com.xdrop.fuzzywuzzy.algorithms.WeightedRatio;
+import com.xdrop.fuzzywuzzy.model.ExtractedResult;
 import com.xdrop.fuzzywuzzy.ratios.PartialRatio;
 import com.xdrop.fuzzywuzzy.ratios.SimpleRatio;
+
+import java.util.Collection;
+import java.util.List;
 
 
 /**
@@ -62,8 +66,8 @@ public class FuzzySearch {
      * those tokens and then take ratio of resulting
      * joined strings.
      *
-     * @param s1 Input string
-     * @param s2 Input string
+     * @param s1              Input string
+     * @param s2              Input string
      * @param stringProcessor Functor which transforms strings before
      *                        calculating the ratio
      * @return The partial ratio of the strings
@@ -94,8 +98,8 @@ public class FuzzySearch {
      * those tokens and then take ratio of resulting
      * joined strings.
      *
-     * @param s1 Input string
-     * @param s2 Input string
+     * @param s1              Input string
+     * @param s2              Input string
      * @param stringProcessor Functor which transforms strings before
      *                        calculating the ratio
      * @return The full ratio of the strings
@@ -129,8 +133,8 @@ public class FuzzySearch {
      * built up and is compared using the simple ratio algorithm.
      * Useful for strings where words appear redundantly.
      *
-     * @param s1 Input string
-     * @param s2 Input string
+     * @param s1              Input string
+     * @param s2              Input string
      * @param stringProcessor Functor which transforms strings before
      *                        calculating the ratio
      * @return The ratio of similarity
@@ -163,8 +167,8 @@ public class FuzzySearch {
      * built up and is compared using the simple ratio algorithm.
      * Useful for strings where words appear redundantly.
      *
-     * @param s1 Input string
-     * @param s2 Input string
+     * @param s1              Input string
+     * @param s2              Input string
      * @param stringProcessor Functor which transforms strings before
      *                        calculating the ratio
      * @return The ratio of similarity
@@ -191,8 +195,8 @@ public class FuzzySearch {
     /**
      * Calculates a weighted ratio between the different algorithms for best results
      *
-     * @param s1 Input string
-     * @param s2 Input string
+     * @param s1              Input string
+     * @param s2              Input string
      * @param stringProcessor Functor which transforms strings before
      *                        calculating the ratio
      * @return The ratio of similarity
@@ -200,6 +204,247 @@ public class FuzzySearch {
     public static int weightedRatio(String s1, String s2, StringProcessor stringProcessor) {
 
         return new WeightedRatio().apply(s1, s2, stringProcessor);
+
+    }
+
+    /**
+     * Creates a <b>sorted</b> list of {@see ExtractedResult} which contain the
+     * top {@param limit} most similar choices
+     *
+     * @param query   The query string
+     * @param choices A list of choices
+     * @param func    The scoring function
+     * @return A list of the results
+     */
+    public static List<ExtractedResult> extractTop(String query, Collection<String> choices,
+                                                   Applicable func, int limit, int cutoff) {
+
+        Extractor extractor = new Extractor(cutoff);
+        return extractor.extractBests(query, choices, func, limit);
+
+    }
+
+    /**
+     * Creates a <b>sorted</b> list of {@see ExtractedResult} which contain the
+     * top {@param limit} most similar choices
+     *
+     * @param query   The query string
+     * @param choices A list of choices
+     * @return A list of the results
+     */
+    public static List<ExtractedResult> extractTop(String query, Collection<String> choices,
+                                                   int limit, int cutoff) {
+
+        Extractor extractor = new Extractor(cutoff);
+        return extractor.extractBests(query, choices, new WeightedRatio(), limit);
+
+    }
+
+    /**
+     * Creates a <b>sorted</b> list of {@see ExtractedResult} which contain the
+     * top {@param limit} most similar choices
+     *
+     * @param query   The query string
+     * @param choices A list of choices
+     * @param func    The scoring function
+     * @param limit   The number of results to return
+     * @return A list of the results
+     */
+    public static List<ExtractedResult> extractTop(String query, Collection<String> choices,
+                                                   Applicable func, int limit) {
+
+        Extractor extractor = new Extractor();
+
+        return extractor.extractBests(query, choices, func, limit);
+
+    }
+
+    /**
+     * Creates a <b>sorted</b> list of {@see ExtractedResult} which contain the
+     * top {@param limit} most similar choices
+     *
+     * @param query   The query string
+     * @param choices A list of choices
+     * @param limit   The number of results to return
+     * @return A list of the results
+     */
+    public static List<ExtractedResult> extractTop(String query, Collection<String> choices,
+                                                   int limit) {
+
+        Extractor extractor = new Extractor();
+
+        return extractor.extractBests(query, choices, new WeightedRatio(), limit);
+
+    }
+
+    /**
+     * Creates a <b>sorted</b> list of {@see ExtractedResult} which contain all the choices
+     * with their corresponding score where higher is more similar
+     *
+     * @param query   The query string
+     * @param choices A list of choices
+     * @param func    The scoring function
+     * @return A list of the results
+     */
+    public static List<ExtractedResult> extractSorted(String query, Collection<String> choices, Applicable func) {
+
+        Extractor extractor = new Extractor();
+
+        return extractor.extractBests(query, choices, func);
+
+    }
+
+
+    /**
+     * Creates a <b>sorted</b> list of {@see ExtractedResult} which contain all the choices
+     * with their corresponding score where higher is more similar
+     *
+     * @param query   The query string
+     * @param choices A list of choices
+     * @param func    The scoring function
+     * @param cutoff  Keep only scores above cutoff
+     * @return A list of the results
+     */
+    public static List<ExtractedResult> extractSorted(String query, Collection<String> choices, Applicable func,
+                                                      int cutoff) {
+
+        Extractor extractor = new Extractor(cutoff);
+
+        return extractor.extractBests(query, choices, func);
+
+    }
+
+    /**
+     * Creates a <b>sorted</b> list of {@see ExtractedResult} which contain all the choices
+     * with their corresponding score where higher is more similar
+     *
+     * @param query   The query string
+     * @param choices A list of choices
+     * @return A list of the results
+     */
+    public static List<ExtractedResult> extractSorted(String query, Collection<String> choices) {
+
+        Extractor extractor = new Extractor();
+
+        return extractor.extractBests(query, choices, new WeightedRatio());
+
+    }
+
+    /**
+     * Creates a <b>sorted</b> list of {@see ExtractedResult} which contain all the choices
+     * with their corresponding score where higher is more similar
+     *
+     * @param query   The query string
+     * @param choices A list of choices
+     * @param cutoff  Keep only scores above cutoff
+     * @return A list of the results
+     */
+    public static List<ExtractedResult> extractSorted(String query, Collection<String> choices,
+                                                      int cutoff) {
+
+        Extractor extractor = new Extractor(cutoff);
+
+        return extractor.extractBests(query, choices, new WeightedRatio());
+
+    }
+
+    /**
+     * Creates a list of {@see ExtractedResult} which contain all the choices with
+     * their corresponding score where higher is more similar
+     *
+     * @param query   The query string
+     * @param choices A list of choices
+     * @param func    The scoring function
+     * @return A list of the results
+     */
+    public static List<ExtractedResult> extractAll(String query, Collection<String> choices, Applicable func) {
+
+        Extractor extractor = new Extractor();
+
+        return extractor.extractWithoutOrder(query, choices, func);
+
+    }
+
+    /**
+     * Creates a list of {@see ExtractedResult} which contain all the choices with
+     * their corresponding score where higher is more similar
+     *
+     * @param query   The query string
+     * @param choices A list of choices
+     * @param func    The scoring function
+     * @param cutoff  Keep only scores above cutoff
+     * @return A list of the results
+     */
+    public static List<ExtractedResult> extractAll(String query, Collection<String> choices, Applicable func,
+                                                   int cutoff) {
+
+        Extractor extractor = new Extractor(cutoff);
+
+        return extractor.extractWithoutOrder(query, choices, func);
+
+    }
+
+    /**
+     * Creates a list of {@see ExtractedResult} which contain all the choices with
+     * their corresponding score where higher is more similar
+     *
+     * @param query   The query string
+     * @param choices A list of choices
+     * @return A list of the results
+     */
+    public static List<ExtractedResult> extractAll(String query, Collection<String> choices) {
+
+        Extractor extractor = new Extractor();
+
+        return extractor.extractWithoutOrder(query, choices, new WeightedRatio());
+
+    }
+
+    /**
+     * Creates a list of {@see ExtractedResult} which contain all the choices with
+     * their corresponding score where higher is more similar
+     *
+     * @param query   The query string
+     * @param choices A list of choices
+     * @param cutoff  Keep only scores above cutoff
+     * @return A list of the results
+     */
+    public static List<ExtractedResult> extractAll(String query, Collection<String> choices, int cutoff) {
+
+        Extractor extractor = new Extractor(cutoff);
+
+        return extractor.extractWithoutOrder(query, choices, new WeightedRatio());
+
+    }
+
+    /**
+     * Find the single best match above a score in a list of choices.
+     *
+     * @param query   A string to match against
+     * @param choices A list of choices
+     * @param func    Scoring function
+     * @return An object containing the best match and it's score
+     */
+    public static ExtractedResult extractOne(String query, Collection<String> choices, Applicable func) {
+
+        Extractor extractor = new Extractor();
+
+        return extractor.extractOne(query, choices, func);
+
+    }
+
+    /**
+     * Find the single best match above a score in a list of choices.
+     *
+     * @param query   A string to match against
+     * @param choices A list of choices
+     * @return An object containing the best match and it's score
+     */
+    public static ExtractedResult extractOne(String query, Collection<String> choices) {
+
+        Extractor extractor = new Extractor();
+
+        return extractor.extractOne(query, choices, new WeightedRatio());
 
     }
 
