@@ -22,7 +22,7 @@ coming soon!
 </dependency>
 ```
 ### Jar release
-Download the latest release [here](https://github.com/xdrop/fuzzywuzzy/releases/tag/1.0.1-alpha) and add to your classpath
+Download the latest release [here](https://github.com/xdrop/fuzzywuzzy/releases) and add to your classpath
 
 ## Usage
 
