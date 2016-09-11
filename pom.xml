@@ -4,7 +4,7 @@
                       https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>xdrop</groupId>
+    <groupId>com.xdrop</groupId>
     <artifactId>fuzzywuzzy</artifactId>
     <name>fuzzywuzzy - parent</name>
     <version>1.2-RELEASE</version>
@@ -16,6 +16,35 @@
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.mycila.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <version>1.10.b1</version>
+                <configuration>
+                    <header>${project.basedir}/header.txt</header>
+                    <strictCheck>true</strictCheck>
+                    <includes>
+                        <!-- Only copyright the java -->
+                        <include>${project.basedir}/src/**.java</include>
+                    </includes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>check</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.2</version>
+                <configuration>
+                    <preparationGoals>clean verify</preparationGoals>
                 </configuration>
             </plugin>
         </plugins>
