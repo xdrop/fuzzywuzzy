@@ -35,6 +35,13 @@
       <tag>1.0.4-alpha</tag>
   </scm>
 
+    <distributionManagement>
+        <repository>
+            <id>bintray</id>
+            <url>https://api.bintray.com/maven/{bintray-user}/{bintray-repo}/{package};publish=1;</url>
+        </repository>
+    </distributionManagement>
+
 
     <build>
         <plugins>
