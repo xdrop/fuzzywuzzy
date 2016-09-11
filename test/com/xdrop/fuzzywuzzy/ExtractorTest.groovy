@@ -1,6 +1,4 @@
-package com.xdrop.fuzzywuzzy.extract
-
-import com.xdrop.fuzzywuzzy.Extractor
+package com.xdrop.fuzzywuzzy
 import com.xdrop.fuzzywuzzy.algorithms.WeightedRatio
 
 class ExtractorTest extends GroovyTestCase {
