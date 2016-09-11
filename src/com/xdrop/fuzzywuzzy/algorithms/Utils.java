@@ -1,4 +1,6 @@
-package com.xdrop.fuzzywuzzy;
+package com.xdrop.fuzzywuzzy.algorithms;
+
+import com.xdrop.fuzzywuzzy.algorithms.StringProcess;
 
 import java.util.*;
 

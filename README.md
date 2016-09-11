@@ -30,6 +30,7 @@ Download the latest release [here](https://github.com/xdrop/fuzzywuzzy/releases/
 ```java
 FuzzySearch.ratio("mysmilarstring","myawfullysimilarstirng")
 72
+
 FuzzySearch.ratio("mysmilarstring","mysimilarstring")
 97
 
@@ -39,12 +40,13 @@ FuzzySearch.ratio("mysmilarstring","mysimilarstring")
 ```java
 FuzzySearch.partialRatio("similar", "somewhresimlrbetweenthisstring")
 71
-
 ```
 
 ### Token Sort Ratio
 ```java
 FuzzySearch.tokenSortPartialRatio("order words out of","  words out of order")
+100
+FuzzySearch.tokenSortRatio("order words out of","  words out of order")
 100
 ```
 
@@ -52,5 +54,18 @@ FuzzySearch.tokenSortPartialRatio("order words out of","  words out of order")
 ```java
 FuzzySearch.tokenSetRatio("fuzzy was a bear", "fuzzy fuzzy fuzzy bear")
 100
+FuzzySearch.tokenSetPartialRatio("fuzzy was a bear", "fuzzy fuzzy fuzzy bear")
+100
 ```
 
+### Weighted Ratio
+```java
+FuzzySearch.weightedRatio"The quick brown fox jimps ofver the small lazy dog", "the quick brown fox jumps over the small lazy dog")
+97
+```
+
+## Credits
+    - seatgeek
+    - David Necas (python-Levenshtein)
+    - Mikko Ohtamaa (python-Levenshtein)
+    - Antti Haapala (python-Levenshtein)

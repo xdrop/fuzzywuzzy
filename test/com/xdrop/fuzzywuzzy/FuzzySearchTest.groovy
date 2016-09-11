@@ -49,6 +49,8 @@ class FuzzySearchTest extends GroovyTestCase {
 
         assertEquals 60, FuzzySearch.weightedRatio("mvn","wwwwww.mavencentral.comm")
         assertEquals 40, FuzzySearch.weightedRatio("mvn","www;'l3;4;.4;23.4/23.4/234//////www.mavencentral.comm")
+        assertEquals 97, FuzzySearch.weightedRatio("The quick brown fox jimps ofver the small lazy dog",
+                "the quick brown fox jumps over the small lazy dog")
 
     }
 }

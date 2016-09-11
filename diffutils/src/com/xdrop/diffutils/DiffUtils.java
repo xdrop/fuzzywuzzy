@@ -5,6 +5,13 @@ import com.xdrop.diffutils.structs.EditType;
 import com.xdrop.diffutils.structs.MatchingBlock;
 import com.xdrop.diffutils.structs.OpCode;
 
+/**
+ *
+ * This is a port of all the functions needed from python-levenshtein C implementation.
+ * The code was ported line by line but unfortunately it was mostly undocumented,
+ * so it is mostly non readable (eg. var names)
+ *
+ */
 public class DiffUtils {
 
     public static EditOp[] getEditOps(String s1, String s2) {
@@ -302,7 +309,7 @@ public class DiffUtils {
 
         spos = dpos = 0;
 
-        EditType type = EditType.KEEP;
+        EditType type;
 
         for (i = n; i != 0; ) {
 
@@ -366,7 +373,6 @@ public class DiffUtils {
 
         o = 0;
         spos = dpos = 0;
-        type = EditType.KEEP;
         int mbIndex = 0;
 
 
@@ -461,7 +467,6 @@ public class DiffUtils {
 
         noOfBlocks = 0;
         spos = dpos = 0;
-        type = EditType.KEEP;
 
         for (i = n; i != 0; ) {
 
@@ -525,7 +530,6 @@ public class DiffUtils {
 
         o = 0;
         spos = dpos = 0;
-        type = EditType.KEEP;
         int oIndex = 0;
 
         for (i = n; i != 0; ) {
