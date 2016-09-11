@@ -90,11 +90,11 @@
                 <artifactId>maven-license-plugin</artifactId>
                 <version>1.10.b1</version>
                 <configuration>
-                    <header>${project.basedir}/header.txt</header>
+                    <header>${project.basedir}/../header.txt</header>
                     <strictCheck>true</strictCheck>
                     <includes>
                         <!-- Only copyright the java -->
-                        <include>src/**</include>
+                        <include>${project.basedir}/../src/**.java</include>
                     </includes>
                     <properties>
                         <inceptionYear>${project.inceptionYear}</inceptionYear>
