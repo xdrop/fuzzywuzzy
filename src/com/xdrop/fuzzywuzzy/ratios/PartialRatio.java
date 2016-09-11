@@ -43,8 +43,6 @@ public class PartialRatio implements Ratio {
 
             double ratio = DiffUtils.getRatio(shorter, long_substr);
 
-            System.out.println("Ratio(" + shorter + "," + long_substr + ")=" + ratio);
-
             if (ratio > .995) {
                 return 100;
             } else {

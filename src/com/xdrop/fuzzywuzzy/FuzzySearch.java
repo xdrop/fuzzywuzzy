@@ -5,7 +5,7 @@ import com.xdrop.fuzzywuzzy.ratios.SimpleRatio;
 
 import java.util.*;
 
-import static com.xdrop.fuzzywuzzy.Utils.max;
+import static com.xdrop.fuzzywuzzy.Primitives.max;
 import static java.lang.Math.round;
 
 @SuppressWarnings("WeakerAccess")
@@ -42,7 +42,7 @@ public class FuzzySearch {
 
     }
 
-    private String processAndSort(String in) {
+    private static String processAndSort(String in) {
 
         in = Utils.processString(in, false);
         String[] wordsArray = in.split("\\s+");
@@ -64,7 +64,7 @@ public class FuzzySearch {
      * @param partial Whether to apply partial ratio or not
      * @return The ratio of the strings
      */
-    private int tokenSort(String s1, String s2, boolean partial) {
+    private static int tokenSort(String s1, String s2, boolean partial) {
 
         String sorted1 = processAndSort(s1);
         String sorted2 = processAndSort(s2);
@@ -82,7 +82,7 @@ public class FuzzySearch {
      * @param s2
      * @return The partial ratio of the strings
      */
-    public int tokenSortPartial(String s1, String s2) {
+    public static int tokenSortPartial(String s1, String s2) {
 
         return tokenSort(s1, s2, true);
 
@@ -97,13 +97,13 @@ public class FuzzySearch {
      * @param s2
      * @return The full ratio of the strings
      */
-    public int tokenSortRatio(String s1, String s2) {
+    public static int tokenSortRatio(String s1, String s2) {
 
         return tokenSort(s1, s2, false);
 
     }
 
-    private int tokenSet(String s1, String s2, Ratio ratio) {
+    private static int tokenSet(String s1, String s2, Ratio ratio) {
 
         s1 = Utils.processString(s1, false);
         s2 = Utils.processString(s2, false);
@@ -129,19 +129,19 @@ public class FuzzySearch {
 
     }
 
-    public int tokenSetRatio(String s1, String s2) {
+    public static int tokenSetRatio(String s1, String s2) {
 
         return tokenSet(s1, s2, new SimpleRatio());
 
     }
 
-    public int tokenSetPartial(String s1, String s2) {
+    public static int tokenSetPartial(String s1, String s2) {
 
         return tokenSet(s1, s2, new PartialRatio());
 
     }
 
-    public int weightedRatio(String s1, String s2) {
+    public static int weightedRatio(String s1, String s2) {
 
         s1 = Utils.processString(s1, false);
         s2 = Utils.processString(s2, false);

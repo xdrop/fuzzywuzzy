@@ -23,7 +23,7 @@ class StringProcess {
         if(m.matches()){
             return m.replaceAll(sub);
         } else {
-            return "";
+            return in;
         }
 
     }

@@ -4,7 +4,7 @@ import org.apache.commons.lang.StringUtils;
 
 import java.util.*;
 
-class Utils {
+public class Utils {
 
     /**
      * Process a string by
@@ -16,7 +16,7 @@ class Utils {
      * @param forceAscii Force to ascii (if true)
      * @return The processed string
      */
-    static String processString(String in, boolean forceAscii) {
+    protected static String processString(String in, boolean forceAscii) {
 
         in = StringProcess.subNonAlphaNumeric(in, " ");
         in = in.toLowerCase();
@@ -34,7 +34,7 @@ class Utils {
 
     static Set<String> tokenizeSet(String in){
 
-        return new HashSet<String>(tokenize(in));
+        return new HashSet<>(tokenize(in));
 
     }
 
@@ -68,21 +68,6 @@ class Utils {
 
     }
 
-//    static double max(double ... elems) {
-//
-//        if (elems.length == 0) return 0;
-//
-//        double best = elems[0];
-//
-//        for(double t : elems){
-//            if (t > best) {
-//                best = t;
-//            }
-//        }
-//
-//        return best;
-//
-//    }
 
 
 }
