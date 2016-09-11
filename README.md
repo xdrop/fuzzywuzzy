@@ -67,6 +67,7 @@ FuzzySearch.weightedRatio("The quick brown fox jimps ofver the small lazy dog", 
 ## Credits
 
 - seatgeek
+- Adam Cohen
 - David Necas (python-Levenshtein)
 - Mikko Ohtamaa (python-Levenshtein)
 - Antti Haapala (python-Levenshtein)

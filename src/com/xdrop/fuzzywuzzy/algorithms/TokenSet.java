@@ -9,28 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-public class TokenSet implements RatioAlgorithm {
-
-    @Override
-    public int apply(String s1, String s2) {
-
-        return apply(s1, s2, new SimpleRatio());
-
-    }
-
-    @Override
-    public int apply(String s1, String s2, StringProcessor stringProcessor) {
-
-        return apply(s1, s2, new SimpleRatio(), stringProcessor);
-
-    }
-
-    @Override
-    public int apply(String s1, String s2, Ratio ratio) {
-
-        return apply(s1, s2, ratio, new DefaultStringProcessor());
-
-    }
+public class TokenSet extends RatioAlgorithm {
 
     @Override
     public int apply(String s1, String s2, Ratio ratio, StringProcessor stringProcessor) {

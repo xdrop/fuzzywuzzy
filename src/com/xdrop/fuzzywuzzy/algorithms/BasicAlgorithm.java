@@ -1,11 +1,43 @@
 package com.xdrop.fuzzywuzzy.algorithms;
 
+import com.xdrop.fuzzywuzzy.Applicable;
 import com.xdrop.fuzzywuzzy.StringProcessor;
 
-public interface BasicAlgorithm {
+public abstract class BasicAlgorithm implements Applicable {
 
-    int apply(String s1, String s2);
+    private StringProcessor stringProcessor;
 
-    int apply(String s1, String s2, StringProcessor stringProcessor);
+    public BasicAlgorithm() {
+        this.stringProcessor = new DefaultStringProcessor();
+    }
 
+    public BasicAlgorithm(StringProcessor stringProcessor) {
+        this.stringProcessor = stringProcessor;
+    }
+
+    public abstract int apply(String s1, String s2, StringProcessor stringProcessor);
+
+    public int apply(String s1, String s2){
+
+        return apply(s1, s2, this.stringProcessor);
+
+    }
+
+    public BasicAlgorithm with(StringProcessor stringProcessor){
+        setStringProcessor(stringProcessor);
+        return this;
+    }
+
+    public BasicAlgorithm noProcessor(){
+        this.stringProcessor = new NoProcess();
+        return this;
+    }
+
+    void setStringProcessor(StringProcessor stringProcessor){
+        this.stringProcessor = stringProcessor;
+    }
+
+    public StringProcessor getStringProcessor() {
+        return stringProcessor;
+    }
 }
