@@ -1,7 +1,5 @@
 package com.xdrop.fuzzywuzzy;
 
-import org.apache.commons.lang.StringUtils;
-
 import java.util.*;
 
 final class Utils {
@@ -42,8 +40,24 @@ final class Utils {
 
         Collections.sort(col);
 
-        return StringUtils.join(col, sep);
+        return join(col, sep);
 
+    }
+
+    static String join(List<String> strings, String sep) {
+        final StringBuilder buf = new StringBuilder(strings.size() * 16);
+
+        for(int i = 0; i < strings.size(); i++){
+
+            if(i < strings.size()) {
+                buf.append(sep);
+            }
+
+            buf.append(strings.get(i));
+
+        }
+
+        return buf.toString().trim();
     }
 
     static String sortAndJoin(Set<String> col, String sep){

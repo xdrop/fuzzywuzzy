@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 class StringProcess {
 
-    private final static String pattern = "(?ui)\\W";
+    private final static String pattern = "[\\p{IsAlphabetic}|\\p{Digit}]";
     private final static Pattern r = Pattern.compile(pattern);
 
 

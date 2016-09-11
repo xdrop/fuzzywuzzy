@@ -7,18 +7,22 @@ class FuzzySearchTest extends GroovyTestCase {
     void testRatio() {
 
         assertEquals 76, FuzzySearch.ratio("mysmilarstring", "mymostsimilarstsdsdring"), 2
+        assertEquals 72, FuzzySearch.ratio("mysmilarstring","myawfullysimilarstirng"), 2
+        assertEquals 97, FuzzySearch.ratio("mysmilarstring","mysimilarstring"), 2
 
     }
 
     void testPartialRatio() {
 
-        assertEquals 71, FuzzySearch.partialRatio("mysmilarstring", "mymostsimilarstsdsdring"), 2
+        assertEquals 71, FuzzySearch.partialRatio("similar", "somewhresimlrbetweenthisstring")
+        assertEquals 43, FuzzySearch.partialRatio("similar", "notinheresim")
 
     }
 
     void testTokenSortPartial() {
 
         assertEquals 67, FuzzySearch.tokenSortPartial("mvn","wwwwww.mavencentral.comm")
+        assertEquals 100, FuzzySearch.tokenSortPartial("  order words out of ","  words out of order")
 
     }
 
@@ -30,7 +34,7 @@ class FuzzySearchTest extends GroovyTestCase {
 
     void testTokenSetRatio() {
 
-        assertEquals 91, FuzzySearch.tokenSetRatio("fuzzy was a bear", "fuzzy d fuzzy was a bsear")
+        assertEquals 100, FuzzySearch.tokenSetRatio("fuzzy fuzzy fuzzy bear", "fuzzy was a bear" )
 
     }
 
