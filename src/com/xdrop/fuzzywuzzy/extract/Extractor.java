@@ -1,6 +1,5 @@
 package com.xdrop.fuzzywuzzy.extract;
 
-import com.sun.org.apache.xml.internal.security.algorithms.JCEMapper;
 import com.xdrop.fuzzywuzzy.Ratio;
 import com.xdrop.fuzzywuzzy.StringProcessor;
 import com.xdrop.fuzzywuzzy.algorithms.BasicAlgorithm;
