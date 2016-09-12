@@ -2,7 +2,6 @@ package com.xdrop.fuzzywuzzy.algorithms;
 
 import com.xdrop.fuzzywuzzy.Ratio;
 import com.xdrop.fuzzywuzzy.StringProcessor;
-import com.xdrop.fuzzywuzzy.ratios.SimpleRatio;
 
 import java.util.ArrayList;
 import java.util.Collections;

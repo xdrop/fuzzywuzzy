@@ -2,7 +2,6 @@ package com.xdrop.fuzzywuzzy.ratios;
 
 import com.xdrop.diffutils.DiffUtils;
 import com.xdrop.diffutils.structs.MatchingBlock;
-import com.xdrop.fuzzywuzzy.Applicable;
 import com.xdrop.fuzzywuzzy.Ratio;
 
 import java.util.ArrayList;
