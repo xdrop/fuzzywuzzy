@@ -73,11 +73,18 @@
                 <version>2.5.2</version>
                 <configuration>
                     <preparationGoals>clean verify</preparationGoals>
-                    <scmCommentPrefix>[release]${line.separator}</scmCommentPrefix>
+                    <scmCommentPrefix>[release] ${project.version}${line.separator}</scmCommentPrefix>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
+    <distributionManagement>
+        <repository>
+            <id>bintray</id>
+            <url>https://api.bintray.com/maven/xdrop/FuzzyWuzzy-Java/fuzzywuzzy</url>
+        </repository>
+    </distributionManagement>
     <dependencies>
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
