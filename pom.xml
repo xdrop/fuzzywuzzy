@@ -4,7 +4,7 @@
     <groupId>com.xdrop</groupId>
     <artifactId>fuzzywuzzy</artifactId>
     <name>fuzzywuzzy - parent</name>
-    <version>1.0.7</version>
+    <version>1.0.8-SNAPSHOT</version>
 
     <licenses>
         <license>
@@ -32,7 +32,7 @@
         <url>https://github.com/xdrop/fuzzywuzzy</url>
         <developerConnection>scm:git:git@github.com:xdrop/fuzzywuzzy.git</developerConnection>
         <connection>scm:git:git://github.com/fuzzywuzzy/fuzzywuzzy.git</connection>
-      <tag>1.0.7</tag>
+      <tag>HEAD</tag>
   </scm>
     <distributionManagement>
         <repository>
@@ -101,13 +101,13 @@
         <dependency>
             <groupId>com.xdrop</groupId>
             <artifactId>diffutils</artifactId>
-            <version>1.1</version>
+            <version>1.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>com.xdrop</groupId>
             <artifactId>fuzzywuzzy-build</artifactId>
-            <version>1.0.7</version>
+            <version>1.0.8-SNAPSHOT</version>
         </dependency>
     </dependencies>
     <packaging>pom</packaging>
