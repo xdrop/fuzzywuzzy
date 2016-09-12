@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class PartialRatio implements Ratio, Applicable {
+public class PartialRatio implements Ratio {
 
     @Override
     public int apply(String s1, String s2) {
