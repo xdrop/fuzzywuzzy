@@ -88,12 +88,6 @@
             <artifactId>junit</artifactId>
             <version>4.8.2</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.easymock/easymock -->
-        <dependency>
-            <groupId>org.easymock</groupId>
-            <artifactId>easymock</artifactId>
-            <version>3.4</version>
-        </dependency>
 
         <dependency>
             <groupId>com.xdrop</groupId>
