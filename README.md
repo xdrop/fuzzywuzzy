@@ -1,5 +1,6 @@
 # JavaWuzzy
-[![Build Status](https://travis-ci.org/xdrop/fuzzywuzzy.svg?branch=master)](https://travis-ci.org/xdrop/fuzzywuzzy) [![Bintray](https://img.shields.io/bintray/v/xdrop/FuzzyWuzzy-Java/fuzzywuzzy.svg?maxAge=2592000)]()
+[![Build Status](https://travis-ci.org/xdrop/fuzzywuzzy.svg?branch=master)](https://travis-ci.org/xdrop/fuzzywuzzy)  [ ![Download](https://api.bintray.com/packages/xdrop/FuzzyWuzzy-Java/fuzzywuzzy/images/download.svg) ](https://bintray.com/xdrop/FuzzyWuzzy-Java/fuzzywuzzy/_latestVersion)
+
 ## FuzzyWuzzy Java Implementation
 Fuzzy string matching for java based on the [FuzzyWuzzy](https://github.com/seatgeek/fuzzywuzzy) Python algorithm.
 
@@ -70,24 +71,24 @@ FuzzySearch.weightedRatio("The quick brown fox jimps ofver the small lazy dog", 
 
 FuzzySearch.extractOne("cowboys", ["Atlanta Falcons", "New York Jets", "New York Giants", "Dallas Cowboys"])
 (string: Dallas Cowboys, score: 90)
-
+```
+```groovy
 FuzzySearch.extractTop("goolge", ["google", "bing", "facebook", "linkedin", "twitter", "googleplus", "bingnews", "plexoogl"], 3)
 [(string: google, score:83), (string: googleplus, score:63), (string: plexoogl, score:43)]
-
+```
+```groovy
 FuzzySearch.extractAll("goolge", ["google", "bing", "facebook", "linkedin", "twitter", "googleplus", "bingnews", "plexoogl"]);
 [(string: google, score:83), (string: bing, score:20), (string: facebook, score:29), (string: linkedin, score:29), (string: twitter, score:15), (string: googleplus, score:63), (string: bingnews, score:29), (string: plexoogl, score:43)]
 // score cutoff
 FuzzySearch.extractAll("goolge", ["google", "bing", "facebook", "linkedin", "twitter", "googleplus", "bingnews", "plexoogl"], 40) 
 [(string: google, score:83), (string: googleplus, score:63), (string: plexoogl, score:43)]
-
+```
+```groovy
 FuzzySearch.extractSorted("goolge", ["google", "bing", "facebook", "linkedin", "twitter", "googleplus", "bingnews", "plexoogl"]);
 [(string: google, score:83), (string: googleplus, score:63), (string: plexoogl, score:43), (string: facebook, score:29), (string: linkedin, score:29), (string: bingnews, score:29), (string: bing, score:20), (string: twitter, score:15)]
 // score cutoff
 FuzzySearch.extractSorted("goolge", ["google", "bing", "facebook", "linkedin", "twitter", "googleplus", "bingnews", "plexoogl"], 3);
 [(string: google, score:83), (string: googleplus, score:63), (string: plexoogl, score:43)]
-
-
-
 ```
 
 ## Credits
