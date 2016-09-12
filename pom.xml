@@ -34,6 +34,12 @@
         <connection>scm:git:git://github.com/fuzzywuzzy/fuzzywuzzy.git</connection>
       <tag>HEAD</tag>
   </scm>
+    <distributionManagement>
+        <repository>
+            <id>bintray</id>
+            <url>https://api.bintray.com/maven/xdrop/FuzzyWuzzy-Java/fuzzywuzzy</url>
+        </repository>
+    </distributionManagement>
 
 
     <build>
@@ -79,12 +85,6 @@
 
         </plugins>
     </build>
-    <distributionManagement>
-        <repository>
-            <id>bintray</id>
-            <url>https://api.bintray.com/maven/xdrop/FuzzyWuzzy-Java/fuzzywuzzy</url>
-        </repository>
-    </distributionManagement>
     <dependencies>
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
@@ -102,6 +102,12 @@
             <groupId>com.xdrop</groupId>
             <artifactId>diffutils</artifactId>
             <version>1.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.xdrop</groupId>
+            <artifactId>fuzzywuzzy-build</artifactId>
+            <version>1.0.6-SNAPSHOT</version>
         </dependency>
     </dependencies>
     <packaging>pom</packaging>
