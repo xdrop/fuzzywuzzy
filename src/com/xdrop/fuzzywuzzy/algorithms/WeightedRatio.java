@@ -1,7 +1,5 @@
 package com.xdrop.fuzzywuzzy.algorithms;
 
-
-import com.xdrop.fuzzywuzzy.Applicable;
 import com.xdrop.fuzzywuzzy.StringProcessor;
 
 import static com.xdrop.fuzzywuzzy.FuzzySearch.*;
