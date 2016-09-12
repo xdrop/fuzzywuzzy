@@ -1,13 +1,40 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                      https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                       https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.xdrop</groupId>
     <artifactId>fuzzywuzzy</artifactId>
     <name>fuzzywuzzy - parent</name>
-    <version>1.0.1-RELEASE</version>
+    <version>1.0.4-SNAPSHOT</version>
+
+    <licenses>
+        <license>
+            <name>GPL 3</name>
+            <url>https://www.gnu.org/licenses/gpl-3.0.en.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>xdrop</id>
+            <name>Panayiotis P</name>
+            <url>http://www.github.com/xdrop</url>
+            <timezone>0</timezone>
+        </developer>
+    </developers>
+
+    <issueManagement>
+        <system>Github</system>
+        <url>https://github.com/xdrop/fuzzywuzzy/issues</url>
+    </issueManagement>
+
+    <scm>
+        <url>https://github.com/xdrop/fuzzywuzzy</url>
+        <developerConnection>scm:git:git@github.com:xdrop/fuzzywuzzy.git</developerConnection>
+        <connection>scm:git:git://github.com/fuzzywuzzy/fuzzywuzzy.git</connection>
+    </scm>
+
+
     <build>
         <plugins>
             <plugin>
@@ -61,10 +88,11 @@
             <artifactId>junit</artifactId>
             <version>4.8.2</version>
         </dependency>
+
         <dependency>
             <groupId>com.xdrop</groupId>
             <artifactId>diffutils</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
     <packaging>pom</packaging>

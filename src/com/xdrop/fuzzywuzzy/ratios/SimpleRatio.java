@@ -1,10 +1,9 @@
 package com.xdrop.fuzzywuzzy.ratios;
 
 import com.xdrop.diffutils.DiffUtils;
-import com.xdrop.fuzzywuzzy.Applicable;
 import com.xdrop.fuzzywuzzy.Ratio;
 
-public class SimpleRatio implements Ratio, Applicable {
+public class SimpleRatio implements Ratio {
     @Override
     public int apply(String s1, String s2) {
 

@@ -1,6 +1,6 @@
 package com.xdrop.fuzzywuzzy;
 
-public interface Ratio {
+public interface Ratio extends Applicable {
 
     int apply(String s1, String s2);
 
