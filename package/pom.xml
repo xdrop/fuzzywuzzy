@@ -1,0 +1,61 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.xdrop</groupId>
+        <artifactId>fuzzywuzzy-root</artifactId>
+        <version>1.0.9</version>
+    </parent>
+    <artifactId>fuzzywuzzy</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.xdrop</groupId>
+            <artifactId>fuzzywuzzy-build</artifactId>
+            <version>1.0.9</version>
+        </dependency>
+    </dependencies>
+
+
+    <distributionManagement>
+        <repository>
+            <id>bintray</id>
+            <url>https://api.bintray.com/maven/xdrop/FuzzyWuzzy-Java/fuzzywuzzy</url>
+        </repository>
+    </distributionManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>false</skip>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.4.3</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <filters>
+                                <filter>
+                                    <artifact>com.xdrop:fuzzywuzzy-build</artifact>
+                                    <includes>
+                                        <include>**</include>
+                                    </includes>
+                                </filter>
+                            </filters>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
