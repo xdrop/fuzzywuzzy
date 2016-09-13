@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.xdrop</groupId>
     <artifactId>fuzzywuzzy-build</artifactId>
-    <version>1.0.8-SNAPSHOT</version>
+    <version>1.0.8</version>
     <name>fuzzywuzzy - build</name>
     <description>Fuzzy string matching algorithm for Java</description>
     <inceptionYear>2016</inceptionYear>
@@ -38,6 +38,13 @@
         <connection>scm:git:git://github.com/fuzzywuzzy/fuzzywuzzy.git</connection>
       <tag>HEAD</tag>
   </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>bintray</id>
+            <url>https://api.bintray.com/maven/xdrop/FuzzyWuzzy-Java/fuzzywuzzy</url>
+        </repository>
+    </distributionManagement>
 
     <build>
         <sourceDirectory>${basedir}/../src</sourceDirectory>
@@ -132,7 +139,7 @@
         <dependency>
             <groupId>com.xdrop</groupId>
             <artifactId>diffutils</artifactId>
-            <version>1.1-SNAPSHOT</version>
+            <version>1.1</version>
         </dependency>
     </dependencies>
 </project>
