@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>com.xdrop</groupId>
-        <artifactId>fuzzywuzzy-root</artifactId>
-        <version>1.0.9</version>
-    </parent>
+    <groupId>com.xdrop</groupId>
     <artifactId>fuzzywuzzy</artifactId>
+    <version>1.0.9</version>
+    <name>fuzzywuzzy</name>
+    <description>Fuzzy string searching implementation of the well-known fuzzywuzzy algorithm for Java</description>
+    <url>https://github.com/xdrop/fuzzywuzzy</url>
 
     <dependencies>
         <dependency>
@@ -15,6 +15,35 @@
             <version>1.0.9</version>
         </dependency>
     </dependencies>
+
+    <licenses>
+        <license>
+            <name>GPL 3</name>
+            <url>https://www.gnu.org/licenses/gpl-3.0.en.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>xdrop</id>
+            <name>Panayiotis P</name>
+            <url>http://www.github.com/xdrop</url>
+            <timezone>0</timezone>
+        </developer>
+    </developers>
+
+    <issueManagement>
+        <system>Github</system>
+        <url>https://github.com/xdrop/fuzzywuzzy/issues</url>
+    </issueManagement>
+
+    <scm>
+        <url>https://github.com/xdrop/fuzzywuzzy</url>
+        <developerConnection>scm:git:git@github.com:xdrop/fuzzywuzzy.git</developerConnection>
+        <connection>scm:git:git://github.com/fuzzywuzzy/fuzzywuzzy.git</connection>
+        <tag>HEAD</tag>
+    </scm>
 
 
     <distributionManagement>
@@ -32,7 +61,14 @@
                     <skip>false</skip>
                 </configuration>
             </plugin>
-
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -53,6 +89,52 @@
                                 </filter>
                             </filters>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>../src</source>
+                                <source>../diffutils/src</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
