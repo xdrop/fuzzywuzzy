@@ -25,7 +25,14 @@ public class Extractor {
         return this;
     }
 
-
+    /**
+     * Returns the list of choices with their associated scores of similarity in a  {@link List<ExtractedResult>}
+     *
+     * @param query
+     * @param choices
+     * @param func
+     * @return
+     */
     public List<ExtractedResult> extractWithoutOrder(String query, Collection<String> choices, Applicable func) {
 
         List<ExtractedResult> yields = new ArrayList<>();
@@ -47,9 +54,9 @@ public class Extractor {
     /**
      * Find the single best match above a score in a list of choices.
      *
-     * @param query A string to match against
+     * @param query  A string to match against
      * @param choice A list of choices
-     * @param func Scoring function
+     * @param func   Scoring function
      * @return An object containing the best match and it's score
      */
     public ExtractedResult extractOne(String query, Collection<String> choice, Applicable func) {
@@ -60,7 +67,7 @@ public class Extractor {
 
     }
 
-    public List<ExtractedResult> extractBests(String query, Collection<String> choice, Applicable func){
+    public List<ExtractedResult> extractTop(String query, Collection<String> choice, Applicable func) {
 
         List<ExtractedResult> best = extractWithoutOrder(query, choice, func);
         Collections.sort(best, Collections.<ExtractedResult>reverseOrder());
@@ -68,7 +75,7 @@ public class Extractor {
         return best;
     }
 
-    public List<ExtractedResult> extractBests(String query, Collection<String> choice, Applicable func, int limit){
+    public List<ExtractedResult> extractTop(String query, Collection<String> choice, Applicable func, int limit) {
 
         List<ExtractedResult> best = extractWithoutOrder(query, choice, func);
 

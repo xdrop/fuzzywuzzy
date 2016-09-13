@@ -208,8 +208,8 @@ public class FuzzySearch {
     }
 
     /**
-     * Creates a <b>sorted</b> list of {@see ExtractedResult} which contain the
-     * top {@param limit} most similar choices
+     * Creates a <b>sorted</b> list of {@link ExtractedResult}  which contain the
+     * top @param limit most similar choices
      *
      * @param query   The query string
      * @param choices A list of choices
@@ -220,13 +220,13 @@ public class FuzzySearch {
                                                    Applicable func, int limit, int cutoff) {
 
         Extractor extractor = new Extractor(cutoff);
-        return extractor.extractBests(query, choices, func, limit);
+        return extractor.extractTop(query, choices, func, limit);
 
     }
 
     /**
-     * Creates a <b>sorted</b> list of {@see ExtractedResult} which contain the
-     * top {@param limit} most similar choices
+     * Creates a <b>sorted</b> list of {@link ExtractedResult} which contain the
+     * top @param limit most similar choices
      *
      * @param query   The query string
      * @param choices A list of choices
@@ -236,13 +236,13 @@ public class FuzzySearch {
                                                    int limit, int cutoff) {
 
         Extractor extractor = new Extractor(cutoff);
-        return extractor.extractBests(query, choices, new WeightedRatio(), limit);
+        return extractor.extractTop(query, choices, new WeightedRatio(), limit);
 
     }
 
     /**
-     * Creates a <b>sorted</b> list of {@see ExtractedResult} which contain the
-     * top {@param limit} most similar choices
+     * Creates a <b>sorted</b> list of {@link ExtractedResult} which contain the
+     * top @param limit most similar choices
      *
      * @param query   The query string
      * @param choices A list of choices
@@ -255,13 +255,13 @@ public class FuzzySearch {
 
         Extractor extractor = new Extractor();
 
-        return extractor.extractBests(query, choices, func, limit);
+        return extractor.extractTop(query, choices, func, limit);
 
     }
 
     /**
-     * Creates a <b>sorted</b> list of {@see ExtractedResult} which contain the
-     * top {@param limit} most similar choices
+     * Creates a <b>sorted</b> list of {@link ExtractedResult} which contain the
+     * top @param limit most similar choices
      *
      * @param query   The query string
      * @param choices A list of choices
@@ -273,12 +273,12 @@ public class FuzzySearch {
 
         Extractor extractor = new Extractor();
 
-        return extractor.extractBests(query, choices, new WeightedRatio(), limit);
+        return extractor.extractTop(query, choices, new WeightedRatio(), limit);
 
     }
 
     /**
-     * Creates a <b>sorted</b> list of {@see ExtractedResult} which contain all the choices
+     * Creates a <b>sorted</b> list of {@link ExtractedResult} which contain all the choices
      * with their corresponding score where higher is more similar
      *
      * @param query   The query string
@@ -290,13 +290,13 @@ public class FuzzySearch {
 
         Extractor extractor = new Extractor();
 
-        return extractor.extractBests(query, choices, func);
+        return extractor.extractTop(query, choices, func);
 
     }
 
 
     /**
-     * Creates a <b>sorted</b> list of {@see ExtractedResult} which contain all the choices
+     * Creates a <b>sorted</b> list of {@link ExtractedResult} which contain all the choices
      * with their corresponding score where higher is more similar
      *
      * @param query   The query string
@@ -310,12 +310,12 @@ public class FuzzySearch {
 
         Extractor extractor = new Extractor(cutoff);
 
-        return extractor.extractBests(query, choices, func);
+        return extractor.extractTop(query, choices, func);
 
     }
 
     /**
-     * Creates a <b>sorted</b> list of {@see ExtractedResult} which contain all the choices
+     * Creates a <b>sorted</b> list of {@link ExtractedResult} which contain all the choices
      * with their corresponding score where higher is more similar
      *
      * @param query   The query string
@@ -326,12 +326,12 @@ public class FuzzySearch {
 
         Extractor extractor = new Extractor();
 
-        return extractor.extractBests(query, choices, new WeightedRatio());
+        return extractor.extractTop(query, choices, new WeightedRatio());
 
     }
 
     /**
-     * Creates a <b>sorted</b> list of {@see ExtractedResult} which contain all the choices
+     * Creates a <b>sorted</b> list of {@link ExtractedResult} which contain all the choices
      * with their corresponding score where higher is more similar
      *
      * @param query   The query string
@@ -344,12 +344,12 @@ public class FuzzySearch {
 
         Extractor extractor = new Extractor(cutoff);
 
-        return extractor.extractBests(query, choices, new WeightedRatio());
+        return extractor.extractTop(query, choices, new WeightedRatio());
 
     }
 
     /**
-     * Creates a list of {@see ExtractedResult} which contain all the choices with
+     * Creates a list of {@link ExtractedResult} which contain all the choices with
      * their corresponding score where higher is more similar
      *
      * @param query   The query string
@@ -366,7 +366,7 @@ public class FuzzySearch {
     }
 
     /**
-     * Creates a list of {@see ExtractedResult} which contain all the choices with
+     * Creates a list of {@link ExtractedResult} which contain all the choices with
      * their corresponding score where higher is more similar
      *
      * @param query   The query string
@@ -385,7 +385,7 @@ public class FuzzySearch {
     }
 
     /**
-     * Creates a list of {@see ExtractedResult} which contain all the choices with
+     * Creates a list of {@link ExtractedResult} which contain all the choices with
      * their corresponding score where higher is more similar
      *
      * @param query   The query string
@@ -401,7 +401,7 @@ public class FuzzySearch {
     }
 
     /**
-     * Creates a list of {@see ExtractedResult} which contain all the choices with
+     * Creates a list of {@link ExtractedResult} which contain all the choices with
      * their corresponding score where higher is more similar
      *
      * @param query   The query string

@@ -8,8 +8,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Partial ratio of similarity
+ */
 public class PartialRatio implements Ratio {
 
+    /**
+     * Computes a partial ratio between the strings
+     *
+     * @param s1 Input string
+     * @param s2 Input string
+     * @return The partial ratio
+     */
     @Override
     public int apply(String s1, String s2) {
 

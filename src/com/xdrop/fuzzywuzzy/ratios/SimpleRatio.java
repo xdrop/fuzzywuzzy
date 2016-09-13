@@ -4,6 +4,14 @@ import com.xdrop.diffutils.DiffUtils;
 import com.xdrop.fuzzywuzzy.Ratio;
 
 public class SimpleRatio implements Ratio {
+
+    /**
+     * Computes a simple Levenshtein distance ratio between the strings
+     *
+     * @param s1 Input string
+     * @param s2 Input string
+     * @return The resulting ratio of similarity
+     */
     @Override
     public int apply(String s1, String s2) {
 
