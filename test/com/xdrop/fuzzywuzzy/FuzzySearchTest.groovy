@@ -112,5 +112,8 @@ class FuzzySearchTest extends GroovyTestCase {
         assert res2.string == "twitter"
         assert res3.string == "Dallas Cowboys" && res3.score == 90
 
+
     }
+
+
 }
