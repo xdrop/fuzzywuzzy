@@ -39,6 +39,7 @@ public class PartialRatio implements Ratio {
             int long_start = dist > 0 ? dist : 0;
             int long_end = long_start + shorter.length();
 
+            if(long_end > longer.length()) long_end = longer.length();
 
             String long_substr = longer.substring(long_start, long_end);
 

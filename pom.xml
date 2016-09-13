@@ -4,7 +4,7 @@
     <groupId>com.xdrop</groupId>
     <artifactId>fuzzywuzzy</artifactId>
     <name>fuzzywuzzy - parent</name>
-    <version>1.0.6-SNAPSHOT</version>
+    <version>1.0.8</version>
 
     <licenses>
         <license>
@@ -34,6 +34,12 @@
         <connection>scm:git:git://github.com/fuzzywuzzy/fuzzywuzzy.git</connection>
       <tag>HEAD</tag>
   </scm>
+    <distributionManagement>
+        <repository>
+            <id>bintray</id>
+            <url>https://api.bintray.com/maven/xdrop/FuzzyWuzzy-Java/fuzzywuzzy</url>
+        </repository>
+    </distributionManagement>
 
 
     <build>
@@ -73,9 +79,10 @@
                 <version>2.5.2</version>
                 <configuration>
                     <preparationGoals>clean verify</preparationGoals>
-                    <scmCommentPrefix>[release]${line.separator}</scmCommentPrefix>
+                    <scmCommentPrefix>[release] ${project.version}${line.separator}</scmCommentPrefix>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
     <dependencies>
@@ -94,7 +101,13 @@
         <dependency>
             <groupId>com.xdrop</groupId>
             <artifactId>diffutils</artifactId>
-            <version>1.1-SNAPSHOT</version>
+            <version>1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.xdrop</groupId>
+            <artifactId>fuzzywuzzy-build</artifactId>
+            <version>1.0.8</version>
         </dependency>
     </dependencies>
     <packaging>pom</packaging>
