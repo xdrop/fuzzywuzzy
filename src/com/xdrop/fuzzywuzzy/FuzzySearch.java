@@ -230,6 +230,9 @@ public class FuzzySearch {
      *
      * @param query   The query string
      * @param choices A list of choices
+     * @param limit   Limits the number of results and speeds up
+     *                the search (k-top heap sort) is used
+     * @param cutoff  Rejects any entries with score below this
      * @return A list of the results
      */
     public static List<ExtractedResult> extractTop(String query, Collection<String> choices,

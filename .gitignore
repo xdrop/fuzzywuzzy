@@ -14,8 +14,10 @@ hs_err_pid*
 .idea/
 *.iml
 target/
-<<<<<<< HEAD
 
 .DS_Store
 pom.xml.releaseBackup
 release.properties
+
+package/dependency-reduced-pom.xml
+pom.xml.versionsBackup

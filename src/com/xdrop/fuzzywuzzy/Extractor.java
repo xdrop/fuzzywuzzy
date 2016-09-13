@@ -26,12 +26,13 @@ public class Extractor {
     }
 
     /**
-     * Returns the list of choices with their associated scores of similarity in a  {@link List<ExtractedResult>}
+     * Returns the list of choices with their associated scores of similarity in a list
+     * of {@link ExtractedResult}
      *
-     * @param query
-     * @param choices
-     * @param func
-     * @return
+     * @param query The query string
+     * @param choices The list of choices
+     * @param func The function to apply
+     * @return The list of results
      */
     public List<ExtractedResult> extractWithoutOrder(String query, Collection<String> choices, Applicable func) {
 
@@ -67,17 +68,36 @@ public class Extractor {
 
     }
 
-    public List<ExtractedResult> extractTop(String query, Collection<String> choice, Applicable func) {
+    /**
+     * Creates a <b>sorted</b> list of {@link ExtractedResult}  which contain the
+     * top @param limit most similar choices
+     *
+     * @param query   The query string
+     * @param choices A list of choices
+     * @param func    The scoring function
+     * @return A list of the results
+     */
+    public List<ExtractedResult> extractTop(String query, Collection<String> choices, Applicable func) {
 
-        List<ExtractedResult> best = extractWithoutOrder(query, choice, func);
+        List<ExtractedResult> best = extractWithoutOrder(query, choices, func);
         Collections.sort(best, Collections.<ExtractedResult>reverseOrder());
 
         return best;
     }
 
-    public List<ExtractedResult> extractTop(String query, Collection<String> choice, Applicable func, int limit) {
+    /**
+     * Creates a <b>sorted</b> list of {@link ExtractedResult} which contain the
+     * top @param limit most similar choices
+     *
+     * @param query   The query string
+     * @param choices A list of choices
+     * @param limit   Limits the number of results and speeds up
+     *                the search (k-top heap sort) is used
+     * @return A list of the results
+     */
+    public List<ExtractedResult> extractTop(String query, Collection<String> choices, Applicable func, int limit) {
 
-        List<ExtractedResult> best = extractWithoutOrder(query, choice, func);
+        List<ExtractedResult> best = extractWithoutOrder(query, choices, func);
 
         List<ExtractedResult> results = Utils.findTopKHeap(best, limit);
         Collections.reverse(results);
