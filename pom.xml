@@ -5,37 +5,7 @@
     <groupId>com.xdrop</groupId>
     <artifactId>fuzzywuzzy-root</artifactId>
     <name>fuzzywuzzy - root</name>
-    <version>1.0.9</version>
-
-    <licenses>
-        <license>
-            <name>GPL 3</name>
-            <url>https://www.gnu.org/licenses/gpl-3.0.en.html</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-
-    <developers>
-        <developer>
-            <id>xdrop</id>
-            <name>Panayiotis P</name>
-            <url>http://www.github.com/xdrop</url>
-            <timezone>0</timezone>
-        </developer>
-    </developers>
-
-    <issueManagement>
-        <system>Github</system>
-        <url>https://github.com/xdrop/fuzzywuzzy/issues</url>
-    </issueManagement>
-
-    <scm>
-        <url>https://github.com/xdrop/fuzzywuzzy</url>
-        <developerConnection>scm:git:git@github.com:xdrop/fuzzywuzzy.git</developerConnection>
-        <connection>scm:git:git://github.com/fuzzywuzzy/fuzzywuzzy.git</connection>
-        <tag>HEAD</tag>
-    </scm>
-
+    <version>1.1.0</version>
 
     <packaging>pom</packaging>
 

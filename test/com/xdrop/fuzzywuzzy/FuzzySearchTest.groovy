@@ -23,6 +23,7 @@ class FuzzySearchTest extends GroovyTestCase {
 
         assertEquals 71, FuzzySearch.partialRatio("similar", "somewhresimlrbetweenthisstring")
         assertEquals 43, FuzzySearch.partialRatio("similar", "notinheresim")
+        assertEquals 38, FuzzySearch.partialRatio("pros holdings, inc.","settlement facility dow corning trust")
 
     }
 
@@ -30,7 +31,7 @@ class FuzzySearchTest extends GroovyTestCase {
 
         assertEquals 67, FuzzySearch.tokenSortPartialRatio("mvn","wwwwww.mavencentral.comm")
         assertEquals 100, FuzzySearch.tokenSortPartialRatio("  order words out of ","  words out of order")
-        assertEquals 38, FuzzySearch.partialRatio("pros holdings, inc.","settlement facility dow corning trust")
+        
     }
 
     void testTokenSortRatio() {
@@ -111,5 +112,8 @@ class FuzzySearchTest extends GroovyTestCase {
         assert res2.string == "twitter"
         assert res3.string == "Dallas Cowboys" && res3.score == 90
 
+
     }
+
+
 }
