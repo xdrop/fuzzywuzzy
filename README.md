@@ -24,22 +24,22 @@ coming soon!
 </dependency>
 ```
 Bintray:
-```
-        <dependency>
-            <groupId>com.xdrop</groupId>
-            <artifactId>fuzzywuzzy</artifactId>
-            <version>1.1.0</version>
-        </dependency>
-            <repositories>
-        <repository>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <id>bintray-xdrop-FuzzyWuzzy-Java</id>
-            <name>bintray</name>
-            <url>http://dl.bintray.com/xdrop/FuzzyWuzzy-Java</url>
-        </repository>
-    </repositories>
+```xml
+<dependency>
+    <groupId>com.xdrop</groupId>
+    <artifactId>fuzzywuzzy</artifactId>
+    <version>1.1.0</version>
+</dependency>
+<repositories>
+    <repository>
+        <snapshots>
+            <enabled>false</enabled>
+        </snapshots>
+        <id>bintray-xdrop-FuzzyWuzzy-Java</id>
+        <name>bintray</name>
+        <url>http://dl.bintray.com/xdrop/FuzzyWuzzy-Java</url>
+    </repository>
+</repositories>
 ```
 ### Jar release
 Download the latest release [here](https://github.com/xdrop/fuzzywuzzy/releases) and add to your classpath
