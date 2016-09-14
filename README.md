@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/xdrop/fuzzywuzzy.svg?branch=master)](https://travis-ci.org/xdrop/fuzzywuzzy)  [ ![Download](https://api.bintray.com/packages/xdrop/FuzzyWuzzy-Java/fuzzywuzzy/images/download.svg) ](https://bintray.com/xdrop/FuzzyWuzzy-Java/fuzzywuzzy/_latestVersion)
 
 ## FuzzyWuzzy Java Implementation
-Fuzzy string matching for java based on the [FuzzyWuzzy](https://github.com/seatgeek/fuzzywuzzy) Python algorithm.
+Fuzzy string matching for java based on the [FuzzyWuzzy](https://github.com/seatgeek/fuzzywuzzy) Python algorithm. The algorithm uses [Levenshtein distance](https://en.wikipedia.org/wiki/Levenshtein_distance) to calculate similarity between strings.
 
 I've personally needed to use this but all of the other Java implementations out there either had a crazy amount of
 dependencies, or simply did not output the correct results as the python one, so I've decided to properly re-implement
@@ -17,10 +17,29 @@ this in Java. Enjoy!
 
 ## Installation
 ### Maven
+Central:
 ```
 <dependency>
 coming soon!
 </dependency>
+```
+Bintray:
+```xml
+<dependency>
+    <groupId>com.xdrop</groupId>
+    <artifactId>fuzzywuzzy</artifactId>
+    <version>1.1.0</version>
+</dependency>
+<repositories>
+    <repository>
+        <snapshots>
+            <enabled>false</enabled>
+        </snapshots>
+        <id>bintray-xdrop-FuzzyWuzzy-Java</id>
+        <name>bintray</name>
+        <url>http://dl.bintray.com/xdrop/FuzzyWuzzy-Java</url>
+    </repository>
+</repositories>
 ```
 ### Jar release
 Download the latest release [here](https://github.com/xdrop/fuzzywuzzy/releases) and add to your classpath
