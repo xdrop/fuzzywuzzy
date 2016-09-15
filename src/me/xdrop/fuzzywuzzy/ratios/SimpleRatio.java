@@ -1,6 +1,6 @@
 package me.xdrop.fuzzywuzzy.ratios;
 
-import com.xdrop.diffutils.DiffUtils;
+import me.xdrop.diffutils.DiffUtils;
 import me.xdrop.fuzzywuzzy.Ratio;
 
 public class SimpleRatio implements Ratio {

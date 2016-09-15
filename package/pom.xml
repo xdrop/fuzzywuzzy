@@ -10,7 +10,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.xdrop</groupId>
+            <groupId>me.xdrop</groupId>
             <artifactId>fuzzywuzzy-build</artifactId>
             <version>1.1.2</version>
         </dependency>
@@ -83,7 +83,7 @@
                         <configuration>
                             <filters>
                                 <filter>
-                                    <artifact>com.xdrop:fuzzywuzzy-build</artifact>
+                                    <artifact>me.xdrop:fuzzywuzzy-build</artifact>
                                     <includes>
                                         <include>**</include>
                                     </includes>
