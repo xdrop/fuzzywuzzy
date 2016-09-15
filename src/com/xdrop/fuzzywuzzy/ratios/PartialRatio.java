@@ -38,7 +38,7 @@ public class PartialRatio implements Ratio {
 
         }
 
-        MatchingBlock[] matchingBlocks = DiffUtils.getMatchingBlocks(s1, s2);
+        MatchingBlock[] matchingBlocks = DiffUtils.getMatchingBlocks(shorter, longer);
 
         List<Double> scores = new ArrayList<>();
 
