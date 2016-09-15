@@ -16,29 +16,15 @@ this in Java. Enjoy!
 
 
 ## Installation
-### Maven
-Central:
-```
-<dependency>
-coming soon!
-</dependency>
-```
-jcenter:
+### Maven Central
 ```xml
 <dependency>
     <groupId>me.xdrop</groupId>
     <artifactId>fuzzywuzzy</artifactId>
     <version>1.1.3</version>
 </dependency>
-<repository>
-    <snapshots>
-        <enabled>false</enabled>
-    </snapshots>
-    <id>central</id>
-    <name>bintray</name>
-    <url>http://jcenter.bintray.com</url>
-</repository>
 ```
+
 ### Jar release
 Download the latest release [here](https://github.com/xdrop/fuzzywuzzy/releases) and add to your classpath
 
