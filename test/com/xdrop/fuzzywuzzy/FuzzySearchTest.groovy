@@ -24,6 +24,8 @@ class FuzzySearchTest extends GroovyTestCase {
         assertEquals 71, FuzzySearch.partialRatio("similar", "somewhresimlrbetweenthisstring")
         assertEquals 43, FuzzySearch.partialRatio("similar", "notinheresim")
         assertEquals 38, FuzzySearch.partialRatio("pros holdings, inc.","settlement facility dow corning trust")
+        assertEquals 33, FuzzySearch.partialRatio("Should be the same","Opposite ways go alike")
+        assertEquals 33, FuzzySearch.partialRatio("Opposite ways go alike" , "Should be the same")
 
     }
 
