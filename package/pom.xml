@@ -5,7 +5,7 @@
     <artifactId>fuzzywuzzy</artifactId>
     <version>1.1.1</version>
     <name>fuzzywuzzy</name>
-    <description>Fuzzy string searching implementation of the well-known fuzzywuzzy algorithm for Java</description>
+    <description>Fuzzy string searching implementation of the well-known fuzzywuzzy algorithm in Java</description>
     <url>https://github.com/xdrop/fuzzywuzzy</url>
 
     <dependencies>
@@ -32,6 +32,7 @@
             <timezone>0</timezone>
         </developer>
     </developers>
+
 
     <issueManagement>
         <system>Github</system>
@@ -134,6 +135,19 @@
                         <phase>package</phase>
                         <goals>
                             <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
                         </goals>
                     </execution>
                 </executions>
