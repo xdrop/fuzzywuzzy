@@ -26,7 +26,7 @@ coming soon!
 jcenter:
 ```xml
 <dependency>
-    <groupId>com.xdrop</groupId>
+    <groupId>me.xdrop</groupId>
     <artifactId>fuzzywuzzy</artifactId>
     <version>1.1.1</version>
 </dependency>
