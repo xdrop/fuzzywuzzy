@@ -28,7 +28,7 @@ Bintray:
 <dependency>
     <groupId>com.xdrop</groupId>
     <artifactId>fuzzywuzzy</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
 </dependency>
 <repositories>
     <repository>
