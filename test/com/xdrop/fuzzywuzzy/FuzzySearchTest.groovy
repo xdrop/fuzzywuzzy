@@ -33,7 +33,8 @@ class FuzzySearchTest extends GroovyTestCase {
 
         assertEquals 67, FuzzySearch.tokenSortPartialRatio("mvn","wwwwww.mavencentral.comm")
         assertEquals 100, FuzzySearch.tokenSortPartialRatio("  order words out of ","  words out of order")
-        
+        assertEquals 44, FuzzySearch.tokenSortPartialRatio("Testing token set ratio token", "Added another test")
+
     }
 
     void testTokenSortRatio() {
@@ -45,12 +46,13 @@ class FuzzySearchTest extends GroovyTestCase {
     void testTokenSetRatio() {
 
         assertEquals 100, FuzzySearch.tokenSetRatio("fuzzy fuzzy fuzzy bear", "fuzzy was a bear" )
+        assertEquals 39, FuzzySearch.tokenSetRatio("Testing token set ratio token", "Added another test")
 
     }
 
     void testTokenSetPartial() {
 
-        assertEquals 22, FuzzySearch.tokenSetPartialRatio("fuzzy was a bear", "blind 100")
+        assertEquals 11, FuzzySearch.tokenSetPartialRatio("fuzzy was a bear", "blind 100")
 
     }
 
