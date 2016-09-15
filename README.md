@@ -28,7 +28,7 @@ jcenter:
 <dependency>
     <groupId>me.xdrop</groupId>
     <artifactId>fuzzywuzzy</artifactId>
-    <version>1.1.1</version>
+    <version>1.1.3</version>
 </dependency>
 <repository>
     <snapshots>
