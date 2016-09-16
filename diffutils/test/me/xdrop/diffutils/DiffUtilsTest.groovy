@@ -28,7 +28,7 @@ class DiffUtilsTest extends GroovyTestCase {
         Random rnd = new Random();
         String chars = "qwertyuiop[]#';lkjhgfdsazxcvbnm,./\\`#QWERTYUIOPLKJHGFDSAZXCVBNM1234567890";
 
-        for (int i = 0; i < 10000; i++){
+        for (int i = 0; i < 1000; i++){
             int len = rnd.nextInt(200)
             assertNotNull DiffUtils.getRatio(generateString(rnd, chars, len),generateString(rnd, chars, i));
         }
