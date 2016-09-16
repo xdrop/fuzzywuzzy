@@ -47,7 +47,7 @@ public class DiffUtils {
         len2o = len1o;
 
         /* strip common suffix */
-        while (len1 > 0 && len2 > 0 && c1[len1 - 1] == c2[len2 - 1]) {
+        while (len1 > 0 && len2 > 0 && c1[p1 + len1 - 1] == c2[p2 + len2 - 1]) {
             len1--;
             len2--;
         }
