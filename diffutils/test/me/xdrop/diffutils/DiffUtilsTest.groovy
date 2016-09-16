@@ -13,12 +13,10 @@ class DiffUtilsTest extends GroovyTestCase {
         return new String(text);
     }
 
+    void testGetEditDistance() {
 
-    void testGetEditOps() {
-
-    }
-
-    void testGetMatchingBlocks() {
+        assertEquals 11, DiffUtils.levEditDistance("sf&t co., ltd.","sft", 0)
+        assertEquals 13, DiffUtils.levEditDistance("sf&t co., ltd.","sft", 1)
 
     }
 
