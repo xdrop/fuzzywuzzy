@@ -21,7 +21,7 @@ this in Java. Enjoy!
 <dependency>
     <groupId>me.xdrop</groupId>
     <artifactId>fuzzywuzzy</artifactId>
-    <version>1.1.4</version>
+    <version>1.1.5</version>
 </dependency>
 ```
 
