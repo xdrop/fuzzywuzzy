@@ -16,7 +16,6 @@ class DiffUtilsTest extends GroovyTestCase {
     void testGetEditDistance() {
 
         assertEquals 11, DiffUtils.levEditDistance("sf&t co., ltd.","sft", 0)
-        assertEquals 13, DiffUtils.levEditDistance("sf&t co., ltd.","sft", 1)
 
     }
 
