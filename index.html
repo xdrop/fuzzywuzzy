@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Fuzzywuzzy by xdrop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Fuzzywuzzy</h1>
+      <h2 class="project-tagline">Java fuzzy string matching implemenation of the well known Python&#39;s fuzzywuzzy algorithm</h2>
+      <a href="https://github.com/xdrop/fuzzywuzzy" class="btn">View on GitHub</a>
+      <a href="https://github.com/xdrop/fuzzywuzzy/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/xdrop/fuzzywuzzy/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="javawuzzy" class="anchor" href="#javawuzzy" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>JavaWuzzy</h1>
+
+<p><a href="https://travis-ci.org/xdrop/fuzzywuzzy"><img src="https://travis-ci.org/xdrop/fuzzywuzzy.svg?branch=master" alt="Build Status"></a>  <a href="https://bintray.com/xdrop/FuzzyWuzzy-Java/fuzzywuzzy/_latestVersion"> <img src="https://api.bintray.com/packages/xdrop/FuzzyWuzzy-Java/fuzzywuzzy/images/download.svg" alt="Download"> </a></p>
+
+<h2>
+<a id="fuzzywuzzy-java-implementation" class="anchor" href="#fuzzywuzzy-java-implementation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>FuzzyWuzzy Java Implementation</h2>
+
+<p>Fuzzy string matching for java based on the <a href="https://github.com/seatgeek/fuzzywuzzy">FuzzyWuzzy</a> Python algorithm. The algorithm uses <a href="https://en.wikipedia.org/wiki/Levenshtein_distance">Levenshtein distance</a> to calculate similarity between strings.</p>
+
+<p>I've personally needed to use this but all of the other Java implementations out there either had a crazy amount of
+dependencies, or simply did not output the correct results as the python one, so I've decided to properly re-implement
+this in Java. Enjoy!</p>
+
+<ul>
+<li>No dependencies!</li>
+<li>Includes implementation of the super-fast <a href="https://github.com/ztane/python-Levenshtein/">python-Levenshtein</a> in Java!</li>
+<li>Simple to use!</li>
+<li>Credits to the great folks at seatgeek for coming up with the algorithm (<a href="http://chairnerd.seatgeek.com/fuzzywuzzy-fuzzy-string-matching-in-python/">More here</a>)</li>
+</ul>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<h3>
+<a id="maven-central" class="anchor" href="#maven-central" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Maven Central</h3>
+
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">dependency</span>&gt;
+    &lt;<span class="pl-ent">groupId</span>&gt;me.xdrop&lt;/<span class="pl-ent">groupId</span>&gt;
+    &lt;<span class="pl-ent">artifactId</span>&gt;fuzzywuzzy&lt;/<span class="pl-ent">artifactId</span>&gt;
+    &lt;<span class="pl-ent">version</span>&gt;1.1.5&lt;/<span class="pl-ent">version</span>&gt;
+&lt;/<span class="pl-ent">dependency</span>&gt;</pre></div>
+
+<h3>
+<a id="gradle" class="anchor" href="#gradle" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Gradle</h3>
+
+<div class="highlight highlight-source-groovy-gradle"><pre>compile <span class="pl-s"><span class="pl-pds">'</span>me.xdrop:fuzzywuzzy:1.1.5<span class="pl-pds">'</span></span></pre></div>
+
+<h3>
+<a id="jar-release" class="anchor" href="#jar-release" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Jar release</h3>
+
+<p>Download the latest release <a href="https://github.com/xdrop/fuzzywuzzy/releases">here</a> and add to your classpath</p>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<h4>
+<a id="simple-ratio" class="anchor" href="#simple-ratio" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Simple Ratio</h4>
+
+<div class="highlight highlight-source-groovy"><pre><span class="pl-k">FuzzySearch</span><span class="pl-k">.</span>ratio(<span class="pl-s"><span class="pl-pds">"</span>mysmilarstring<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>myawfullysimilarstirng<span class="pl-pds">"</span></span>)
+<span class="pl-c1">72</span>
+
+<span class="pl-k">FuzzySearch</span><span class="pl-k">.</span>ratio(<span class="pl-s"><span class="pl-pds">"</span>mysmilarstring<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>mysimilarstring<span class="pl-pds">"</span></span>)
+<span class="pl-c1">97</span>
+</pre></div>
+
+<h4>
+<a id="partial-ratio" class="anchor" href="#partial-ratio" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Partial Ratio</h4>
+
+<div class="highlight highlight-source-groovy"><pre><span class="pl-k">FuzzySearch</span><span class="pl-k">.</span>partialRatio(<span class="pl-s"><span class="pl-pds">"</span>similar<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>somewhresimlrbetweenthisstring<span class="pl-pds">"</span></span>)
+<span class="pl-c1">71</span></pre></div>
+
+<h4>
+<a id="token-sort-ratio" class="anchor" href="#token-sort-ratio" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Token Sort Ratio</h4>
+
+<div class="highlight highlight-source-groovy"><pre><span class="pl-k">FuzzySearch</span><span class="pl-k">.</span>tokenSortPartialRatio(<span class="pl-s"><span class="pl-pds">"</span>order words out of<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>  words out of order<span class="pl-pds">"</span></span>)
+<span class="pl-c1">100</span>
+<span class="pl-k">FuzzySearch</span><span class="pl-k">.</span>tokenSortRatio(<span class="pl-s"><span class="pl-pds">"</span>order words out of<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>  words out of order<span class="pl-pds">"</span></span>)
+<span class="pl-c1">100</span></pre></div>
+
+<h4>
+<a id="token-set-ratio" class="anchor" href="#token-set-ratio" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Token Set Ratio</h4>
+
+<div class="highlight highlight-source-groovy"><pre><span class="pl-k">FuzzySearch</span><span class="pl-k">.</span>tokenSetRatio(<span class="pl-s"><span class="pl-pds">"</span>fuzzy was a bear<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>fuzzy fuzzy fuzzy bear<span class="pl-pds">"</span></span>)
+<span class="pl-c1">100</span>
+<span class="pl-k">FuzzySearch</span><span class="pl-k">.</span>tokenSetPartialRatio(<span class="pl-s"><span class="pl-pds">"</span>fuzzy was a bear<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>fuzzy fuzzy fuzzy bear<span class="pl-pds">"</span></span>)
+<span class="pl-c1">100</span></pre></div>
+
+<h4>
+<a id="weighted-ratio" class="anchor" href="#weighted-ratio" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Weighted Ratio</h4>
+
+<div class="highlight highlight-source-groovy"><pre><span class="pl-k">FuzzySearch</span><span class="pl-k">.</span>weightedRatio(<span class="pl-s"><span class="pl-pds">"</span>The quick brown fox jimps ofver the small lazy dog<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>the quick brown fox jumps over the small lazy dog<span class="pl-pds">"</span></span>)
+<span class="pl-c1">97</span></pre></div>
+
+<h4>
+<a id="extract" class="anchor" href="#extract" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Extract</h4>
+
+<div class="highlight highlight-source-groovy"><pre><span class="pl-c">// groovy</span>
+
+<span class="pl-k">FuzzySearch</span><span class="pl-k">.</span>extractOne(<span class="pl-s"><span class="pl-pds">"</span>cowboys<span class="pl-pds">"</span></span>, [<span class="pl-s"><span class="pl-pds">"</span>Atlanta Falcons<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>New York Jets<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>New York Giants<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>Dallas Cowboys<span class="pl-pds">"</span></span>])
+(<span class="pl-c1">string</span>: <span class="pl-k">Dallas</span> <span class="pl-k">Cowboys</span>, <span class="pl-c1">score</span>: <span class="pl-c1">90</span>)</pre></div>
+
+<div class="highlight highlight-source-groovy"><pre><span class="pl-k">FuzzySearch</span><span class="pl-k">.</span>extractTop(<span class="pl-s"><span class="pl-pds">"</span>goolge<span class="pl-pds">"</span></span>, [<span class="pl-s"><span class="pl-pds">"</span>google<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>bing<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>facebook<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>linkedin<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>twitter<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>googleplus<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>bingnews<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>plexoogl<span class="pl-pds">"</span></span>], <span class="pl-c1">3</span>)
+[(<span class="pl-c1">string</span>: google, <span class="pl-c1">score</span>:<span class="pl-c1">83</span>), (<span class="pl-c1">string</span>: googleplus, <span class="pl-c1">score</span>:<span class="pl-c1">63</span>), (<span class="pl-c1">string</span>: plexoogl, <span class="pl-c1">score</span>:<span class="pl-c1">43</span>)]</pre></div>
+
+<div class="highlight highlight-source-groovy"><pre><span class="pl-k">FuzzySearch</span><span class="pl-k">.</span>extractAll(<span class="pl-s"><span class="pl-pds">"</span>goolge<span class="pl-pds">"</span></span>, [<span class="pl-s"><span class="pl-pds">"</span>google<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>bing<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>facebook<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>linkedin<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>twitter<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>googleplus<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>bingnews<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>plexoogl<span class="pl-pds">"</span></span>]);
+[(<span class="pl-c1">string</span>: google, <span class="pl-c1">score</span>:<span class="pl-c1">83</span>), (<span class="pl-c1">string</span>: bing, <span class="pl-c1">score</span>:<span class="pl-c1">20</span>), (<span class="pl-c1">string</span>: facebook, <span class="pl-c1">score</span>:<span class="pl-c1">29</span>), (<span class="pl-c1">string</span>: linkedin, <span class="pl-c1">score</span>:<span class="pl-c1">29</span>), (<span class="pl-c1">string</span>: twitter, <span class="pl-c1">score</span>:<span class="pl-c1">15</span>), (<span class="pl-c1">string</span>: googleplus, <span class="pl-c1">score</span>:<span class="pl-c1">63</span>), (<span class="pl-c1">string</span>: bingnews, <span class="pl-c1">score</span>:<span class="pl-c1">29</span>), (<span class="pl-c1">string</span>: plexoogl, <span class="pl-c1">score</span>:<span class="pl-c1">43</span>)]
+<span class="pl-c">// score cutoff</span>
+<span class="pl-k">FuzzySearch</span><span class="pl-k">.</span>extractAll(<span class="pl-s"><span class="pl-pds">"</span>goolge<span class="pl-pds">"</span></span>, [<span class="pl-s"><span class="pl-pds">"</span>google<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>bing<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>facebook<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>linkedin<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>twitter<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>googleplus<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>bingnews<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>plexoogl<span class="pl-pds">"</span></span>], <span class="pl-c1">40</span>) 
+[(<span class="pl-c1">string</span>: google, <span class="pl-c1">score</span>:<span class="pl-c1">83</span>), (<span class="pl-c1">string</span>: googleplus, <span class="pl-c1">score</span>:<span class="pl-c1">63</span>), (<span class="pl-c1">string</span>: plexoogl, <span class="pl-c1">score</span>:<span class="pl-c1">43</span>)]</pre></div>
+
+<div class="highlight highlight-source-groovy"><pre><span class="pl-k">FuzzySearch</span><span class="pl-k">.</span>extractSorted(<span class="pl-s"><span class="pl-pds">"</span>goolge<span class="pl-pds">"</span></span>, [<span class="pl-s"><span class="pl-pds">"</span>google<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>bing<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>facebook<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>linkedin<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>twitter<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>googleplus<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>bingnews<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>plexoogl<span class="pl-pds">"</span></span>]);
+[(<span class="pl-c1">string</span>: google, <span class="pl-c1">score</span>:<span class="pl-c1">83</span>), (<span class="pl-c1">string</span>: googleplus, <span class="pl-c1">score</span>:<span class="pl-c1">63</span>), (<span class="pl-c1">string</span>: plexoogl, <span class="pl-c1">score</span>:<span class="pl-c1">43</span>), (<span class="pl-c1">string</span>: facebook, <span class="pl-c1">score</span>:<span class="pl-c1">29</span>), (<span class="pl-c1">string</span>: linkedin, <span class="pl-c1">score</span>:<span class="pl-c1">29</span>), (<span class="pl-c1">string</span>: bingnews, <span class="pl-c1">score</span>:<span class="pl-c1">29</span>), (<span class="pl-c1">string</span>: bing, <span class="pl-c1">score</span>:<span class="pl-c1">20</span>), (<span class="pl-c1">string</span>: twitter, <span class="pl-c1">score</span>:<span class="pl-c1">15</span>)]
+<span class="pl-c">// score cutoff</span>
+<span class="pl-k">FuzzySearch</span><span class="pl-k">.</span>extractSorted(<span class="pl-s"><span class="pl-pds">"</span>goolge<span class="pl-pds">"</span></span>, [<span class="pl-s"><span class="pl-pds">"</span>google<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>bing<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>facebook<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>linkedin<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>twitter<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>googleplus<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>bingnews<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>plexoogl<span class="pl-pds">"</span></span>], <span class="pl-c1">3</span>);
+[(<span class="pl-c1">string</span>: google, <span class="pl-c1">score</span>:<span class="pl-c1">83</span>), (<span class="pl-c1">string</span>: googleplus, <span class="pl-c1">score</span>:<span class="pl-c1">63</span>), (<span class="pl-c1">string</span>: plexoogl, <span class="pl-c1">score</span>:<span class="pl-c1">43</span>)]</pre></div>
+
+<h2>
+<a id="credits" class="anchor" href="#credits" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Credits</h2>
+
+<ul>
+<li>seatgeek</li>
+<li>Adam Cohen</li>
+<li>David Necas (python-Levenshtein)</li>
+<li>Mikko Ohtamaa (python-Levenshtein)</li>
+<li>Antti Haapala (python-Levenshtein)</li>
+</ul>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/xdrop/fuzzywuzzy">Fuzzywuzzy</a> is maintained by <a href="https://github.com/xdrop">xdrop</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
