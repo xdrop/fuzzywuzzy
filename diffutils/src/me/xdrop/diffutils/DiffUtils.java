@@ -621,7 +621,7 @@ public class DiffUtils {
 
     }
 
-    private static int levEditDistance(String s1, String s2, int xcost) {
+    public static int levEditDistance(String s1, String s2, int xcost) {
 
         int i;
         int half;
@@ -811,6 +811,8 @@ public class DiffUtils {
 
                 if (haystack[offset + p] == needle)
                     return 1;
+
+                p++;
 
             } while (--num != 0);
 

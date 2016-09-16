@@ -16,6 +16,7 @@ class FuzzySearchTest extends GroovyTestCase {
         assertEquals 76, FuzzySearch.ratio("mysmilarstring", "mymostsimilarstsdsdring"), 2
         assertEquals 72, FuzzySearch.ratio("mysmilarstring","myawfullysimilarstirng"), 2
         assertEquals 97, FuzzySearch.ratio("mysmilarstring","mysimilarstring"), 2
+        assertEquals 75, FuzzySearch.ratio("csr", "c s r"), 2
 
     }
 
