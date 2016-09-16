@@ -27,7 +27,7 @@ this in Java. Enjoy!
 
 ### Gradle
 ```gradle
-compile 'me.xdrop:fuzzywuzzy:1.1.4'
+compile 'me.xdrop:fuzzywuzzy:1.1.5'
 ```
 
 ### Jar release
