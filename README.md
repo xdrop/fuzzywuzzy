@@ -25,6 +25,11 @@ this in Java. Enjoy!
 </dependency>
 ```
 
+### Gradle
+```gradle
+compile 'me.xdrop:fuzzywuzzy:1.1.4'
+```
+
 ### Jar release
 Download the latest release [here](https://github.com/xdrop/fuzzywuzzy/releases) and add to your classpath
 
