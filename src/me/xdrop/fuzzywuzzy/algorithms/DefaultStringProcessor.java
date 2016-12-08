@@ -47,4 +47,19 @@ public class DefaultStringProcessor implements StringProcessor {
 
     }
 
+    private static Pattern compilePattern(){
+
+        Pattern p;
+
+        try{
+            p = Pattern.compile(pattern, Pattern.UNICODE_CHARACTER_CLASS);
+        } catch (IllegalArgumentException e) {
+            // catch Android specific issue
+            p =Pattern.compile(pattern);
+        }
+
+        return p;
+
+    }
+
 }
