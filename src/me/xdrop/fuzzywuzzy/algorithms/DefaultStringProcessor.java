@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class DefaultStringProcessor implements StringProcessor {
 
     private final static String pattern = "[^\\p{Alnum}]";
-    private final static Pattern r = Pattern.compile(pattern, Pattern.UNICODE_CHARACTER_CLASS);
+    private final static Pattern r = compilePattern();
 
 
     /**
