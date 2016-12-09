@@ -54,8 +54,12 @@ public class DefaultStringProcessor implements StringProcessor {
         try{
             p = Pattern.compile(pattern, Pattern.UNICODE_CHARACTER_CLASS);
         } catch (IllegalArgumentException e) {
-            // catch Android specific issue
-            p =Pattern.compile(pattern);
+            // Even though Android supports the unicode pattern class
+            // for some reason it throws an IllegalArgumentException
+            // if we pass the flag like on standard Java runtime
+            //
+            // We catch this and recompile without the flag (unicode should still work)
+            p = Pattern.compile(pattern);
         }
 
         return p;
