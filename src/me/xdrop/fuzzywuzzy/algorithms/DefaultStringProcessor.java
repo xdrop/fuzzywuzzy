@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class DefaultStringProcessor implements StringProcessor {
 
     private final static String pattern = "[^\\p{Alnum}]";
-    private final static Pattern r = Pattern.compile(pattern, Pattern.UNICODE_CHARACTER_CLASS);
+    private final static Pattern r = compilePattern();
 
 
     /**
@@ -44,6 +44,25 @@ public class DefaultStringProcessor implements StringProcessor {
         in = in.trim();
 
         return in;
+
+    }
+
+    private static Pattern compilePattern(){
+
+        Pattern p;
+
+        try{
+            p = Pattern.compile(pattern, Pattern.UNICODE_CHARACTER_CLASS);
+        } catch (IllegalArgumentException e) {
+            // Even though Android supports the unicode pattern class
+            // for some reason it throws an IllegalArgumentException
+            // if we pass the flag like on standard Java runtime
+            //
+            // We catch this and recompile without the flag (unicode should still work)
+            p = Pattern.compile(pattern);
+        }
+
+        return p;
 
     }
 
