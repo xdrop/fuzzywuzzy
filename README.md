@@ -12,6 +12,7 @@ this in Java. Enjoy!
 * No dependencies!
 * Includes implementation of the super-fast [python-Levenshtein](https://github.com/ztane/python-Levenshtein/) in Java!
 * Simple to use!
+* Lightweight!
 * Credits to the great folks at seatgeek for coming up with the algorithm ([More here](http://chairnerd.seatgeek.com/fuzzywuzzy-fuzzy-string-matching-in-python/))
 
 
@@ -21,13 +22,13 @@ this in Java. Enjoy!
 <dependency>
     <groupId>me.xdrop</groupId>
     <artifactId>fuzzywuzzy</artifactId>
-    <version>1.1.5</version>
+    <version>1.1.6</version>
 </dependency>
 ```
 
 ### Gradle
 ```gradle
-compile 'me.xdrop:fuzzywuzzy:1.1.5'
+compile 'me.xdrop:fuzzywuzzy:1.1.6'
 ```
 
 ### Jar release
