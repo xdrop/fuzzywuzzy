@@ -24,6 +24,8 @@ public class WeightedRatio extends BasicAlgorithm  {
         int len1 = s1.length();
         int len2 = s2.length();
 
+        if (len1 == 0 || len2 == 0) { return 0; }
+
         boolean tryPartials = TRY_PARTIALS;
         double unbaseScale = UNBASE_SCALE;
         double partialScale = PARTIAL_SCALE;
