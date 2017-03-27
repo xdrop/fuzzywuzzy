@@ -22,13 +22,13 @@ this in Java. Enjoy!
 <dependency>
     <groupId>me.xdrop</groupId>
     <artifactId>fuzzywuzzy</artifactId>
-    <version>1.1.6</version>
+    <version>1.1.7</version>
 </dependency>
 ```
 
 ### Gradle
 ```gradle
-compile 'me.xdrop:fuzzywuzzy:1.1.6'
+compile 'me.xdrop:fuzzywuzzy:1.1.7'
 ```
 
 ### Jar release
