@@ -32,6 +32,22 @@ public class FuzzySearch {
     }
 
     /**
+     * Calculates a Levenshtein simple ratio between the strings.
+     * This is indicates a measure of similarity
+     *
+     * @param s1 Input string
+     * @param s2 Input string
+     * @param stringProcessor Functor which transforms strings before
+     *                        calculating the ratio
+     * @return The simple ratio
+     */
+    public static int ratio(String s1, String s2, StringProcessor stringProcessor) {
+
+        return new SimpleRatio().apply(s1, s2, stringProcessor);
+
+    }
+
+    /**
      * Inconsistent substrings lead to problems in matching. This ratio
      * uses a heuristic called "best partial" for when two strings
      * are of noticeably different lengths.
@@ -43,6 +59,23 @@ public class FuzzySearch {
     public static int partialRatio(String s1, String s2) {
 
         return new PartialRatio().apply(s1, s2);
+
+    }
+
+    /**
+     * Inconsistent substrings lead to problems in matching. This ratio
+     * uses a heuristic called "best partial" for when two strings
+     * are of noticeably different lengths.
+     *
+     * @param s1 Input string
+     * @param s2 Input string
+     * @param stringProcessor Functor which transforms strings before
+     *                        calculating the ratio
+     * @return The partial ratio
+     */
+    public static int partialRatio(String s1, String s2, StringProcessor stringProcessor) {
+
+        return new PartialRatio().apply(s1, s2, stringProcessor);
 
     }
 
