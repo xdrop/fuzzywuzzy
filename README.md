@@ -1,5 +1,5 @@
 # JavaWuzzy
-[![Build Status](https://travis-ci.org/xdrop/fuzzywuzzy.svg?branch=master)](https://travis-ci.org/xdrop/fuzzywuzzy)  [ ![Download](https://api.bintray.com/packages/xdrop/FuzzyWuzzy-Java/fuzzywuzzy/images/download.svg) ](https://bintray.com/xdrop/FuzzyWuzzy-Java/fuzzywuzzy/_latestVersion)
+[![Build Status](https://travis-ci.org/xdrop/fuzzywuzzy.svg?branch=master)](https://travis-ci.org/xdrop/fuzzywuzzy)  [ ![Download](https://img.shields.io/github/release/xdrop/fuzzywuzzy.svg) ](https://github.com/xdrop/fuzzywuzzy/releases)
 
 ## FuzzyWuzzy Java Implementation
 Fuzzy string matching for java based on the [FuzzyWuzzy](https://github.com/seatgeek/fuzzywuzzy) Python algorithm. The algorithm uses [Levenshtein distance](https://en.wikipedia.org/wiki/Levenshtein_distance) to calculate similarity between strings.
@@ -12,6 +12,7 @@ this in Java. Enjoy!
 * No dependencies!
 * Includes implementation of the super-fast [python-Levenshtein](https://github.com/ztane/python-Levenshtein/) in Java!
 * Simple to use!
+* Lightweight!
 * Credits to the great folks at seatgeek for coming up with the algorithm ([More here](http://chairnerd.seatgeek.com/fuzzywuzzy-fuzzy-string-matching-in-python/))
 
 
@@ -21,13 +22,13 @@ this in Java. Enjoy!
 <dependency>
     <groupId>me.xdrop</groupId>
     <artifactId>fuzzywuzzy</artifactId>
-    <version>1.1.5</version>
+    <version>1.1.7</version>
 </dependency>
 ```
 
 ### Gradle
 ```gradle
-compile 'me.xdrop:fuzzywuzzy:1.1.5'
+compile 'me.xdrop:fuzzywuzzy:1.1.7'
 ```
 
 ### Jar release

@@ -2,6 +2,7 @@ package me.xdrop.fuzzywuzzy.ratios;
 
 import me.xdrop.diffutils.DiffUtils;
 import me.xdrop.fuzzywuzzy.Ratio;
+import me.xdrop.fuzzywuzzy.StringProcessor;
 
 public class SimpleRatio implements Ratio {
 
@@ -17,5 +18,10 @@ public class SimpleRatio implements Ratio {
 
         return (int) Math.round(100 * DiffUtils.getRatio(s1, s2));
 
+    }
+
+    @Override
+    public int apply(String s1, String s2, StringProcessor sp) {
+        return apply(sp.process(s1), sp.process(s2));
     }
 }

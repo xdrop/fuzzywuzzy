@@ -3,6 +3,7 @@ package me.xdrop.fuzzywuzzy.ratios;
 import me.xdrop.diffutils.DiffUtils;
 import me.xdrop.diffutils.structs.MatchingBlock;
 import me.xdrop.fuzzywuzzy.Ratio;
+import me.xdrop.fuzzywuzzy.StringProcessor;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -65,6 +66,11 @@ public class PartialRatio implements Ratio {
 
         return (int) Math.round(100 * Collections.max(scores));
 
+    }
+
+    @Override
+    public int apply(String s1, String s2, StringProcessor sp) {
+        return apply(sp.process(s1), sp.process(s2));
     }
 
 
