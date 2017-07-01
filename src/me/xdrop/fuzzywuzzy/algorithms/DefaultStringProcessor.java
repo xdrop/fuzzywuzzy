@@ -23,7 +23,7 @@ public class DefaultStringProcessor implements StringProcessor {
         Matcher m = r.matcher(in);
 
         if(m.find()){
-            return m.replaceAll(" ");
+            return m.replaceAll(sub);
         } else {
             return in;
         }
