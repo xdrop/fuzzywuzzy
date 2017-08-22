@@ -31,7 +31,7 @@ public class WeightedRatio extends BasicAlgorithm  {
         double partialScale = PARTIAL_SCALE;
 
         int base = ratio(s1, s2);
-        double lenRatio = (double) (Math.max(len1, len2) / Math.min(len1, len2));
+        double lenRatio = ( (double) Math.max(len1, len2) ) / Math.min(len1, len2);
 
         // if strings are similar length don't use partials
         if (lenRatio < 1.5) tryPartials = false;
