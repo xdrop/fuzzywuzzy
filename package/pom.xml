@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>me.xdrop</groupId>
     <artifactId>fuzzywuzzy</artifactId>
-    <version>1.1.8</version>
+    <version>1.1.9</version>
     <name>fuzzywuzzy</name>
     <description>Fuzzy string searching implementation of the well-known fuzzywuzzy algorithm in Java</description>
     <url>https://github.com/xdrop/fuzzywuzzy</url>
@@ -12,7 +12,7 @@
         <dependency>
             <groupId>me.xdrop</groupId>
             <artifactId>fuzzywuzzy-build</artifactId>
-            <version>1.1.8</version>
+            <version>1.1.9</version>
         </dependency>
     </dependencies>
 
