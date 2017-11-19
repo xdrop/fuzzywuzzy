@@ -5,7 +5,7 @@
     <groupId>me.xdrop</groupId>
     <artifactId>fuzzywuzzy-root</artifactId>
     <name>fuzzywuzzy - root</name>
-    <version>1.1.7</version>
+    <version>1.1.9</version>
 
     <packaging>pom</packaging>
 
