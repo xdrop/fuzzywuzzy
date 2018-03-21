@@ -35,8 +35,8 @@ public class FuzzySearch {
      * Calculates a Levenshtein simple ratio between the strings.
      * This is indicates a measure of similarity
      *
-     * @param s1 Input string
-     * @param s2 Input string
+     * @param s1              Input string
+     * @param s2              Input string
      * @param stringProcessor Functor which transforms strings before
      *                        calculating the ratio
      * @return The simple ratio
@@ -67,8 +67,8 @@ public class FuzzySearch {
      * uses a heuristic called "best partial" for when two strings
      * are of noticeably different lengths.
      *
-     * @param s1 Input string
-     * @param s2 Input string
+     * @param s1              Input string
+     * @param s2              Input string
      * @param stringProcessor Functor which transforms strings before
      *                        calculating the ratio
      * @return The partial ratio
