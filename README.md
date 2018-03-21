@@ -79,7 +79,7 @@ FuzzySearch.weightedRatio("The quick brown fox jimps ofver the small lazy dog", 
 // groovy
 
 FuzzySearch.extractOne("cowboys", ["Atlanta Falcons", "New York Jets", "New York Giants", "Dallas Cowboys"])
-(string: Dallas Cowboys, score: 90)
+(string: Dallas Cowboys, score: 90, index: 3)
 ```
 ```groovy
 FuzzySearch.extractTop("goolge", ["google", "bing", "facebook", "linkedin", "twitter", "googleplus", "bingnews", "plexoogl"], 3)
