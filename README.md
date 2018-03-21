@@ -22,13 +22,13 @@ this in Java. Enjoy!
 <dependency>
     <groupId>me.xdrop</groupId>
     <artifactId>fuzzywuzzy</artifactId>
-    <version>1.1.9</version>
+    <version>1.1.10</version>
 </dependency>
 ```
 
 ### Gradle
 ```gradle
-compile 'me.xdrop:fuzzywuzzy:1.1.9'
+compile 'me.xdrop:fuzzywuzzy:1.1.10'
 ```
 
 ### Jar release
@@ -83,21 +83,21 @@ FuzzySearch.extractOne("cowboys", ["Atlanta Falcons", "New York Jets", "New York
 ```
 ```groovy
 FuzzySearch.extractTop("goolge", ["google", "bing", "facebook", "linkedin", "twitter", "googleplus", "bingnews", "plexoogl"], 3)
-[(string: google, score:83), (string: googleplus, score:63), (string: plexoogl, score:43)]
+[(string: google, score: 83, index: 0), (string: googleplus, score: 63, index:5), (string: plexoogl, score: 43, index: 7)]
 ```
 ```groovy
 FuzzySearch.extractAll("goolge", ["google", "bing", "facebook", "linkedin", "twitter", "googleplus", "bingnews", "plexoogl"]);
-[(string: google, score:83), (string: bing, score:20), (string: facebook, score:29), (string: linkedin, score:29), (string: twitter, score:15), (string: googleplus, score:63), (string: bingnews, score:29), (string: plexoogl, score:43)]
+[(string: google, score: 83, index: 0), (string: bing, score: 20, index: 1), (string: facebook, score: 29, index: 2), (string: linkedin, score: 29, index: 3), (string: twitter, score: 15, index: 4), (string: googleplus, score: 63, index: 5), (string: bingnews, score: 29, index: 6), (string: plexoogl, score: 43, index: 7)]
 // score cutoff
 FuzzySearch.extractAll("goolge", ["google", "bing", "facebook", "linkedin", "twitter", "googleplus", "bingnews", "plexoogl"], 40) 
-[(string: google, score:83), (string: googleplus, score:63), (string: plexoogl, score:43)]
+[(string: google, score: 83, index: 0), (string: googleplus, score: 63, index: 5), (string: plexoogl, score: 43, index: 7)]
 ```
 ```groovy
 FuzzySearch.extractSorted("goolge", ["google", "bing", "facebook", "linkedin", "twitter", "googleplus", "bingnews", "plexoogl"]);
-[(string: google, score:83), (string: googleplus, score:63), (string: plexoogl, score:43), (string: facebook, score:29), (string: linkedin, score:29), (string: bingnews, score:29), (string: bing, score:20), (string: twitter, score:15)]
+[(string: google, score: 83, index: 0), (string: googleplus, score: 63, index: 5), (string: plexoogl, score: 43, index: 7), (string: facebook, score: 29, index: 2), (string: linkedin, score: 29, index: 3), (string: bingnews, score: 29, index: 6), (string: bing, score: 20, index: 1), (string: twitter, score: 15, index: 4)]
 // score cutoff
 FuzzySearch.extractSorted("goolge", ["google", "bing", "facebook", "linkedin", "twitter", "googleplus", "bingnews", "plexoogl"], 3);
-[(string: google, score:83), (string: googleplus, score:63), (string: plexoogl, score:43)]
+[(string: google, score: 83, index: 0), (string: googleplus, score: 63, index: 5), (string: plexoogl, score: 43, index: 7)]
 ```
 
 ## Credits

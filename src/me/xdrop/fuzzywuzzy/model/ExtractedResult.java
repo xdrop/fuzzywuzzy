@@ -40,6 +40,6 @@ public class ExtractedResult implements Comparable<ExtractedResult> {
 
     @Override
     public String toString() {
-        return "(string: " + string + ", score:" + score + ", index:" + index+ ")";
+        return "(string: " + string + ", score: " + score + ", index: " + index+ ")";
     }
 }
