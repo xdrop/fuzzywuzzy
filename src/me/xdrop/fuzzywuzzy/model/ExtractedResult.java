@@ -4,10 +4,17 @@ public class ExtractedResult implements Comparable<ExtractedResult> {
 
     private String string;
     private int score;
+    private int index;
 
     public ExtractedResult(String string, int score) {
         this.string = string;
         this.score = score;
+    }
+
+    public ExtractedResult(String string, int score, int index) {
+        this.string = string;
+        this.score = score;
+        this.index = index;
     }
 
     @Override
@@ -27,8 +34,12 @@ public class ExtractedResult implements Comparable<ExtractedResult> {
         return score;
     }
 
+    public int getIndex() {
+        return index;
+    }
+
     @Override
     public String toString() {
-        return "(string: " + string + ", score:" + score + ")";
+        return "(string: " + string + ", score:" + score + ", index:" + index+ ")";
     }
 }

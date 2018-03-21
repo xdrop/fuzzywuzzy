@@ -5,12 +5,15 @@ import me.xdrop.diffutils.structs.EditType;
 import me.xdrop.diffutils.structs.MatchingBlock;
 import me.xdrop.diffutils.structs.OpCode;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
- *
  * This is a port of all the functions needed from python-levenshtein C implementation.
  * The code was ported line by line but unfortunately it was mostly undocumented,
  * so it is mostly non readable (eg. var names)
- *
  */
 public class DiffUtils {
 
@@ -102,8 +105,8 @@ public class DiffUtils {
 
 
     private static EditOp[] editOpsFromCostMatrix(int len1, char[] c1, int p1, int o1,
-                                           int len2, char[] c2, int p2, int o2,
-                                           int[] matrix) {
+                                                  int len2, char[] c2, int p2, int o2,
+                                                  int[] matrix) {
 
         int i, j, pos;
 
@@ -217,7 +220,7 @@ public class DiffUtils {
 
     }
 
-    public static MatchingBlock[] getMatchingBlocks(String s1, String s2){
+    public static MatchingBlock[] getMatchingBlocks(String s1, String s2) {
 
         return getMatchingBlocks(s1.length(), s2.length(), getEditOps(s1, s2));
 
@@ -646,7 +649,7 @@ public class DiffUtils {
         }
 
         /* strip common suffix */
-        while (len1 > 0 && len2 > 0 && c1[str1 + len1 - 1] == c2[str2 + len2 - 1]){
+        while (len1 > 0 && len2 > 0 && c1[str1 + len1 - 1] == c2[str2 + len2 - 1]) {
             len1--;
             len2--;
         }
@@ -676,10 +679,10 @@ public class DiffUtils {
         }
 
         /* check len1 == 1 separately */
-        if (len1  == 1){
+        if (len1 == 1) {
             if (xcost != 0) {
-                return len2 + 1 -2 * memchr(c2, str2, c1[str1], len2);
-            } else{
+                return len2 + 1 - 2 * memchr(c2, str2, c1[str1], len2);
+            } else {
                 return len2 - memchr(c2, str2, c1[str1], len2);
             }
         }
@@ -691,7 +694,7 @@ public class DiffUtils {
         int[] row = new int[len2];
         int end = len2 - 1;
 
-        for(i = 0; i < len2 - (xcost != 0 ? 0 : half); i++)
+        for (i = 0; i < len2 - (xcost != 0 ? 0 : half); i++)
             row[i] = i;
 
 
@@ -699,9 +702,9 @@ public class DiffUtils {
          * obfuscated version, but also extremely memory-conservative and relatively
          * fast.  */
 
-        if(xcost != 0) {
+        if (xcost != 0) {
 
-            for(i = 1; i < len1; i++){
+            for (i = 1; i < len1; i++) {
 
                 int p = 1;
 
@@ -711,12 +714,11 @@ public class DiffUtils {
                 int D = i;
                 int x = i;
 
-                while(p <= end) {
+                while (p <= end) {
 
-                    if(ch1 == c2[c2p++]) {
+                    if (ch1 == c2[c2p++]) {
                         x = --D;
-                    }
-                    else {
+                    } else {
                         x++;
                     }
                     D = row[p];
@@ -738,7 +740,7 @@ public class DiffUtils {
              * necessary */
 
             row[0] = len1 - half - 1;
-            for (i = 1; i < len1; i++){
+            for (i = 1; i < len1; i++) {
                 int p;
 
                 char ch1 = c1[str1 + i - 1];
@@ -761,7 +763,7 @@ public class DiffUtils {
                         x = c3;
                     }
                     row[p++] = x;
-                } else{
+                } else {
                     p = 1;
                     c2p = str2;
                     D = x = i;
@@ -773,7 +775,7 @@ public class DiffUtils {
                 while (p <= end) {
                     int c3 = --D + ((ch1 != c2[c2p++]) ? 1 : 0);
                     x++;
-                    if(x > c3){
+                    if (x > c3) {
                         x = c3;
                     }
                     D = row[p];
@@ -785,8 +787,8 @@ public class DiffUtils {
                 }
 
                 /* lower triangle sentinel */
-                if (i <= half){
-                    int c3 = --D + ((ch1 != c2[c2p])? 1 : 0);
+                if (i <= half) {
+                    int c3 = --D + ((ch1 != c2[c2p]) ? 1 : 0);
                     x++;
                     if (x > c3) {
                         x = c3;
@@ -802,7 +804,7 @@ public class DiffUtils {
 
     }
 
-    private static int memchr(char[] haystack, int offset, char needle, int num){
+    private static int memchr(char[] haystack, int offset, char needle, int num) {
 
         if (num != 0) {
             int p = 0;
@@ -833,6 +835,7 @@ public class DiffUtils {
         return (lensum - editDistance) / (double) lensum;
 
     }
+
 
 
 }

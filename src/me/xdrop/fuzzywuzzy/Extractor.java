@@ -37,15 +37,16 @@ public class Extractor {
     public List<ExtractedResult> extractWithoutOrder(String query, Collection<String> choices, Applicable func) {
 
         List<ExtractedResult> yields = new ArrayList<>();
+        int index = 0;
 
         for (String s : choices) {
 
             int score = func.apply(query, s);
 
             if (score >= cutoff) {
-                yields.add(new ExtractedResult(s, score));
+                yields.add(new ExtractedResult(s, score, index));
             }
-
+            index++;
         }
 
         return yields;
