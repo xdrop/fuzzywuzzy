@@ -1,17 +1,14 @@
 package me.xdrop.fuzzywuzzy.model;
 
-public class ExtractedResult implements Comparable<ExtractedResult> {
+public class ExtractedResult<T> implements Comparable<ExtractedResult<T>> {
 
+    private T referent;
     private String string;
     private int score;
     private int index;
 
-    public ExtractedResult(String string, int score) {
-        this.string = string;
-        this.score = score;
-    }
-
-    public ExtractedResult(String string, int score, int index) {
+    public ExtractedResult(T referent, String string, int score, int index) {
+        this.referent = referent;
         this.string = string;
         this.score = score;
         this.index = index;
@@ -20,6 +17,10 @@ public class ExtractedResult implements Comparable<ExtractedResult> {
     @Override
     public int compareTo(ExtractedResult o) {
         return Integer.compare(this.getScore(), o.getScore());
+    }
+
+    public T getReferent() {
+        return referent;
     }
 
     public String getString() {
