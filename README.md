@@ -107,3 +107,4 @@ FuzzySearch.extractSorted("goolge", ["google", "bing", "facebook", "linkedin", "
 - David Necas (python-Levenshtein)
 - Mikko Ohtamaa (python-Levenshtein)
 - Antti Haapala (python-Levenshtein)
+- Tobias Burdow (burdoto)
