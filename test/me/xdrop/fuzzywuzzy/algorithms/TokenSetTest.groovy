@@ -1,13 +1,11 @@
 package me.xdrop.fuzzywuzzy.algorithms
 
-import me.xdrop.fuzzywuzzy.StringProcessor
 import me.xdrop.fuzzywuzzy.Ratio
+import me.xdrop.fuzzywuzzy.ToStringFunction
 import me.xdrop.fuzzywuzzy.ratios.PartialRatio
 
 import static org.easymock.EasyMock.anyObject
 import static org.easymock.EasyMock.eq
-import static org.easymock.EasyMock.eq
-import static org.easymock.EasyMock.expect
 import static org.easymock.EasyMock.expect
 import static org.easymock.EasyMock.mock
 import static org.easymock.EasyMock.replay
@@ -17,12 +15,12 @@ class TokenSetTest extends GroovyTestCase {
     void testUsesStringProcessor() {
         def ts = new TokenSet()
 
-        def mock = mock(StringProcessor)
+        ToStringFunction<String> mock = mock(ToStringFunction)
 
-        expect(mock.process(eq("notthesame")))
+        expect(mock.apply(eq("notthesame")))
                 .andReturn("thesame")
 
-        expect(mock.process(eq("thesame")))
+        expect(mock.apply(eq("thesame")))
                 .andReturn("thesame")
 
         replay(mock)

@@ -1,6 +1,6 @@
 package me.xdrop.fuzzywuzzy.algorithms;
 
-import me.xdrop.fuzzywuzzy.StringProcessor;
+import me.xdrop.fuzzywuzzy.ToStringFunction;
 
 import static me.xdrop.fuzzywuzzy.FuzzySearch.*;
 import static me.xdrop.fuzzywuzzy.algorithms.PrimitiveUtils.max;
@@ -16,10 +16,10 @@ public class WeightedRatio extends BasicAlgorithm  {
 
 
     @Override
-    public int apply(String s1, String s2, StringProcessor stringProcessor) {
+    public int apply(String s1, String s2, ToStringFunction<String> stringProcessor) {
 
-        s1 = stringProcessor.process(s1);
-        s2 = stringProcessor.process(s2);
+        s1 = stringProcessor.apply(s1);
+        s2 = stringProcessor.apply(s2);
 
         int len1 = s1.length();
         int len2 = s2.length();

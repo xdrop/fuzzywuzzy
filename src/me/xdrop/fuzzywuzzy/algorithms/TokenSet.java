@@ -1,20 +1,20 @@
 package me.xdrop.fuzzywuzzy.algorithms;
 
 import me.xdrop.fuzzywuzzy.Ratio;
-import me.xdrop.fuzzywuzzy.StringProcessor;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import me.xdrop.fuzzywuzzy.ToStringFunction;
 
 public class TokenSet extends RatioAlgorithm {
 
     @Override
-    public int apply(String s1, String s2, Ratio ratio, StringProcessor stringProcessor) {
+    public int apply(String s1, String s2, Ratio ratio, ToStringFunction<String> stringFunction) {
 
-        s1 = stringProcessor.process(s1);
-        s2 = stringProcessor.process(s2);
+        s1 = stringFunction.apply(s1);
+        s2 = stringFunction.apply(s2);
 
         Set<String> tokens1 = Utils.tokenizeSet(s1);
         Set<String> tokens2 = Utils.tokenizeSet(s2);

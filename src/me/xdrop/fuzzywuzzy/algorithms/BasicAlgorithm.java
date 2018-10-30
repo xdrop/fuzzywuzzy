@@ -1,43 +1,43 @@
 package me.xdrop.fuzzywuzzy.algorithms;
 
 import me.xdrop.fuzzywuzzy.Applicable;
-import me.xdrop.fuzzywuzzy.StringProcessor;
+import me.xdrop.fuzzywuzzy.ToStringFunction;
 
 public abstract class BasicAlgorithm implements Applicable {
 
-    private StringProcessor stringProcessor;
+    private ToStringFunction<String> stringFunction;
 
     public BasicAlgorithm() {
-        this.stringProcessor = new DefaultStringProcessor();
+        this.stringFunction = new DefaultStringFunction();
     }
 
-    public BasicAlgorithm(StringProcessor stringProcessor) {
-        this.stringProcessor = stringProcessor;
+    public BasicAlgorithm(ToStringFunction<String> stringFunction) {
+        this.stringFunction = stringFunction;
     }
 
-    public abstract int apply(String s1, String s2, StringProcessor stringProcessor);
+    public abstract int apply(String s1, String s2, ToStringFunction<String> stringProcessor);
 
     public int apply(String s1, String s2){
 
-        return apply(s1, s2, this.stringProcessor);
+        return apply(s1, s2, this.stringFunction);
 
     }
 
-    public BasicAlgorithm with(StringProcessor stringProcessor){
-        setStringProcessor(stringProcessor);
+    public BasicAlgorithm with(ToStringFunction<String> stringFunction){
+        setStringFunction(stringFunction);
         return this;
     }
 
     public BasicAlgorithm noProcessor(){
-        this.stringProcessor = new NoProcess();
+        this.stringFunction = ToStringFunction.DEFAULT;
         return this;
     }
 
-    void setStringProcessor(StringProcessor stringProcessor){
-        this.stringProcessor = stringProcessor;
+    void setStringFunction(ToStringFunction<String> stringFunction){
+        this.stringFunction = stringFunction;
     }
 
-    public StringProcessor getStringProcessor() {
-        return stringProcessor;
+    public ToStringFunction<String> getStringFunction() {
+        return stringFunction;
     }
 }
