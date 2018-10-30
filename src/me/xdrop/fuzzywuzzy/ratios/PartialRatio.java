@@ -3,11 +3,11 @@ package me.xdrop.fuzzywuzzy.ratios;
 import me.xdrop.diffutils.DiffUtils;
 import me.xdrop.diffutils.structs.MatchingBlock;
 import me.xdrop.fuzzywuzzy.Ratio;
-import me.xdrop.fuzzywuzzy.StringProcessor;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import me.xdrop.fuzzywuzzy.ToStringFunction;
 
 /**
  * Partial ratio of similarity
@@ -69,8 +69,8 @@ public class PartialRatio implements Ratio {
     }
 
     @Override
-    public int apply(String s1, String s2, StringProcessor sp) {
-        return apply(sp.process(s1), sp.process(s2));
+    public int apply(String s1, String s2, ToStringFunction<String> sp) {
+        return apply(sp.apply(s1), sp.apply(s2));
     }
 
 

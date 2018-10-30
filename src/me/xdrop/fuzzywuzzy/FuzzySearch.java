@@ -37,13 +37,13 @@ public class FuzzySearch {
      *
      * @param s1              Input string
      * @param s2              Input string
-     * @param stringProcessor Functor which transforms strings before
+     * @param stringFunction Functor which transforms strings before
      *                        calculating the ratio
      * @return The simple ratio
      */
-    public static int ratio(String s1, String s2, StringProcessor stringProcessor) {
+    public static int ratio(String s1, String s2, ToStringFunction<String> stringFunction) {
 
-        return new SimpleRatio().apply(s1, s2, stringProcessor);
+        return new SimpleRatio().apply(s1, s2, stringFunction);
 
     }
 
@@ -69,13 +69,13 @@ public class FuzzySearch {
      *
      * @param s1              Input string
      * @param s2              Input string
-     * @param stringProcessor Functor which transforms strings before
+     * @param stringFunction Functor which transforms strings before
      *                        calculating the ratio
      * @return The partial ratio
      */
-    public static int partialRatio(String s1, String s2, StringProcessor stringProcessor) {
+    public static int partialRatio(String s1, String s2, ToStringFunction<String> stringFunction) {
 
-        return new PartialRatio().apply(s1, s2, stringProcessor);
+        return new PartialRatio().apply(s1, s2, stringFunction);
 
     }
 
@@ -101,13 +101,13 @@ public class FuzzySearch {
      *
      * @param s1              Input string
      * @param s2              Input string
-     * @param stringProcessor Functor which transforms strings before
+     * @param stringFunction Functor which transforms strings before
      *                        calculating the ratio
      * @return The partial ratio of the strings
      */
-    public static int tokenSortPartialRatio(String s1, String s2, StringProcessor stringProcessor) {
+    public static int tokenSortPartialRatio(String s1, String s2, ToStringFunction<String> stringFunction) {
 
-        return new TokenSort().apply(s1, s2, new PartialRatio(), stringProcessor);
+        return new TokenSort().apply(s1, s2, new PartialRatio(), stringFunction);
 
     }
 
@@ -133,13 +133,13 @@ public class FuzzySearch {
      *
      * @param s1              Input string
      * @param s2              Input string
-     * @param stringProcessor Functor which transforms strings before
+     * @param stringFunction Functor which transforms strings before
      *                        calculating the ratio
      * @return The full ratio of the strings
      */
-    public static int tokenSortRatio(String s1, String s2, StringProcessor stringProcessor) {
+    public static int tokenSortRatio(String s1, String s2, ToStringFunction<String> stringFunction) {
 
-        return new TokenSort().apply(s1, s2, new SimpleRatio(), stringProcessor);
+        return new TokenSort().apply(s1, s2, new SimpleRatio(), stringFunction);
 
     }
 
@@ -168,13 +168,13 @@ public class FuzzySearch {
      *
      * @param s1              Input string
      * @param s2              Input string
-     * @param stringProcessor Functor which transforms strings before
+     * @param stringFunction Functor which transforms strings before
      *                        calculating the ratio
      * @return The ratio of similarity
      */
-    public static int tokenSetRatio(String s1, String s2, StringProcessor stringProcessor) {
+    public static int tokenSetRatio(String s1, String s2, ToStringFunction<String> stringFunction) {
 
-        return new TokenSet().apply(s1, s2, new SimpleRatio(), stringProcessor);
+        return new TokenSet().apply(s1, s2, new SimpleRatio(), stringFunction);
 
     }
 
@@ -202,13 +202,13 @@ public class FuzzySearch {
      *
      * @param s1              Input string
      * @param s2              Input string
-     * @param stringProcessor Functor which transforms strings before
+     * @param stringFunction Functor which transforms strings before
      *                        calculating the ratio
      * @return The ratio of similarity
      */
-    public static int tokenSetPartialRatio(String s1, String s2, StringProcessor stringProcessor) {
+    public static int tokenSetPartialRatio(String s1, String s2, ToStringFunction<String> stringFunction) {
 
-        return new TokenSet().apply(s1, s2, new PartialRatio(), stringProcessor);
+        return new TokenSet().apply(s1, s2, new PartialRatio(), stringFunction);
 
     }
 
@@ -230,13 +230,13 @@ public class FuzzySearch {
      *
      * @param s1              Input string
      * @param s2              Input string
-     * @param stringProcessor Functor which transforms strings before
+     * @param stringFunction Functor which transforms strings before
      *                        calculating the ratio
      * @return The ratio of similarity
      */
-    public static int weightedRatio(String s1, String s2, StringProcessor stringProcessor) {
+    public static int weightedRatio(String s1, String s2, ToStringFunction<String> stringFunction) {
 
-        return new WeightedRatio().apply(s1, s2, stringProcessor);
+        return new WeightedRatio().apply(s1, s2, stringFunction);
 
     }
 

@@ -1,6 +1,6 @@
 package me.xdrop.fuzzywuzzy.algorithms
 
-import me.xdrop.fuzzywuzzy.StringProcessor
+import me.xdrop.fuzzywuzzy.ToStringFunction
 
 import static org.easymock.EasyMock.*;
 
@@ -9,12 +9,12 @@ class WeightedRatioTest extends GroovyTestCase {
     void testUsesStringProcessor() {
         def wr = new WeightedRatio()
 
-        def mock = mock(StringProcessor)
+        ToStringFunction<String> mock = mock(ToStringFunction)
 
-        expect(mock.process(eq("notthesame")))
+        expect(mock.apply(eq("notthesame")))
             .andReturn("thesame")
 
-        expect(mock.process(eq("thesame")))
+        expect(mock.apply(eq("thesame")))
                 .andReturn("thesame")
 
         replay(mock)

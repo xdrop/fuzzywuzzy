@@ -1,7 +1,7 @@
 package me.xdrop.fuzzywuzzy.algorithms
 
-import me.xdrop.fuzzywuzzy.StringProcessor
 import me.xdrop.fuzzywuzzy.Ratio
+import me.xdrop.fuzzywuzzy.ToStringFunction
 import me.xdrop.fuzzywuzzy.ratios.PartialRatio
 import me.xdrop.fuzzywuzzy.ratios.SimpleRatio
 
@@ -17,12 +17,12 @@ class TokenSortTest extends GroovyTestCase {
 
         def ts = new TokenSort()
 
-        def mock = mock(StringProcessor)
+        ToStringFunction<String> mock = mock(ToStringFunction)
 
-        expect(mock.process(eq("notthesame")))
+        expect(mock.apply(eq("notthesame")))
                 .andReturn("thesame")
 
-        expect(mock.process(eq("thesame")))
+        expect(mock.apply(eq("thesame")))
                 .andReturn("thesame")
 
         replay(mock)

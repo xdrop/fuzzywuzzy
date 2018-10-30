@@ -22,6 +22,6 @@ public interface Ratio extends Applicable {
      * @param sp String processor to pre-process strings before calculating the ratio
      * @return Integer representing ratio of similarity
      */
-    int apply(String s1, String s2, StringProcessor sp);
+    int apply(String s1, String s2, ToStringFunction<String> sp);
 
 }
