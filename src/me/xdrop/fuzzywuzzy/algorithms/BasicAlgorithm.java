@@ -29,7 +29,7 @@ public abstract class BasicAlgorithm implements Applicable {
     }
 
     public BasicAlgorithm noProcessor(){
-        this.stringFunction = ToStringFunction.NO_PROCESS;
+        this.stringFunction = ToStringFunction.DEFAULT;
         return this;
     }
 

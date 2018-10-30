@@ -1,7 +1,6 @@
 package me.xdrop.fuzzywuzzy;
 
 import me.xdrop.fuzzywuzzy.algorithms.Utils;
-import me.xdrop.fuzzywuzzy.model.BoundExtractedResult;
 import me.xdrop.fuzzywuzzy.model.ExtractedResult;
 
 import java.util.ArrayList;
@@ -35,22 +34,9 @@ public class Extractor {
      * @param func The function to apply
      * @return The list of results
      */
-    public List<ExtractedResult> extractWithoutOrder(String query, Collection<String> choices,
+    public List<ExtractedResult<String>> extractWithoutOrder(String query, Collection<String> choices,
                                                              Applicable func) {
-        List<ExtractedResult> yields = new ArrayList<>();
-        int index = 0;
-
-        for (String s : choices) {
-
-            int score = func.apply(query, s);
-
-            if (score >= cutoff) {
-                yields.add(new ExtractedResult(s, score, index));
-            }
-            index++;
-        }
-
-        return yields;
+        return extractWithoutOrder(query, choices, ToStringFunction.DEFAULT, func);
     }
 
     /**
@@ -63,10 +49,10 @@ public class Extractor {
      * @param func The function to apply
      * @return The list of results
      */
-    public <T> List<BoundExtractedResult<T>> extractWithoutOrder(String query, Collection<T> choices,
-                                                                 ToStringFunction<T> toStringFunction, Applicable func) {
+    public <T> List<ExtractedResult<T>> extractWithoutOrder(String query, Collection<T> choices,
+                                                            ToStringFunction<T> toStringFunction, Applicable func) {
 
-        List<BoundExtractedResult<T>> yields = new ArrayList<>();
+        List<ExtractedResult<T>> yields = new ArrayList<>();
         int index = 0;
 
         for (T t : choices) {
@@ -75,7 +61,7 @@ public class Extractor {
             int score = func.apply(query, s);
 
             if (score >= cutoff) {
-                yields.add(new BoundExtractedResult<>(t, s, score, index));
+                yields.add(new ExtractedResult<>(t, s, score, index));
             }
             index++;
         }
@@ -92,10 +78,8 @@ public class Extractor {
      * @param func   Scoring function
      * @return An object containing the best match and it's score
      */
-    public ExtractedResult extractOne(String query, Collection<String> choices, Applicable func) {
-        List<ExtractedResult> extracted = extractWithoutOrder(query, choices, func);
-
-        return Collections.max(extracted);
+    public ExtractedResult<String> extractOne(String query, Collection<String> choices, Applicable func) {
+        return extractOne(query, choices, ToStringFunction.DEFAULT, func);
     }
 
     /**
@@ -107,10 +91,10 @@ public class Extractor {
      * @param func   Scoring function
      * @return An object containing the best match and it's score
      */
-    public <T> BoundExtractedResult<T> extractOne(String query, Collection<T> choices, ToStringFunction<T> toStringFunction,
-                                                  Applicable func) {
+    public <T> ExtractedResult<T> extractOne(String query, Collection<T> choices, ToStringFunction<T> toStringFunction,
+                                         Applicable func) {
 
-        List<BoundExtractedResult<T>> extracted = extractWithoutOrder(query, choices, toStringFunction, func);
+        List<ExtractedResult<T>> extracted = extractWithoutOrder(query, choices, toStringFunction, func);
 
         return Collections.max(extracted);
 
@@ -125,11 +109,8 @@ public class Extractor {
      * @param func    The scoring function
      * @return A list of the results
      */
-    public List<ExtractedResult> extractTop(String query, Collection<String> choices, Applicable func) {
-        List<ExtractedResult> best = extractWithoutOrder(query, choices, func);
-        Collections.sort(best, Collections.<ExtractedResult>reverseOrder());
-
-        return best;
+    public List<ExtractedResult<String>> extractTop(String query, Collection<String> choices, Applicable func) {
+        return extractTop(query, choices, ToStringFunction.DEFAULT, func);
     }
 
     /**
@@ -142,11 +123,11 @@ public class Extractor {
      * @param func    The scoring function
      * @return A list of the results
      */
-    public <T> List<BoundExtractedResult<T>> extractTop(String query, Collection<T> choices,
-                                                        ToStringFunction<T> toStringFunction, Applicable func) {
+    public <T> List<ExtractedResult<T>> extractTop(String query, Collection<T> choices,
+                                               ToStringFunction<T> toStringFunction, Applicable func) {
 
-        List<BoundExtractedResult<T>> best = extractWithoutOrder(query, choices, toStringFunction, func);
-        Collections.sort(best, Collections.<BoundExtractedResult<T>>reverseOrder());
+        List<ExtractedResult<T>> best = extractWithoutOrder(query, choices, toStringFunction, func);
+        Collections.sort(best, Collections.<ExtractedResult<T>>reverseOrder());
 
         return best;
     }
@@ -161,13 +142,8 @@ public class Extractor {
      *                the search (k-top heap sort) is used
      * @return A list of the results
      */
-    public List<ExtractedResult> extractTop(String query, Collection<String> choices, Applicable func, int limit) {
-        List<ExtractedResult> best = extractWithoutOrder(query, choices, func);
-
-        List<ExtractedResult> results = Utils.findTopKHeap(best, limit);
-        Collections.reverse(results);
-
-        return results;
+    public List<ExtractedResult<String>> extractTop(String query, Collection<String> choices, Applicable func, int limit) {
+        return extractTop(query, choices, ToStringFunction.DEFAULT, func, limit);
     }
 
     /**
@@ -181,12 +157,12 @@ public class Extractor {
      *                the search (k-top heap sort) is used
      * @return A list of the results
      */
-    public <T> List<BoundExtractedResult<T>> extractTop(String query, Collection<T> choices,
-                                                        ToStringFunction<T> toStringFunction, Applicable func, int limit) {
+    public <T> List<ExtractedResult<T>> extractTop(String query, Collection<T> choices,
+                                               ToStringFunction<T> toStringFunction, Applicable func, int limit) {
 
-        List<BoundExtractedResult<T>> best = extractWithoutOrder(query, choices, toStringFunction, func);
+        List<ExtractedResult<T>> best = extractWithoutOrder(query, choices, toStringFunction, func);
 
-        List<BoundExtractedResult<T>> results = Utils.findTopKHeap(best, limit);
+        List<ExtractedResult<T>> results = Utils.findTopKHeap(best, limit);
         Collections.reverse(results);
 
         return results;
