@@ -18,7 +18,7 @@ public interface ToStringFunction<T> {
      * A default ToStringFunction that returns the input string;
      * used by methods that use plain strings in {@link FuzzySearch}.
      */
-    ToStringFunction<String> DEFAULT = new ToStringFunction<String>() {
+    ToStringFunction<String> NO_PROCESS = new ToStringFunction<String>() {
         @Override
         public String apply(String item) {
             return item;
