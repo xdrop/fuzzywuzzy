@@ -3,7 +3,7 @@ package me.xdrop.fuzzywuzzy.algorithms;
 import me.xdrop.fuzzywuzzy.StringProcessor;
 
 /**
- * @deprecated Use {@code ToStringFunction#DEFAULT} instead.
+ * @deprecated Use {@code ToStringFunction#NO_PROCESS} instead.
  */
 @Deprecated
 public class NoProcess extends StringProcessor {
