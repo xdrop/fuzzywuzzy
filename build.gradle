@@ -1,0 +1,83 @@
+apply plugin: 'maven-publish'
+apply plugin: 'java-library'
+
+project.version = '2.0.0'
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+repositories {
+    jcenter()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+allprojects {
+    apply plugin: 'java-library'
+    
+    group 'me.xdrop'
+
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        testImplementation 'org.codehaus.groovy:groovy-test:2.5.3'
+        testImplementation 'junit:junit:4.12'
+    }
+
+    javadoc {
+        source = sourceSets.main.allJava
+        options.encoding = 'UTF-8'
+        options.destinationDirectory = new File("docs\\javadoc")
+    }
+}
+
+project(':fuzzywuzzy') {
+    version '2.0.0'
+
+    dependencies {
+        implementation project(':diffutils')
+        testImplementation 'org.easymock:easymock:3.6'
+    }
+
+    sourceSets {
+        main {
+            java {
+                srcDirs = ["src\\main\\java"]
+            }
+        }
+
+        test {
+            java {
+                srcDirs = ["src\\test\\java"]
+            }
+        }
+    }
+}
+
+project(':diffutils') {
+    version '1.3'
+    
+    sourceSets {
+        main {
+            java {
+                srcDirs = ["src\\main\\java"]
+            }
+        }
+        
+        test {
+            java {
+                srcDirs = ["src\\test\\java"]
+            }
+        }
+    }
+}
