@@ -37,7 +37,7 @@ allprojects {
     javadoc {
         source = sourceSets.main.allJava
         options.encoding = 'UTF-8'
-        options.destinationDirectory = new File("docs\\")
+        options.destinationDirectory = new File("docs\\javadoc")
     }
 }
 
