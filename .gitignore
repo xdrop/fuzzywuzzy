@@ -1,23 +1,20 @@
-*.class
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
-*.war
-*.ear
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-
+.gradle
+build/
+out/
 .idea/
-*.iml
-target/
 
-.DS_Store
-pom.xml.releaseBackup
-release.properties
+# Ignore Gradle GUI config
+gradle-app.setting
 
-package/dependency-reduced-pom.xml
-pom.xml.versionsBackup
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+# Cache of project
+.gradletasknamecache
+
+# # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
+# gradle/wrapper/gradle-wrapper.properties
+
+/out/
+*.jar
+*.class

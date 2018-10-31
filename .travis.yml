@@ -5,4 +5,4 @@ jdk:
   - openjdk7
 
 script:
-  - mvn clean test
+  - gradle clean test
