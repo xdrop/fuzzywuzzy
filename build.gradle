@@ -19,7 +19,7 @@ publishing {
 
 allprojects {
     apply plugin: 'java-library'
-    
+
     group 'me.xdrop'
 
     sourceCompatibility = 1.7
@@ -30,7 +30,6 @@ allprojects {
     }
 
     dependencies {
-        testImplementation 'org.codehaus.groovy:groovy-test:2.5.3'
         testImplementation 'junit:junit:4.12'
     }
 
@@ -38,6 +37,25 @@ allprojects {
         source = sourceSets.main.allJava
         options.encoding = 'UTF-8'
         options.destinationDirectory = new File("docs\\javadoc")
+    }
+
+    compileTestJava {
+        // Use UTF-8 explicitly because of DefaultStringProcessorTest#testProcess() method using special characters
+        options.encoding = 'UTF-8'
+    }
+
+    sourceSets {
+        main {
+            java {
+                srcDirs = ["src\\main\\java"]
+            }
+        }
+
+        test {
+            java {
+                srcDirs = ["src\\test\\java"]
+            }
+        }
     }
 }
 
@@ -48,36 +66,8 @@ project(':fuzzywuzzy') {
         implementation project(':diffutils')
         testImplementation 'org.easymock:easymock:3.6'
     }
-
-    sourceSets {
-        main {
-            java {
-                srcDirs = ["src\\main\\java"]
-            }
-        }
-
-        test {
-            java {
-                srcDirs = ["src\\test\\java"]
-            }
-        }
-    }
 }
 
 project(':diffutils') {
     version '1.3'
-    
-    sourceSets {
-        main {
-            java {
-                srcDirs = ["src\\main\\java"]
-            }
-        }
-        
-        test {
-            java {
-                srcDirs = ["src\\test\\java"]
-            }
-        }
-    }
 }
