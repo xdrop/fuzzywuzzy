@@ -100,6 +100,13 @@ FuzzySearch.extractSorted("goolge", ["google", "bing", "facebook", "linkedin", "
 [(string: google, score: 83, index: 0), (string: googleplus, score: 63, index: 5), (string: plexoogl, score: 43, index: 7)]
 ```
 
+#### Extract using any object
+`extractOne` and related methods can receive `Collection<T>` and produce `BoundExtractedResult<T>`
+```java
+List<Foo> foo = ...;
+BoundExtractedResult<Foo> match = FuzzySearch.extractOne("cowboys", foo, x -> x.toString());
+Foo matchFoo = match.getReferent();
+```
 ## Credits
 
 - seatgeek
