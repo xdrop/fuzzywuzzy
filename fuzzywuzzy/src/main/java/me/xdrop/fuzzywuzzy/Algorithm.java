@@ -1,4 +1,4 @@
-package me.xdrop.levenshtein;
+package me.xdrop.fuzzywuzzy;
 
 public interface Algorithm {
 }

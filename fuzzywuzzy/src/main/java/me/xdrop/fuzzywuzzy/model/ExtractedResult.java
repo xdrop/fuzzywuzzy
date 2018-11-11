@@ -1,4 +1,4 @@
-package me.xdrop.levenshtein.model;
+package me.xdrop.fuzzywuzzy.model;
 
 public class ExtractedResult<T> implements Comparable<ExtractedResult<T>> {
 
