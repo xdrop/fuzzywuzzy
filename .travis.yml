@@ -5,4 +5,4 @@ jdk:
   - openjdk7
 
 script:
-  - gradle clean test
+  - ./gradlew clean test
