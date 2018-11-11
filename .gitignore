@@ -18,3 +18,6 @@ gradle-app.setting
 /out/
 *.jar
 *.class
+
+# Files that contain login credentials
+*.cred
