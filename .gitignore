@@ -6,6 +6,8 @@ out/
 # Ignore Gradle GUI config
 gradle-app.setting
 
+*.jar
+
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
 !gradle-wrapper.jar
 
@@ -16,7 +18,6 @@ gradle-app.setting
 # gradle/wrapper/gradle-wrapper.properties
 
 /out/
-*.jar
 *.class
 
 # Files that contain login credentials

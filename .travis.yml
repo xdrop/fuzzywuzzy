@@ -2,7 +2,13 @@ language: java
 sudo: false
 
 jdk:
-  - openjdk7
+  - openjdk8
 
 script:
   - ./gradlew clean test
+
+# A complete compilation is done with the defined script
+jobs:
+  include:
+  - stage: deploy
+    install: skip
