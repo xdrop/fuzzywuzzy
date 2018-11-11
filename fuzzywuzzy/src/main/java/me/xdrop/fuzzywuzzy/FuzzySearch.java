@@ -464,7 +464,7 @@ public class FuzzySearch {
      * @param func    Scoring function
      * @return An object containing the best match and it's score
      */
-    public static ExtractedResult extractOne(String query, Collection<String> choices, Applicable func) {
+    public static ExtractedResult<String> extractOne(String query, Collection<String> choices, Applicable func) {
 
         Extractor extractor = new Extractor();
 
@@ -479,7 +479,7 @@ public class FuzzySearch {
      * @param choices A list of choices
      * @return An object containing the best match and it's score
      */
-    public static ExtractedResult extractOne(String query, Collection<String> choices) {
+    public static ExtractedResult<String> extractOne(String query, Collection<String> choices) {
 
         Extractor extractor = new Extractor();
 
