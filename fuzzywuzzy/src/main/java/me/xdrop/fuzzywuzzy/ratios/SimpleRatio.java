@@ -5,6 +5,10 @@ import me.xdrop.fuzzywuzzy.Ratio;
 import me.xdrop.fuzzywuzzy.ToStringFunction;
 
 public class SimpleRatio implements Ratio {
+    public static final SimpleRatio instance = new SimpleRatio();
+
+    private SimpleRatio() {
+    }
 
     /**
      * Computes a simple Levenshtein distance ratio between the strings

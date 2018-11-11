@@ -9,11 +9,14 @@ import static java.lang.Math.round;
 
 @SuppressWarnings("WeakerAccess")
 public class WeightedRatio extends BasicAlgorithm  {
+    public static final WeightedRatio instance = new WeightedRatio();
 
     public static final double UNBASE_SCALE = .95;
     public static final double PARTIAL_SCALE = .90;
     public static final boolean TRY_PARTIALS = true;
 
+    private WeightedRatio() {
+    }
 
     @Override
     public int apply(String s1, String s2, ToStringFunction<String> stringProcessor) {

@@ -13,6 +13,10 @@ import me.xdrop.fuzzywuzzy.ToStringFunction;
  * Partial ratio of similarity
  */
 public class PartialRatio implements Ratio {
+    public static final PartialRatio instance = new PartialRatio();
+
+    private PartialRatio() {
+    }
 
     /**
      * Computes a partial ratio between the strings

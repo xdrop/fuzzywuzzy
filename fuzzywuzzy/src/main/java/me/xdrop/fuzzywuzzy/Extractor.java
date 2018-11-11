@@ -7,22 +7,19 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import me.xdrop.fuzzywuzzy.model.ImmutableInstanceException;
 
 public class Extractor {
+    public static final Extractor instance = new Extractor();
 
     private int cutoff;
 
-    public Extractor() {
+    private Extractor() {
         this.cutoff = 0;
     }
 
     public Extractor(int cutoff) {
         this.cutoff = cutoff;
-    }
-
-    public Extractor with(int cutoff) {
-        this.setCutoff(cutoff);
-        return this;
     }
 
     /**
@@ -178,7 +175,14 @@ public class Extractor {
         return cutoff;
     }
 
-    public void setCutoff(int cutoff) {
+    /**
+     * Changes the value to cut off at.
+     *
+     * @param cutoff The cutoff to set.
+     * @throws ImmutableInstanceException If this instance is the immutable final class instance.
+     */
+    public void setCutoff(int cutoff) throws ImmutableInstanceException {
+        if (this == instance) throw new ImmutableInstanceException(Extractor.class);
         this.cutoff = cutoff;
     }
 }

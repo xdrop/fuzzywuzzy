@@ -9,6 +9,10 @@ import java.util.Set;
 import me.xdrop.fuzzywuzzy.ToStringFunction;
 
 public class TokenSet extends RatioAlgorithm {
+    public static final TokenSet instance = new TokenSet();
+
+    private TokenSet() {
+    }
 
     @Override
     public int apply(String s1, String s2, Ratio ratio, ToStringFunction<String> stringFunction) {

@@ -7,6 +7,10 @@ import java.util.List;
 import me.xdrop.fuzzywuzzy.ToStringFunction;
 
 public class TokenSort extends RatioAlgorithm {
+    public static final TokenSort instance = new TokenSort();
+
+    private TokenSort() {
+    }
 
     @Override
     public int apply(String s1, String s2, Ratio ratio, ToStringFunction<String> stringFunction) {

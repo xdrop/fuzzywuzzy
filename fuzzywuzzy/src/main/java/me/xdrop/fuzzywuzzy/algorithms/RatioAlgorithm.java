@@ -10,7 +10,7 @@ public abstract class RatioAlgorithm extends BasicAlgorithm {
 
     public RatioAlgorithm() {
         super();
-        this.ratio = new SimpleRatio();
+        this.ratio = SimpleRatio.instance;
     }
 
     public RatioAlgorithm(ToStringFunction<String> stringFunction) {
