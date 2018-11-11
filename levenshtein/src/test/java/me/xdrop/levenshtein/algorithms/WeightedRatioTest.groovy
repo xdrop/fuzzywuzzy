@@ -1,6 +1,6 @@
 package me.xdrop.levenshtein.algorithms
 
-import me.xdrop.fuzzywuzzy.ToStringFunction
+import me.xdrop.fuzzywuzzy.functions.ToStringFunction
 import org.junit.Test
 
 import static org.easymock.EasyMock.*

@@ -1,11 +1,11 @@
-package me.xdrop.levenshtein;
+package me.xdrop.fuzzywuzzy.functions;
 
 /**
  * Transforms an item of type T to a String.
  *
  * @param <T> The type of the item to transform.
  */
-public interface ToStringFunction<T> {
+public interface ToStringFunction<T> extends Function<T, String> {
     /**
      * Transforms the input item to a string.
      *
@@ -15,8 +15,7 @@ public interface ToStringFunction<T> {
     String apply(T item);
 
     /**
-     * A default ToStringFunction that returns the input string;
-     * used by methods that use plain strings in {@link LevenshteinSearch}.
+     * A default ToStringFunction that returns the input string.
      */
     ToStringFunction<String> IDENTITY = new ToStringFunction<String>() {
         @Override

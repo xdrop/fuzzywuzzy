@@ -1,7 +1,7 @@
 package me.xdrop.levenshtein.algorithms
 
 import me.xdrop.fuzzywuzzy.Ratio
-import me.xdrop.fuzzywuzzy.ToStringFunction
+import me.xdrop.fuzzywuzzy.functions.ToStringFunction
 import me.xdrop.fuzzywuzzy.ratios.PartialRatio
 import me.xdrop.fuzzywuzzy.ratios.SimpleRatio
 import org.junit.Test
