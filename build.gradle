@@ -28,6 +28,9 @@ allprojects {
     }
 
     dependencies {
+        implementation project(':fuzzywuzzy')
+        
+        testImplementation 'org.easymock:easymock:3.6'
         testImplementation 'org.codehaus.groovy:groovy-test:2.5.3'
     }
     
@@ -64,14 +67,9 @@ allprojects {
 
 project(':fuzzywuzzy') {
     version '2.0.0'
-
-    dependencies {
-        implementation project(':diffutils')
-        testImplementation 'org.easymock:easymock:3.6'
-    }
 }
 
-project(':diffutils') {
+project(':levenshtein') {
     version '1.3'
 }
 
