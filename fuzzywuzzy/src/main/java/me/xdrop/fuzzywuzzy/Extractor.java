@@ -36,7 +36,7 @@ public class Extractor {
      */
     public List<ExtractedResult<String>> extractWithoutOrder(String query, Collection<String> choices,
                                                              Applicable func) {
-        return extractWithoutOrder(query, choices, ToStringFunction.DEFAULT, func);
+        return extractWithoutOrder(query, choices, ToStringFunction.IDENTITY, func);
     }
 
     /**
@@ -80,7 +80,7 @@ public class Extractor {
      * @return An object containing the best match and it's score
      */
     public ExtractedResult<String> extractOne(String query, Collection<String> choices, Applicable func) {
-        return extractOne(query, choices, ToStringFunction.DEFAULT, func);
+        return extractOne(query, choices, ToStringFunction.IDENTITY, func);
     }
 
     /**
@@ -112,7 +112,7 @@ public class Extractor {
      * @return A list of the results
      */
     public List<ExtractedResult<String>> extractTop(String query, Collection<String> choices, Applicable func) {
-        return extractTop(query, choices, ToStringFunction.DEFAULT, func);
+        return extractTop(query, choices, ToStringFunction.IDENTITY, func);
     }
 
     /**
@@ -147,7 +147,7 @@ public class Extractor {
      * @return A list of the results
      */
     public List<ExtractedResult<String>> extractTop(String query, Collection<String> choices, Applicable func, int limit) {
-        return extractTop(query, choices, ToStringFunction.DEFAULT, func, limit);
+        return extractTop(query, choices, ToStringFunction.IDENTITY, func, limit);
     }
 
     /**

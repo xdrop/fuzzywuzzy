@@ -256,7 +256,7 @@ public class FuzzySearch {
                                                            Applicable func, int limit, int cutoff) {
 
         Extractor extractor = new Extractor(cutoff);
-        return extractor.extractTop(query, choices, ToStringFunction.DEFAULT, func, limit);
+        return extractor.extractTop(query, choices, ToStringFunction.IDENTITY, func, limit);
 
     }
 
@@ -275,7 +275,7 @@ public class FuzzySearch {
                                                            int limit, int cutoff) {
 
         Extractor extractor = new Extractor(cutoff);
-        return extractor.extractTop(query, choices, ToStringFunction.DEFAULT, new WeightedRatio(), limit);
+        return extractor.extractTop(query, choices, ToStringFunction.IDENTITY, new WeightedRatio(), limit);
 
     }
 
@@ -294,7 +294,7 @@ public class FuzzySearch {
 
         Extractor extractor = new Extractor();
 
-        return extractor.extractTop(query, choices, ToStringFunction.DEFAULT, func, limit);
+        return extractor.extractTop(query, choices, ToStringFunction.IDENTITY, func, limit);
 
     }
 
@@ -312,7 +312,7 @@ public class FuzzySearch {
 
         Extractor extractor = new Extractor();
 
-        return extractor.extractTop(query, choices, ToStringFunction.DEFAULT, new WeightedRatio(), limit);
+        return extractor.extractTop(query, choices, ToStringFunction.IDENTITY, new WeightedRatio(), limit);
 
     }
 
@@ -329,7 +329,7 @@ public class FuzzySearch {
 
         Extractor extractor = new Extractor();
 
-        return extractor.extractTop(query, choices, ToStringFunction.DEFAULT, func);
+        return extractor.extractTop(query, choices, ToStringFunction.IDENTITY, func);
 
     }
 
@@ -349,7 +349,7 @@ public class FuzzySearch {
 
         Extractor extractor = new Extractor(cutoff);
 
-        return extractor.extractTop(query, choices, ToStringFunction.DEFAULT, func);
+        return extractor.extractTop(query, choices, ToStringFunction.IDENTITY, func);
 
     }
 
@@ -365,7 +365,7 @@ public class FuzzySearch {
 
         Extractor extractor = new Extractor();
 
-        return extractor.extractTop(query, choices, ToStringFunction.DEFAULT, new WeightedRatio());
+        return extractor.extractTop(query, choices, ToStringFunction.IDENTITY, new WeightedRatio());
 
     }
 
@@ -383,7 +383,7 @@ public class FuzzySearch {
 
         Extractor extractor = new Extractor(cutoff);
 
-        return extractor.extractTop(query, choices, ToStringFunction.DEFAULT, new WeightedRatio());
+        return extractor.extractTop(query, choices, ToStringFunction.IDENTITY, new WeightedRatio());
 
     }
 
@@ -400,7 +400,7 @@ public class FuzzySearch {
 
         Extractor extractor = new Extractor();
 
-        return extractor.extractWithoutOrder(query, choices, ToStringFunction.DEFAULT, func);
+        return extractor.extractWithoutOrder(query, choices, ToStringFunction.IDENTITY, func);
 
     }
 
@@ -419,7 +419,7 @@ public class FuzzySearch {
 
         Extractor extractor = new Extractor(cutoff);
 
-        return extractor.extractWithoutOrder(query, choices, ToStringFunction.DEFAULT, func);
+        return extractor.extractWithoutOrder(query, choices, ToStringFunction.IDENTITY, func);
 
     }
 
@@ -435,7 +435,7 @@ public class FuzzySearch {
 
         Extractor extractor = new Extractor();
 
-        return extractor.extractWithoutOrder(query, choices, ToStringFunction.DEFAULT, new WeightedRatio());
+        return extractor.extractWithoutOrder(query, choices, ToStringFunction.IDENTITY, new WeightedRatio());
 
     }
 
@@ -452,7 +452,7 @@ public class FuzzySearch {
 
         Extractor extractor = new Extractor(cutoff);
 
-        return extractor.extractWithoutOrder(query, choices, ToStringFunction.DEFAULT, new WeightedRatio());
+        return extractor.extractWithoutOrder(query, choices, ToStringFunction.IDENTITY, new WeightedRatio());
 
     }
 
@@ -468,7 +468,7 @@ public class FuzzySearch {
 
         Extractor extractor = new Extractor();
 
-        return extractor.extractOne(query, choices, ToStringFunction.DEFAULT, func);
+        return extractor.extractOne(query, choices, ToStringFunction.IDENTITY, func);
 
     }
 
@@ -483,7 +483,7 @@ public class FuzzySearch {
 
         Extractor extractor = new Extractor();
 
-        return extractor.extractOne(query, choices, ToStringFunction.DEFAULT, new WeightedRatio());
+        return extractor.extractOne(query, choices, ToStringFunction.IDENTITY, new WeightedRatio());
 
     }
 
