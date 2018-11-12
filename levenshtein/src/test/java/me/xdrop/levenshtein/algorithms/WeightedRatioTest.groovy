@@ -1,6 +1,6 @@
 package me.xdrop.levenshtein.algorithms
 
-import me.xdrop.fuzzywuzzy.functions.ToStringFunction
+import me.xdrop.fuzzywuzzy.functions.ToStringMapper
 import org.junit.Test
 
 import static org.easymock.EasyMock.*
@@ -10,7 +10,7 @@ class WeightedRatioTest extends GroovyTestCase {
     void testUsesStringProcessor() {
         def wr = new WeightedRatio()
 
-        ToStringFunction<String> mock = mock(ToStringFunction)
+        ToStringMapper<String> mock = mock(ToStringMapper)
 
         expect(mock.apply(eq("notthesame"))).andReturn("thesame")
         expect(mock.apply(eq("thesame"))).andReturn("thesame")

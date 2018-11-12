@@ -1,7 +1,7 @@
 package me.xdrop.levenshtein.algorithms
 
 import me.xdrop.fuzzywuzzy.Ratio
-import me.xdrop.fuzzywuzzy.functions.ToStringFunction
+import me.xdrop.fuzzywuzzy.functions.ToStringMapper
 import me.xdrop.fuzzywuzzy.ratios.PartialRatio
 import org.junit.Test
 
@@ -15,7 +15,7 @@ class TokenSetTest extends GroovyTestCase {
     @Test
     void testUsesStringProcessor() {
         def ts = new TokenSet()
-        ToStringFunction<String> mock = mock(ToStringFunction)
+        ToStringMapper<String> mock = mock(ToStringMapper)
 
         expect(mock.apply(eq("notthesame"))).andReturn("thesame")
         expect(mock.apply(eq("thesame"))).andReturn("thesame")

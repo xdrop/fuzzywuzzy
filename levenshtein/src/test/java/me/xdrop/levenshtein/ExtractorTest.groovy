@@ -1,6 +1,6 @@
 package me.xdrop.levenshtein
 import me.xdrop.fuzzywuzzy.algorithms.WeightedRatio
-import me.xdrop.fuzzywuzzy.model.ExtractedResult
+import me.xdrop.fuzzywuzzy.model.Result
 import org.junit.Test
 
 class ExtractorTest extends GroovyTestCase {
@@ -16,7 +16,7 @@ class ExtractorTest extends GroovyTestCase {
 
     @Test
     void testExtractWithoutOrder() {
-        List<ExtractedResult> res = extractor.extractWithoutOrder("goolge", choices, new WeightedRatio())
+        List<Result> res = extractor.extractWithoutOrder("goolge", choices, new WeightedRatio())
 
         assert res.size() == choices.size()
         assert res.get(0).score > 0
@@ -24,7 +24,7 @@ class ExtractorTest extends GroovyTestCase {
 
     @Test
     void testExtractOne() {
-        ExtractedResult res = extractor.extractOne("goolge", choices, new WeightedRatio())
+        Result res = extractor.extractOne("goolge", choices, new WeightedRatio())
 
         assert res.string == "google"
     }
