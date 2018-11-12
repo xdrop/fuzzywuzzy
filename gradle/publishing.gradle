@@ -61,6 +61,15 @@ publishing {
                     }
                 }
 
+                contributors {
+                    contributor {
+                        id = "burdoto"
+                        name = "Tobias Burdow"
+                        url = "http://www.github.com/burdoto"
+                        timezone = "+1"
+                    }
+                }
+
                 scm {
                     connection = 'scm:git:https://github.com/xdrop/fuzzywuzzy.git'
                     developerConnection = 'scm:git:git@github.com:xdrop/fuzzywuzzy.git'
