@@ -94,20 +94,21 @@ public class Result<T> implements Comparable<Result<T>> {
 
     @Override
     public String toString() {
-        return String.format("Result" + (isStringReferent ? "" : "@referent=%s") +
-                "[string=%s;score=%d" + (originIndex == -1 ? "" : ";originIndex=%d") + "]#%d", getFormatArgs());
+        final String format = "Result" + (isStringReferent ? "" : "@referent=%s") +
+                "[string=%s;score=%d" + (originIndex == -1 ? "" : ";originIndex=%d") + "]#%d";
+        return String.format(format, getFormatArgs());
     }
 
     private Object[] getFormatArgs() {
         int size = 3;
 
-        if (isStringReferent) size++;
+        if (!isStringReferent) size++;
         if (originIndex > -1) size++;
 
         Object[] arg = new Object[size];
         int i = 0;
 
-        if (isStringReferent) arg[i++] = referent.toString();
+        if (!isStringReferent) arg[i++] = referent.toString();
         arg[i++] = string;
         arg[i++] = score;
         if (originIndex > -1) arg[i++] = originIndex;
