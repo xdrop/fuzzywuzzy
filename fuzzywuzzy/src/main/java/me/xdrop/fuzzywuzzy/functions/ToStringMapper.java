@@ -5,7 +5,7 @@ package me.xdrop.fuzzywuzzy.functions;
  *
  * @param <T> The type of the item to transform.
  */
-public interface ToStringFunction<T> extends Function<T, String> {
+public interface ToStringMapper<T> extends Mapper<T, String> {
     /**
      * Transforms the input item to a string.
      *
@@ -15,9 +15,9 @@ public interface ToStringFunction<T> extends Function<T, String> {
     String apply(T item);
 
     /**
-     * A default ToStringFunction that returns the input string.
+     * A default ToStringMapper that returns the input string.
      */
-    ToStringFunction<String> IDENTITY = new ToStringFunction<String>() {
+    ToStringMapper<String> IDENTITY = new ToStringMapper<String>() {
         @Override
         public String apply(String item) {
             return item;
