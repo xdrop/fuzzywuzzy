@@ -26,7 +26,7 @@ public class Levenshtein extends AlgorithmBase {
      * Defines default scoring method as {@link Method#SIMPLE_RATIO}
      */
     private Levenshtein() {
-        super(Method.SIMPLE_RATIO);
+        super(Method.WEIGHTED_RATIO);
     }
 
     /**

@@ -2,6 +2,7 @@ package me.xdrop.fuzzywuzzy;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.PriorityQueue;
 import me.xdrop.fuzzywuzzy.functions.StringMapper;
@@ -27,12 +28,9 @@ public class Util {
 
         for (T x : arr) {
             if (pq.size() < k) pq.add(x);
-            else {
-                assert pq.peek() != null;
-                if ((x.compareTo(pq.peek()) * -1) > 0) {
-                    pq.poll();
-                    pq.add(x);
-                }
+            else if (x.compareTo(pq.peek()) > 0) {
+                pq.poll();
+                pq.add(x);
             }
         }
 
@@ -46,5 +44,11 @@ public class Util {
         }
 
         return res;
+    }
+
+    public static <T extends Comparable<T>> List<T> sortAndReverse(List<T> list) {
+        Collections.sort(list);
+        Collections.reverse(list);
+        return list;
     }
 }

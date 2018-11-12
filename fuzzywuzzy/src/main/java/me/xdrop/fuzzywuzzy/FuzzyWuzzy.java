@@ -288,13 +288,7 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
                                      ScoringMethod scoringMethod) {
         // add a custom comparator because by default, results compare in "reversed" order; meaning
         // Collections.max would actually return the lowest score result
-        return Collections.max(extractAllSorted(target, options, stringMapper, scoringMethod, 0),
-                new Comparator<Result<T>>() {
-                    @Override
-                    public int compare(Result<T> o1, Result<T> o2) {
-                        return Integer.compare(o2.getScore(), o1.getScore());
-                    }
-                });
+        return Collections.max(extractAllSorted(target, options, stringMapper, scoringMethod, 0));
     }
 
     /**
@@ -384,10 +378,9 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
                                               int threshold,
                                               int limit) throws IllegalArgumentException {
         if (limit < 1) throw new IllegalArgumentException("Parameter 'limit' must not be smaller than '1'!");
-        List<Result<T>> preResults = extractAll(target, options, stringMapper, scoringMethod, threshold);
-        return Util.extractLimitedKHeap(preResults, limit);
+        List<Result<T>> preResults = extractAllSorted(target, options, stringMapper, scoringMethod, threshold);
+        return Util.sortAndReverse(Util.extractLimitedKHeap(preResults, limit));
     }
-
 
     /**
      * Extracts all results from the provided list, using the
@@ -463,9 +456,7 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
                                                 StringMapper<T> stringMapper,
                                                 ScoringMethod scoringMethod,
                                                 int threshold) {
-        List<Result<T>> results = extractAll(target, options, stringMapper, scoringMethod, threshold);
-        Collections.sort(results);
-        return results;
+        return Util.sortAndReverse(extractAll(target, options, stringMapper, scoringMethod, threshold));
     }
 
     /**
