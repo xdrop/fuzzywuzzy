@@ -85,7 +85,7 @@ class LevenshteinSearchTest extends GroovyTestCase {
         assert res2.size() == 2
         assert res2.get(0).string == "google" && res2.get(1).string == "googleplus"
 
-        assert fuzzy.extractLimited("goolge", choices, 2, 100).size() == 0
+        assert fuzzy.extractLimited("goolge", choices, 100, 2).size() == 0
     }
 
     @Test

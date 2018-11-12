@@ -5,11 +5,8 @@ import me.xdrop.fuzzywuzzy.functions.StringMapper
 import me.xdrop.fuzzywuzzy.levenshtein.ratios.PartialRatio
 import org.junit.Test
 
-import static org.easymock.EasyMock.anyObject
-import static org.easymock.EasyMock.eq
-import static org.easymock.EasyMock.expect
-import static org.easymock.EasyMock.mock
-import static org.easymock.EasyMock.replay
+import static me.xdrop.fuzzywuzzy.levenshtein.Levenshtein.Method.TOKEN_SET_SIMPLE
+import static org.easymock.EasyMock.*
 
 class TokenSetTest extends GroovyTestCase {
     @Test
@@ -26,13 +23,14 @@ class TokenSetTest extends GroovyTestCase {
 
     @Test
     void testUsesRatio(){
-        def ts = new TokenSet()
-        def mock = mock(ScoringFunction)
+        ScoringFunction mock = mock(ScoringFunction)
 
-        expect(mock.apply(anyObject(String), anyObject(String))).andReturn(0).anyTimes()
+        expect(mock.apply(anyObject(String), anyObject(String)))
+                .andReturn(0)
+                .anyTimes()
         replay(mock)
 
-        assertEquals 0, ts.apply("one two", "one three", mock)
+        assertEquals 63, TOKEN_SET_SIMPLE.apply("one two", "one three")
     }
 
     @Test

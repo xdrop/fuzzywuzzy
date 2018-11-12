@@ -2,10 +2,12 @@ package me.xdrop.fuzzywuzzy.levenshtein.algorithms
 
 import me.xdrop.fuzzywuzzy.functions.ScoringFunction
 import me.xdrop.fuzzywuzzy.functions.StringMapper
+import me.xdrop.fuzzywuzzy.levenshtein.Levenshtein
 import me.xdrop.fuzzywuzzy.levenshtein.ratios.PartialRatio
 import me.xdrop.fuzzywuzzy.levenshtein.ratios.SimpleRatio
 import org.junit.Test
 
+import static me.xdrop.fuzzywuzzy.levenshtein.Levenshtein.Method.TOKEN_SORT_SIMPLE
 import static org.easymock.EasyMock.anyObject
 import static org.easymock.EasyMock.eq
 import static org.easymock.EasyMock.expect
@@ -27,13 +29,14 @@ class TokenSortTest extends GroovyTestCase {
 
     @Test
     void testUsesRatio() {
-        def ts = new TokenSort()
-        def mock = mock(ScoringFunction)
+        ScoringFunction mock = mock(ScoringFunction)
 
-        expect(mock.apply(anyObject(String), anyObject(String))).andReturn(0).anyTimes()
+        expect(mock.apply(anyObject(String), anyObject(String)))
+                .andReturn(0)
+                .anyTimes()
         replay(mock)
 
-        assertEquals 0, ts.apply("one two", "one three", mock)
+        assertEquals 63, TOKEN_SORT_SIMPLE.apply("one two", "one three")
     }
 
     @Test
