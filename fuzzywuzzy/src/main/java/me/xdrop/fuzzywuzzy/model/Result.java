@@ -13,7 +13,7 @@ public class Result<T> implements Comparable<Result<T>> {
     private boolean isStringReferent;
 
     /**
-     * Creates a new instance.
+     * Creates a new instance for a result from a list.
      * Mostly used internally.
      *
      * @param referent    The referent object.
@@ -29,6 +29,19 @@ public class Result<T> implements Comparable<Result<T>> {
         this.string = string;
         this.score = score;
         this.originIndex = originIndex;
+    }
+
+    /**
+     * Creates a new instance for a single request.
+     * Mostly used internally.
+     *
+     * @param referent The referent object.
+     * @param string The representation string.
+     * @param score The score of this result.
+     * @throws IllegalArgumentException If the referent is a {@link String} and is not equal to the {@code string} value.
+     */
+    public Result(T referent, String string, int score) throws IllegalArgumentException {
+        this(referent, string, score, -1);
     }
 
     /**
@@ -87,15 +100,19 @@ public class Result<T> implements Comparable<Result<T>> {
 
     private Object[] getFormatArgs() {
         int size = 3;
+
         if (isStringReferent) size++;
         if (originIndex > -1) size++;
+
         Object[] arg = new Object[size];
         int i = 0;
+
         if (isStringReferent) arg[i++] = referent;
         arg[i++] = string;
         arg[i++] = score;
         if (originIndex > -1) arg[i++] = originIndex;
         arg[i] = hashCode();
+
         return arg;
     }
 }
