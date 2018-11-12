@@ -21,3 +21,4 @@ release.properties
 
 package/dependency-reduced-pom.xml
 pom.xml.versionsBackup
+.gradle
