@@ -1,4 +1,4 @@
-package me.xdrop.levenshtein.algorithms
+package me.xdrop.fuzzywuzzy.levenshtein.algorithms
 
 import org.junit.Test
 

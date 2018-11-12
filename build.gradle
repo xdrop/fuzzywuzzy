@@ -28,7 +28,8 @@ allprojects {
     }
 
     dependencies {
-        implementation project(':fuzzywuzzy')
+        if (!project.name.equalsIgnoreCase("fuzzywuzzy")) 
+            implementation project(':fuzzywuzzy')
         
         testImplementation 'org.easymock:easymock:3.6'
         testImplementation 'org.codehaus.groovy:groovy-test:2.5.3'
@@ -62,6 +63,10 @@ allprojects {
                 srcDirs = ["src\\test\\java"]
             }
         }
+    }
+    
+    test {
+        outputs.upToDateWhen { false }
     }
 }
 

@@ -7,7 +7,6 @@ import java.util.Comparator;
 import java.util.List;
 import me.xdrop.fuzzywuzzy.algorithms.Algorithm;
 import me.xdrop.fuzzywuzzy.algorithms.AlgorithmFactory;
-import me.xdrop.fuzzywuzzy.functions.ScoringFunction;
 import me.xdrop.fuzzywuzzy.functions.StringMapper;
 import me.xdrop.fuzzywuzzy.model.Result;
 import me.xdrop.fuzzywuzzy.model.ScoringMethod;
@@ -43,10 +42,229 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      * Extracts the best result from the provided list, using the
      * {@linkplain Algorithm#getDefaultScoringMethod() default scoring method} to determin the scores of the elements.
      *
-     * @param target The target (key) element. This will be the criteria.
+     * @param target  The target (key) element. This will be the criteria.
      * @param options A list of elements to look for the target in.
+     * @return A sorted list of all Results whose score is higher than or equal the given threshold.
+     */
+    public Result<String> extractBest(String target, Collection<String> options) {
+        return extractBest(target, options, StringMapper.IDENTITY);
+    }
+
+    /**
+     * Extracts the best result from the provided list, using the provided scoringMethod to determine the scores
+     * of the elements.
+     *
+     * @param target        The target (key) element. This will be the criteria.
+     * @param options       A list of elements to look for the target in.
+     * @param scoringMethod The method to use for scoring between two strings.
+     * @return A sorted list of all Results whose score is higher than or equal the given threshold.
+     */
+    public Result<String> extractBest(String target, Collection<String> options, ScoringMethod scoringMethod) {
+        return extractBest(target, options, StringMapper.IDENTITY, scoringMethod);
+    }
+
+    /**
+     * Extracts a limited amount of the best results from the provided list, using the
+     * {@linkplain Algorithm#getDefaultScoringMethod() default scoring method} defined by the algorithm to determine
+     * the scores of the results.
+     * Uses a default threshold of 0, thus; every item gets included.
+     *
+     * @param target  The target (key) element. This will be the criteria.
+     * @param options A list of elements to look for the target in.
+     * @param limit   The maximum amount of items to include in the output.
+     * @return A sorted list of all Results whose score is higher than or equal the given threshold.
+     * @throws IllegalArgumentException If the provided limit is smaller than 1.
+     * @see #extractLimited(Object, Collection, StringMapper, ScoringMethod, int, int)
+     */
+    public List<Result<String>> extractLimited(String target,
+                                               Collection<String> options,
+                                               int limit) throws IllegalArgumentException {
+        return extractLimited(target, options, StringMapper.IDENTITY, limit);
+    }
+
+    /**
+     * Extracts a limited amount of the best results from the provided list, using the provided scoringMethod to determine their scores.
+     *
+     * @param target        The target (key) element. This will be the criteria.
+     * @param options       A list of elements to look for the target in.
+     * @param scoringMethod The method to use for scoring between two strings.
+     * @param limit         The maximum amount of items to include in the output.
+     * @return A sorted list of all Results whose score is higher than or equal the given threshold.
+     * @throws IllegalArgumentException If the provided limit is smaller than 1.
+     * @see #extractLimited(Object, Collection, StringMapper, ScoringMethod, int, int)
+     */
+    public List<Result<String>> extractLimited(String target,
+                                               Collection<String> options,
+                                               ScoringMethod scoringMethod,
+                                               int limit) throws IllegalArgumentException {
+        return extractLimited(target, options, scoringMethod, 0, limit);
+    }
+
+    /**
+     * Extracts a limited amount of the best results from the provided list, using the
+     * {@linkplain Algorithm#getDefaultScoringMethod() default scoring method} defined by the algorithm to determine
+     * the scores of the results.
+     *
+     * @param target    The target (key) element. This will be the criteria.
+     * @param options   A list of elements to look for the target in.
+     * @param threshold The minimum score of an element to be included in the output list.
+     * @param limit     The maximum amount of items to include in the output.
+     * @return A sorted list of all Results whose score is higher than or equal the given threshold.
+     * @throws IllegalArgumentException If the provided limit is smaller than 1.
+     * @see #extractLimited(Object, Collection, StringMapper, ScoringMethod, int, int)
+     */
+    public List<Result<String>> extractLimited(String target,
+                                               Collection<String> options,
+                                               int threshold,
+                                               int limit) throws IllegalArgumentException {
+        return extractLimited(target, options, algorithm.getDefaultScoringMethod(), threshold, limit);
+    }
+
+    /**
+     * Extracts a limited amount of the best results from the provided list, using the provided scoringMethod to
+     * determine their scores.
+     *
+     * @param target        The target (key) element. This will be the criteria.
+     * @param options       A list of elements to look for the target in.
+     * @param scoringMethod The method to use for scoring between two strings.
+     * @param threshold     The minimum score of an element to be included in the output list.
+     * @param limit         The maximum amount of items to include in the output.
+     * @return A sorted list of all Results whose score is higher than or equal the given threshold.
+     * @throws IllegalArgumentException If the provided limit is smaller than 1.
+     */
+    public List<Result<String>> extractLimited(String target,
+                                               Collection<String> options,
+                                               ScoringMethod scoringMethod,
+                                               int threshold,
+                                               int limit) throws IllegalArgumentException {
+        return extractLimited(target, options, StringMapper.IDENTITY, scoringMethod, threshold, limit);
+    }
+
+    /**
+     * Extracts all results from the provided list, using the
+     * {@linkplain Algorithm#getDefaultScoringMethod() default scoring method} defined by the algorithm,
+     * then sorts the results.
+     * Uses a default threshold of 0, thus; every item gets included.
+     *
+     * @param target  The target (key) element. This will be the criteria.
+     * @param options A list of elements to look for the target in.
+     * @return A sorted list of all Results whose score is higher than or equal the given threshold.
+     * @see #extractAllSorted(Object, Collection, StringMapper, ScoringMethod, int)
+     */
+    public List<Result<String>> extractAllSorted(String target, Collection<String> options) {
+        return extractAllSorted(target, options, StringMapper.IDENTITY);
+    }
+
+    /**
+     * Extracts all results from the provided list, using the provided scoringMethod to determine their scores.
+     *
+     * @param target        The target (key) element. This will be the criteria.
+     * @param options       A list of elements to look for the target in.
+     * @param scoringMethod The method to use for scoring between two strings.
+     * @return A sorted list of all Results whose score is higher than or equal the given threshold.
+     * @see #extractAllSorted(Object, Collection, StringMapper, ScoringMethod, int)
+     */
+    public List<Result<String>> extractAllSorted(String target, Collection<String> options, ScoringMethod scoringMethod) {
+        return extractAllSorted(target, options, scoringMethod, 0);
+    }
+
+    /**
+     * Extracts all results from the provided list, using the
+     * {@linkplain Algorithm#getDefaultScoringMethod() default scoring method} defined by the algorithm,
+     * then sorts the results.
+     *
+     * @param target    The target (key) element. This will be the criteria.
+     * @param options   A list of elements to look for the target in.
+     * @param threshold The minimum score of an element to be included in the output list.
+     * @return A sorted list of all Results whose score is higher than or equal the given threshold.
+     * @see #extractAllSorted(Object, Collection, StringMapper, ScoringMethod, int)
+     */
+    public List<Result<String>> extractAllSorted(String target, Collection<String> options, int threshold) {
+        return extractAllSorted(target, options, algorithm.getDefaultScoringMethod(), threshold);
+    }
+
+    /**
+     * Extracts all results from the provided list, using the provided scoringMethod to determine their scores,
+     * and sorts the results.
+     *
+     * @param target        The target (key) element. This will be the criteria.
+     * @param options       A list of elements to look for the target in.
+     * @param scoringMethod The method to use for scoring between two strings.
+     * @param threshold     The minimum score of an element to be included in the output list.
+     * @return A sorted list of all Results whose score is higher than or equal the given threshold.
+     */
+    public List<Result<String>> extractAllSorted(String target,
+                                                 Collection<String> options,
+                                                 ScoringMethod scoringMethod,
+                                                 int threshold) {
+        return extractAllSorted(target, options, StringMapper.IDENTITY, scoringMethod, threshold);
+    }
+
+    /**
+     * Extracts all results from the provided list, using the
+     * {@linkplain Algorithm#getDefaultScoringMethod() default scoring method} defined by the algorithm.
+     * Uses a default threshold of 0, thus; every item gets included.
+     *
+     * @param target  The target (key) element. This will be the criteria.
+     * @param options A list of elements to look for the target in.
+     * @return An unsorted list of all Results whose score is higher than or equal the given threshold.
+     * @see #extractAll(Object, Collection, StringMapper, ScoringMethod, int)
+     */
+    public List<Result<String>> extractAll(String target, Collection<String> options) {
+        return extractAll(target, options, StringMapper.IDENTITY);
+    }
+
+    /**
+     * Extracts all results from the provided list, using the provided scoringMethod to determine their scores.
+     *
+     * @param target        The target (key) element. This will be the criteria.
+     * @param options       A list of elements to look for the target in.
+     * @param scoringMethod The method to use for scoring between two strings.
+     * @return An unsorted list of all Results whose score is higher than or equal the given threshold.
+     * @see #extractAll(Object, Collection, StringMapper, ScoringMethod, int)
+     */
+    public List<Result<String>> extractAll(String target, Collection<String> options, ScoringMethod scoringMethod) {
+        return extractAll(target, options, scoringMethod, 0);
+    }
+
+    /**
+     * Extracts all results from the provided list, using the
+     * {@linkplain Algorithm#getDefaultScoringMethod() default scoring method} defined by the algorithm.
+     *
+     * @param target    The target (key) element. This will be the criteria.
+     * @param options   A list of elements to look for the target in.
+     * @param threshold The minimum score of an element to be included in the output list.
+     * @return An unsorted list of all Results whose score is higher than or equal the given threshold.
+     * @see #extractAll(Object, Collection, StringMapper, ScoringMethod, int)
+     */
+    public List<Result<String>> extractAll(String target, Collection<String> options, int threshold) {
+        return extractAll(target, options, algorithm.getDefaultScoringMethod(), threshold);
+    }
+
+    /**
+     * Extracts all results from the provided list, using the provided scoringMethod to determine their scores.
+     *
+     * @param target        The target (key) element. This will be the criteria.
+     * @param options       A list of elements to look for the target in.
+     * @param scoringMethod The method to use for scoring between two strings.
+     * @param threshold     The minimum score of an element to be included in the output list.
+     * @return An unsorted list of all Results whose score is higher than or equal the given threshold.
+     */
+    public List<Result<String>> extractAll(String target,
+                                           Collection<String> options,
+                                           ScoringMethod scoringMethod,
+                                           int threshold) {
+        return extractAll(target, options, StringMapper.IDENTITY, scoringMethod, threshold);
+    }
+
+    /**
+     * Extracts the best result from the provided list, using the
+     * {@linkplain Algorithm#getDefaultScoringMethod() default scoring method} to determin the scores of the elements.
+     *
+     * @param target       The target (key) element. This will be the criteria.
+     * @param options      A list of elements to look for the target in.
      * @param stringMapper A mapper to convert the elements into string representations that can be compared.
-     * @param <T> Type-variable of the elements.
+     * @param <T>          Type-variable of the elements.
      * @return A sorted list of all Results whose score is higher than or equal the given threshold.
      */
     public <T> Result<T> extractBest(T target, Collection<T> options, StringMapper<T> stringMapper) {
@@ -57,11 +275,11 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      * Extracts the best result from the provided list, using the provided scoringMethod to determine the scores
      * of the elements.
      *
-     * @param target The target (key) element. This will be the criteria.
-     * @param options A list of elements to look for the target in.
-     * @param stringMapper A mapper to convert the elements into string representations that can be compared.
+     * @param target        The target (key) element. This will be the criteria.
+     * @param options       A list of elements to look for the target in.
+     * @param stringMapper  A mapper to convert the elements into string representations that can be compared.
      * @param scoringMethod The method to use for scoring between two strings.
-     * @param <T> Type-variable of the elements.
+     * @param <T>           Type-variable of the elements.
      * @return A sorted list of all Results whose score is higher than or equal the given threshold.
      */
     public <T> Result<T> extractBest(T target,
@@ -72,11 +290,11 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
         // Collections.max would actually return the lowest score result
         return Collections.max(extractAllSorted(target, options, stringMapper, scoringMethod, 0),
                 new Comparator<Result<T>>() {
-            @Override
-            public int compare(Result<T> o1, Result<T> o2) {
-                return Integer.compare(o2.getScore(), o1.getScore());
-            }
-        });
+                    @Override
+                    public int compare(Result<T> o1, Result<T> o2) {
+                        return Integer.compare(o2.getScore(), o1.getScore());
+                    }
+                });
     }
 
     /**
@@ -85,11 +303,11 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      * the scores of the results.
      * Uses a default threshold of 0, thus; every item gets included.
      *
-     * @param target The target (key) element. This will be the criteria.
-     * @param options A list of elements to look for the target in.
+     * @param target       The target (key) element. This will be the criteria.
+     * @param options      A list of elements to look for the target in.
      * @param stringMapper A mapper to convert the elements into string representations that can be compared.
-     * @param limit The maximum amount of items to include in the output.
-     * @param <T> Type-variable of the elements.
+     * @param limit        The maximum amount of items to include in the output.
+     * @param <T>          Type-variable of the elements.
      * @return A sorted list of all Results whose score is higher than or equal the given threshold.
      * @throws IllegalArgumentException If the provided limit is smaller than 1.
      * @see #extractLimited(Object, Collection, StringMapper, ScoringMethod, int, int)
@@ -102,16 +320,37 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
     }
 
     /**
+     * Extracts a limited amount of the best results from the provided list, using the provided scoringMethod to determine their scores.
+     *
+     * @param target        The target (key) element. This will be the criteria.
+     * @param options       A list of elements to look for the target in.
+     * @param stringMapper  A mapper to convert the elements into string representations that can be compared.
+     * @param scoringMethod The method to use for scoring between two strings.
+     * @param limit         The maximum amount of items to include in the output.
+     * @param <T>           Type-variable of the elements.
+     * @return A sorted list of all Results whose score is higher than or equal the given threshold.
+     * @throws IllegalArgumentException If the provided limit is smaller than 1.
+     * @see #extractLimited(Object, Collection, StringMapper, ScoringMethod, int, int)
+     */
+    public <T> List<Result<T>> extractLimited(T target,
+                                              Collection<T> options,
+                                              StringMapper<T> stringMapper,
+                                              ScoringMethod scoringMethod,
+                                              int limit) throws IllegalArgumentException {
+        return extractLimited(target, options, stringMapper, scoringMethod, 0, limit);
+    }
+
+    /**
      * Extracts a limited amount of the best results from the provided list, using the
      * {@linkplain Algorithm#getDefaultScoringMethod() default scoring method} defined by the algorithm to determine
      * the scores of the results.
      *
-     * @param target The target (key) element. This will be the criteria.
-     * @param options A list of elements to look for the target in.
+     * @param target       The target (key) element. This will be the criteria.
+     * @param options      A list of elements to look for the target in.
      * @param stringMapper A mapper to convert the elements into string representations that can be compared.
-     * @param threshold The minimum score of an element to be included in the output list.
-     * @param limit The maximum amount of items to include in the output.
-     * @param <T> Type-variable of the elements.
+     * @param threshold    The minimum score of an element to be included in the output list.
+     * @param limit        The maximum amount of items to include in the output.
+     * @param <T>          Type-variable of the elements.
      * @return A sorted list of all Results whose score is higher than or equal the given threshold.
      * @throws IllegalArgumentException If the provided limit is smaller than 1.
      * @see #extractLimited(Object, Collection, StringMapper, ScoringMethod, int, int)
@@ -128,13 +367,13 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      * Extracts a limited amount of the best results from the provided list, using the provided scoringMethod to
      * determine their scores.
      *
-     * @param target The target (key) element. This will be the criteria.
-     * @param options A list of elements to look for the target in.
-     * @param stringMapper A mapper to convert the elements into string representations that can be compared.
+     * @param target        The target (key) element. This will be the criteria.
+     * @param options       A list of elements to look for the target in.
+     * @param stringMapper  A mapper to convert the elements into string representations that can be compared.
      * @param scoringMethod The method to use for scoring between two strings.
-     * @param threshold The minimum score of an element to be included in the output list.
-     * @param limit The maximum amount of items to include in the output.
-     * @param <T> Type-variable of the elements.
+     * @param threshold     The minimum score of an element to be included in the output list.
+     * @param limit         The maximum amount of items to include in the output.
+     * @param <T>           Type-variable of the elements.
      * @return A sorted list of all Results whose score is higher than or equal the given threshold.
      * @throws IllegalArgumentException If the provided limit is smaller than 1.
      */
@@ -156,10 +395,10 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      * then sorts the results.
      * Uses a default threshold of 0, thus; every item gets included.
      *
-     * @param target The target (key) element. This will be the criteria.
-     * @param options A list of elements to look for the target in.
+     * @param target       The target (key) element. This will be the criteria.
+     * @param options      A list of elements to look for the target in.
      * @param stringMapper A mapper to convert the elements into string representations that can be compared.
-     * @param <T> Type-variable of the elements.
+     * @param <T>          Type-variable of the elements.
      * @return A sorted list of all Results whose score is higher than or equal the given threshold.
      * @see #extractAllSorted(Object, Collection, StringMapper, ScoringMethod, int)
      */
@@ -169,17 +408,34 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
         return extractAllSorted(target, options, stringMapper, algorithm.getDefaultScoringMethod(), 0);
     }
 
+    /**
+     * Extracts all results from the provided list, using the provided scoringMethod to determine their scores.
+     *
+     * @param target        The target (key) element. This will be the criteria.
+     * @param options       A list of elements to look for the target in.
+     * @param stringMapper  A mapper to convert the elements into string representations that can be compared.
+     * @param scoringMethod The method to use for scoring between two strings.
+     * @param <T>           Type-variable of the elements.
+     * @return A sorted list of all Results whose score is higher than or equal the given threshold.
+     * @see #extractAllSorted(Object, Collection, StringMapper, ScoringMethod, int)
+     */
+    public <T> List<Result<T>> extractAllSorted(T target,
+                                                Collection<T> options,
+                                                StringMapper<T> stringMapper,
+                                                ScoringMethod scoringMethod) {
+        return extractAllSorted(target, options, stringMapper, scoringMethod, 0);
+    }
 
     /**
      * Extracts all results from the provided list, using the
      * {@linkplain Algorithm#getDefaultScoringMethod() default scoring method} defined by the algorithm,
      * then sorts the results.
      *
-     * @param target The target (key) element. This will be the criteria.
-     * @param options A list of elements to look for the target in.
+     * @param target       The target (key) element. This will be the criteria.
+     * @param options      A list of elements to look for the target in.
      * @param stringMapper A mapper to convert the elements into string representations that can be compared.
-     * @param threshold The minimum score of an element to be included in the output list.
-     * @param <T> Type-variable of the elements.
+     * @param threshold    The minimum score of an element to be included in the output list.
+     * @param <T>          Type-variable of the elements.
      * @return A sorted list of all Results whose score is higher than or equal the given threshold.
      * @see #extractAllSorted(Object, Collection, StringMapper, ScoringMethod, int)
      */
@@ -194,12 +450,12 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      * Extracts all results from the provided list, using the provided scoringMethod to determine their scores,
      * and sorts the results.
      *
-     * @param target The target (key) element. This will be the criteria.
-     * @param options A list of elements to look for the target in.
-     * @param stringMapper A mapper to convert the elements into string representations that can be compared.
+     * @param target        The target (key) element. This will be the criteria.
+     * @param options       A list of elements to look for the target in.
+     * @param stringMapper  A mapper to convert the elements into string representations that can be compared.
      * @param scoringMethod The method to use for scoring between two strings.
-     * @param threshold The minimum score of an element to be included in the output list.
-     * @param <T> Type-variable of the elements.
+     * @param threshold     The minimum score of an element to be included in the output list.
+     * @param <T>           Type-variable of the elements.
      * @return A sorted list of all Results whose score is higher than or equal the given threshold.
      */
     public <T> List<Result<T>> extractAllSorted(T target,
@@ -217,10 +473,10 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      * {@linkplain Algorithm#getDefaultScoringMethod() default scoring method} defined by the algorithm.
      * Uses a default threshold of 0, thus; every item gets included.
      *
-     * @param target The target (key) element. This will be the criteria.
-     * @param options A list of elements to look for the target in.
+     * @param target       The target (key) element. This will be the criteria.
+     * @param options      A list of elements to look for the target in.
      * @param stringMapper A mapper to convert the elements into string representations that can be compared.
-     * @param <T> Type-variable of the elements.
+     * @param <T>          Type-variable of the elements.
      * @return An unsorted list of all Results whose score is higher than or equal the given threshold.
      * @see #extractAll(Object, Collection, StringMapper, ScoringMethod, int)
      */
@@ -229,14 +485,32 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
     }
 
     /**
+     * Extracts all results from the provided list, using the provided scoringMethod to determine their scores.
+     *
+     * @param target        The target (key) element. This will be the criteria.
+     * @param options       A list of elements to look for the target in.
+     * @param stringMapper  A mapper to convert the elements into string representations that can be compared.
+     * @param scoringMethod The method to use for scoring between two strings.
+     * @param <T>           Type-variable of the elements.
+     * @return An unsorted list of all Results whose score is higher than or equal the given threshold.
+     * @see #extractAll(Object, Collection, StringMapper, ScoringMethod, int)
+     */
+    public <T> List<Result<T>> extractAll(T target,
+                                          Collection<T> options,
+                                          StringMapper<T> stringMapper,
+                                          ScoringMethod scoringMethod) {
+        return extractAll(target, options, stringMapper, scoringMethod, 0);
+    }
+
+    /**
      * Extracts all results from the provided list, using the
      * {@linkplain Algorithm#getDefaultScoringMethod() default scoring method} defined by the algorithm.
      *
-     * @param target The target (key) element. This will be the criteria.
-     * @param options A list of elements to look for the target in.
+     * @param target       The target (key) element. This will be the criteria.
+     * @param options      A list of elements to look for the target in.
      * @param stringMapper A mapper to convert the elements into string representations that can be compared.
-     * @param threshold The minimum score of an element to be included in the output list.
-     * @param <T> Type-variable of the elements.
+     * @param threshold    The minimum score of an element to be included in the output list.
+     * @param <T>          Type-variable of the elements.
      * @return An unsorted list of all Results whose score is higher than or equal the given threshold.
      * @see #extractAll(Object, Collection, StringMapper, ScoringMethod, int)
      */
@@ -250,12 +524,12 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
     /**
      * Extracts all results from the provided list, using the provided scoringMethod to determine their scores.
      *
-     * @param target The target (key) element. This will be the criteria.
-     * @param options A list of elements to look for the target in.
-     * @param stringMapper A mapper to convert the elements into string representations that can be compared.
+     * @param target        The target (key) element. This will be the criteria.
+     * @param options       A list of elements to look for the target in.
+     * @param stringMapper  A mapper to convert the elements into string representations that can be compared.
      * @param scoringMethod The method to use for scoring between two strings.
-     * @param threshold The minimum score of an element to be included in the output list.
-     * @param <T> Type-variable of the elements.
+     * @param threshold     The minimum score of an element to be included in the output list.
+     * @param <T>           Type-variable of the elements.
      * @return An unsorted list of all Results whose score is higher than or equal the given threshold.
      */
     public <T> List<Result<T>> extractAll(T target,
@@ -282,7 +556,7 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      * Creates a new FuzzyWuzzy instance using the provided factory.
      *
      * @param factory The factory to use to create a new FuzzyWuzzy implementation.
-     * @param <A> Type-variable of the algorithm.
+     * @param <A>     Type-variable of the algorithm.
      * @return A FuzzyWuzzy interface to use the algorithm.
      */
     public static <A extends Algorithm> FuzzyWuzzy<A> algorithm(AlgorithmFactory<A> factory) {

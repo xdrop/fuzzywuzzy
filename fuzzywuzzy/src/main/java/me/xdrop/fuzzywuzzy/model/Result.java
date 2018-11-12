@@ -107,7 +107,7 @@ public class Result<T> implements Comparable<Result<T>> {
         Object[] arg = new Object[size];
         int i = 0;
 
-        if (isStringReferent) arg[i++] = referent;
+        if (isStringReferent) arg[i++] = referent.toString();
         arg[i++] = string;
         arg[i++] = score;
         if (originIndex > -1) arg[i++] = originIndex;

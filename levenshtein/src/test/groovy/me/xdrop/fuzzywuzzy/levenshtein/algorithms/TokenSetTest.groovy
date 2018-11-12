@@ -1,9 +1,8 @@
-package me.xdrop.levenshtein.algorithms
+package me.xdrop.fuzzywuzzy.levenshtein.algorithms
 
-import me.xdrop.fuzzywuzzy.Ratio
-import me.xdrop.fuzzywuzzy.functions.ToStringMapper
-import me.xdrop.fuzzywuzzy.ratios.PartialRatio
-import me.xdrop.fuzzywuzzy.ratios.SimpleRatio
+import me.xdrop.fuzzywuzzy.functions.ScoringFunction
+import me.xdrop.fuzzywuzzy.functions.StringMapper
+import me.xdrop.fuzzywuzzy.levenshtein.ratios.PartialRatio
 import org.junit.Test
 
 import static org.easymock.EasyMock.anyObject
@@ -12,11 +11,11 @@ import static org.easymock.EasyMock.expect
 import static org.easymock.EasyMock.mock
 import static org.easymock.EasyMock.replay
 
-class TokenSortTest extends GroovyTestCase {
+class TokenSetTest extends GroovyTestCase {
     @Test
     void testUsesStringProcessor() {
-        def ts = new TokenSort()
-        ToStringMapper<String> mock = mock(ToStringMapper)
+        def ts = new TokenSet()
+        StringMapper<String> mock = mock(StringMapper)
 
         expect(mock.apply(eq("notthesame"))).andReturn("thesame")
         expect(mock.apply(eq("thesame"))).andReturn("thesame")
@@ -26,9 +25,9 @@ class TokenSortTest extends GroovyTestCase {
     }
 
     @Test
-    void testUsesRatio() {
-        def ts = new TokenSort()
-        def mock = mock(Ratio)
+    void testUsesRatio(){
+        def ts = new TokenSet()
+        def mock = mock(ScoringFunction)
 
         expect(mock.apply(anyObject(String), anyObject(String))).andReturn(0).anyTimes()
         replay(mock)
@@ -37,10 +36,10 @@ class TokenSortTest extends GroovyTestCase {
     }
 
     @Test
-    void testTokenSort() {
-        def ts = new TokenSort()
+    void testTokenSet() {
+        def ts = new TokenSet()
 
+        assertEquals 46, ts.apply("test", "pesticide")
         assertEquals 75, ts.apply("test", "pesticide", new PartialRatio())
-        assertEquals 46, ts.apply("test", "pesticide", new SimpleRatio())
     }
 }

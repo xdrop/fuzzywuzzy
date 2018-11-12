@@ -1,4 +1,4 @@
-package me.xdrop.levenshtein.diffutils
+package me.xdrop.fuzzywuzzy.levenshtein.diffutils
 
 import org.junit.Test
 

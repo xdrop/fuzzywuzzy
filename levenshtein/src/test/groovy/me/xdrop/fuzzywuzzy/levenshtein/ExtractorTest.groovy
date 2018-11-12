@@ -1,22 +1,26 @@
-package me.xdrop.levenshtein
-import me.xdrop.fuzzywuzzy.algorithms.WeightedRatio
+package me.xdrop.fuzzywuzzy.levenshtein
+
+import me.xdrop.fuzzywuzzy.FuzzyWuzzy
 import me.xdrop.fuzzywuzzy.model.Result
+import org.junit.Before
 import org.junit.Test
+
+import static me.xdrop.fuzzywuzzy.levenshtein.Levenshtein.Method.*
 
 class ExtractorTest extends GroovyTestCase {
     List<String> choices
-    Extractor extractor
+    FuzzyWuzzy<Levenshtein> fuzzy
 
-    @Test
+    @Before
     void setUp() throws Exception {
         super.setUp()
         choices = ["google", "bing", "facebook", "linkedin", "twitter", "googleplus", "bingnews", "plexoogl"]
-        extractor = new Extractor()
+        fuzzy = FuzzyWuzzy.algorithm(Levenshtein.FACTORY)
     }
 
     @Test
     void testExtractWithoutOrder() {
-        List<Result> res = extractor.extractWithoutOrder("goolge", choices, new WeightedRatio())
+        List<Result> res = fuzzy.extractAll("goolge", choices, WEIGHTED_RATIO)
 
         assert res.size() == choices.size()
         assert res.get(0).score > 0
@@ -24,21 +28,21 @@ class ExtractorTest extends GroovyTestCase {
 
     @Test
     void testExtractOne() {
-        Result res = extractor.extractOne("goolge", choices, new WeightedRatio())
+        Result res = fuzzy.extractBest("goolge", choices, WEIGHTED_RATIO)
 
         assert res.string == "google"
     }
 
     @Test
     void testExtractBests() {
-        def res = extractor.extractTop("goolge", choices, new WeightedRatio())
+        def res = fuzzy.extractBest("goolge", choices, WEIGHTED_RATIO)
 
-        assert res.get(0).string == "google" && res.get(1).string == "googleplus"
+        assert res.string == "google"
     }
 
     @Test
     void testExtractBests1() {
-        def res = extractor.extractTop("goolge", choices, new WeightedRatio(), 3)
+        def res = fuzzy.extractLimited("goolge", choices, WEIGHTED_RATIO, 3)
 
         assert res.size() == 3
         assert res.get(0).string == "google" && res.get(1).string == "googleplus" && res.get(2).string == "plexoogl"
