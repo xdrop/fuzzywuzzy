@@ -82,7 +82,7 @@ public class Result<T> implements Comparable<Result<T>> {
 
     @Override
     public int compareTo(Result other) {
-        return Integer.compare(this.score, other.score);
+        return Integer.compare(other.score, score);
     }
 
     @Override

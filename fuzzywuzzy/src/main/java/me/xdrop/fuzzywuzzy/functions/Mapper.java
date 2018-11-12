@@ -1,5 +1,11 @@
 package me.xdrop.fuzzywuzzy.functions;
 
+/**
+ * Transforms T into R.
+ *
+ * @param <T> Type-variable for the input.
+ * @param <R> Type-variable for the output.
+ */
 public interface Mapper<T, R> {
     /**
      * Transforms the input item to a string.
