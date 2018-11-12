@@ -28,9 +28,6 @@ allprojects {
     }
 
     dependencies {
-        if (!project.name.equalsIgnoreCase("fuzzywuzzy")) 
-            implementation project(':fuzzywuzzy')
-        
         testImplementation 'org.easymock:easymock:3.6'
         testImplementation 'org.codehaus.groovy:groovy-test:2.5.3'
     }
@@ -44,6 +41,7 @@ allprojects {
         source = sourceSets.main.allJava
         options.encoding = 'UTF-8'
         options.destinationDirectory = new File("docs\\javadoc")
+        outputs.upToDateWhen { false }
     }
 
     compileTestGroovy {
@@ -59,8 +57,8 @@ allprojects {
         }
 
         test {
-            java {
-                srcDirs = ["src\\test\\java"]
+            groovy {
+                srcDirs = ["src\\test\\groovy"]
             }
         }
     }
@@ -76,6 +74,10 @@ project(':fuzzywuzzy') {
 
 project(':levenshtein') {
     version '1.3'
+
+    dependencies {
+        implementation project(':fuzzywuzzy')
+    }
 }
 
 // utility method to decide whether we are on travis ci machine
