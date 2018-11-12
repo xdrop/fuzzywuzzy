@@ -5,11 +5,13 @@ import me.xdrop.fuzzywuzzy.functions.ScoringFunction;
 /**
  * Interface for scoring methods.
  */
-public interface ScoringMethod {
+public interface ScoringMethod extends ScoringFunction {
     /**
-     * Gets the scoring function for this method.
+     * Calls the {@link ScoringFunction#apply(String, String)} method for the function.
      *
-     * @return The scoring function.
+     * @param base The first string to compare.
+     * @param target The second string to compare against.
+     * @return The score of the {@code base} string.
      */
-    ScoringFunction getScoringFunction();
+    Integer apply(String base, String target);
 }

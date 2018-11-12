@@ -4,6 +4,7 @@ import me.xdrop.fuzzywuzzy.FuzzyWuzzy;
 import me.xdrop.fuzzywuzzy.algorithms.AlgorithmBase;
 import me.xdrop.fuzzywuzzy.algorithms.AlgorithmFactory;
 import me.xdrop.fuzzywuzzy.functions.ScoringFunction;
+import me.xdrop.fuzzywuzzy.levenshtein.algorithms.RatioAlgorithm;
 import me.xdrop.fuzzywuzzy.levenshtein.algorithms.TokenSet;
 import me.xdrop.fuzzywuzzy.levenshtein.algorithms.TokenSort;
 import me.xdrop.fuzzywuzzy.levenshtein.algorithms.WeightedRatio;
@@ -18,7 +19,7 @@ public class Levenshtein extends AlgorithmBase {
     /**
      * Factory for the Levenshtein Algorithm
      */
-    public final static AlgorithmFactory<Levenshtein> factory = new Factory();
+    public final static AlgorithmFactory<Levenshtein> FACTORY = new Factory();
 
     /**
      * Private constructor; used by {@link Factory}.
@@ -35,18 +36,31 @@ public class Levenshtein extends AlgorithmBase {
         SIMPLE_RATIO(new SimpleRatio()),
         PARTIAL_RATIO(new PartialRatio()),
         WEIGHTED_RATIO(new WeightedRatio()),
-        TOKEN_SORT(new TokenSort()),
-        TOKEN_SET(new TokenSet());
+        TOKEN_SORT_SIMPLE(new TokenSort(), SIMPLE_RATIO),
+        TOKEN_SET_SIMPLE(new TokenSet(), SIMPLE_RATIO),
+        TOKEN_SORT_PARTIAL(new TokenSort(), PARTIAL_RATIO),
+        TOKEN_SET_PARTIAL(new TokenSet(), PARTIAL_RATIO);
 
         private final ScoringFunction scoringFunction;
+        private final Method subMethod;
 
         <F extends ScoringFunction> Method(F scoringFunction) {
             this.scoringFunction = scoringFunction;
+            this.subMethod = null;
+        }
+
+        <F extends ScoringFunction> Method(F scoringFunction, Method subMethod) {
+            this.scoringFunction = scoringFunction;
+            this.subMethod = subMethod;
         }
 
         @Override
-        public ScoringFunction getScoringFunction() {
-            return scoringFunction;
+        public Integer apply(String base, String target) {
+            if (scoringFunction instanceof RatioAlgorithm && subMethod != null)
+                return ((RatioAlgorithm) scoringFunction).apply(base, target, subMethod.scoringFunction);
+            else if (scoringFunction instanceof RatioAlgorithm)
+                throw new NullPointerException("No SubMethod defined for method "+name());
+            else return scoringFunction.apply(base, target);
         }
     }
 

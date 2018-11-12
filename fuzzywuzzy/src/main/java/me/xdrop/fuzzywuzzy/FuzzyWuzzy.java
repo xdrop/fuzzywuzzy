@@ -264,13 +264,12 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
                                           ScoringMethod scoringMethod,
                                           int threshold) {
         final List<Result<T>> yields = new ArrayList<>();
-        final ScoringFunction scoringFunction = scoringMethod.getScoringFunction();
         final String targetString = stringMapper.apply(target);
         int originIndex = 0;
 
         for (T t : options) {
             final String s = stringMapper.apply(t);
-            final int score = scoringFunction.apply(s, targetString);
+            final int score = scoringMethod.apply(s, targetString);
 
             if (score >= threshold) yields.add(new Result<>(t, s, score, originIndex));
             originIndex++;
