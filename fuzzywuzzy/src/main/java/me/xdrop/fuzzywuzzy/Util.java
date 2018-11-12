@@ -15,7 +15,7 @@ import me.xdrop.fuzzywuzzy.model.ScoringMethod;
 public class Util {
     /**
      * Implementation of K Heap Sort.
-     * Used by {@link FuzzyWuzzy#extractLimited(Object, Collection, StringMapper, ScoringMethod, int, int)}.
+     * Used by {@link FuzzyWuzzy#extractLimited(String, Collection, StringMapper, ScoringMethod, int, int)}.
      * THE COMPARATOR IS REVERSED!
      *
      * @param arr List of results.
