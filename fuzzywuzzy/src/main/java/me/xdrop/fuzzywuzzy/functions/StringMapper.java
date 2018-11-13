@@ -23,4 +23,14 @@ public interface StringMapper<T> extends Mapper<T, String> {
             return item;
         }
     };
+
+    /**
+     * A StringMapper that works similar to the {@link java.lang.String#toLowerCase()} method.
+     */
+    StringMapper<String> CASE_INSENSITIVE = new StringMapper<String>() {
+        @Override
+        public String apply(String item) {
+            return item.toLowerCase();
+        }
+    };
 }
