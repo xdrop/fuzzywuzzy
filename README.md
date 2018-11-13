@@ -28,7 +28,13 @@ this in Java. Enjoy!
 
 ### Gradle
 ```gradle
-compile 'me.xdrop:fuzzywuzzy:1.2.0'
+repositories {
+    jcenter()
+}
+
+dependencies {
+    implementation 'me.xdrop:fuzzywuzzy:1.2.0'
+}
 ```
 
 ### Jar release
