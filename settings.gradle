@@ -5,3 +5,5 @@ include ':fuzzywuzzy'
 
 // Levenshtein algorithm module
 include ':levenshtein'
+// Android attach module
+include ':android-attacher'

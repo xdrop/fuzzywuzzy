@@ -81,6 +81,28 @@ project(':levenshtein') {
     }
 }
 
+project(':android-attacher') {
+    version '0.1.0'
+    
+    repositories {
+        google()
+    }
+    
+    dependencies {
+        implementation project(':fuzzywuzzy')
+        implementation 'com.android.support:appcompat-v7:28.0.0'
+        implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+        
+        println "[INFO] Resolving dependencies of module ${project.name} cannot be finished automatically; " +
+                "you need to set up Android SDK 28 manually as module SDK within your IDE."
+    }
+    
+    test {
+        // DO NOT run tests on Travis because this module additionally requires Android SDK 28 or higher.
+        if (isTravis()) outputs.upToDateWhen { true }
+    }
+}
+
 // utility method to decide whether we are on travis ci machine
 static boolean isTravis() {
     return System.getenv().containsKey("TRAVIS")
