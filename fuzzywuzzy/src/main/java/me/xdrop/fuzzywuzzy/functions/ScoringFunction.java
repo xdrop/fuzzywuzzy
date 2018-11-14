@@ -6,7 +6,8 @@ package me.xdrop.fuzzywuzzy.functions;
 public interface ScoringFunction extends Comparison<String, Integer> {
     /**
      * The method to score with.
-     * @param base The first string to compare.
+     *
+     * @param base   The first string to compare.
      * @param target The second string to compare against.
      * @return The score of the {@code base} string.
      */

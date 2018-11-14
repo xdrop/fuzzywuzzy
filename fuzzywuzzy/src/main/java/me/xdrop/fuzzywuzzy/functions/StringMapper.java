@@ -7,14 +7,6 @@ package me.xdrop.fuzzywuzzy.functions;
  */
 public interface StringMapper<T> extends Mapper<T, String> {
     /**
-     * Transforms the input item to a string.
-     *
-     * @param item The item to transform.
-     * @return A string to use for comparing the item.
-     */
-    String apply(T item);
-
-    /**
      * A default StringMapper that returns the input string.
      */
     StringMapper<String> IDENTITY = new StringMapper<String>() {
@@ -25,12 +17,10 @@ public interface StringMapper<T> extends Mapper<T, String> {
     };
 
     /**
-     * A StringMapper that works similar to the {@link java.lang.String#toLowerCase()} method.
+     * Transforms the input item to a string.
+     *
+     * @param item The item to transform.
+     * @return A string to use for comparing the item.
      */
-    StringMapper<String> CASE_INSENSITIVE = new StringMapper<String>() {
-        @Override
-        public String apply(String item) {
-            return item.toLowerCase();
-        }
-    };
+    String apply(T item);
 }

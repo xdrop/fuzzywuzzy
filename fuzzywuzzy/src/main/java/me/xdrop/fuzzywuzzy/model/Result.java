@@ -36,8 +36,8 @@ public class Result<T> implements Comparable<Result<T>> {
      * Mostly used internally.
      *
      * @param referent The referent object.
-     * @param string The representation string.
-     * @param score The score of this result.
+     * @param string   The representation string.
+     * @param score    The score of this result.
      * @throws IllegalArgumentException If the referent is a {@link String} and is not equal to the {@code string} value.
      */
     public Result(T referent, String string, int score) throws IllegalArgumentException {

@@ -1,6 +1,5 @@
 package me.xdrop.fuzzywuzzy.algorithms;
 
-import me.xdrop.fuzzywuzzy.functions.StringMapper;
 import me.xdrop.fuzzywuzzy.model.ScoringMethod;
 
 /**

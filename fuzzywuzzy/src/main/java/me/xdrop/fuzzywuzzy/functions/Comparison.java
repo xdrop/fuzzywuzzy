@@ -10,7 +10,7 @@ public interface Comparison<T, R> {
     /**
      * Compares two instances of T.
      *
-     * @param base The base line instance.
+     * @param base   The base line instance.
      * @param target The target.
      * @return The result of the comparison.
      */

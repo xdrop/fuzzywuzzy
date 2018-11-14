@@ -1,10 +1,7 @@
 package me.xdrop.fuzzywuzzy;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 import me.xdrop.fuzzywuzzy.algorithms.Algorithm;
 import me.xdrop.fuzzywuzzy.algorithms.AlgorithmFactory;
 import me.xdrop.fuzzywuzzy.functions.StringMapper;
@@ -76,14 +73,15 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      * @throws IllegalArgumentException If the provided limit is smaller than 1.
      * @see #extractLimited(String, Collection, StringMapper, ScoringMethod, int, int)
      */
-    public List<Result<String>> extractLimited(String target,
-                                               Collection<String> options,
-                                               int limit) throws IllegalArgumentException {
+    public Collection<Result<String>> extractLimited(String target,
+                                                     Collection<String> options,
+                                                     int limit) throws IllegalArgumentException {
         return extractLimited(target, options, StringMapper.IDENTITY, limit);
     }
 
     /**
-     * Extracts a limited amount of the best results from the provided list, using the provided scoringMethod to determine their scores.
+     * Extracts a limited amount of the best results from the provided list,
+     * using the provided scoringMethod to determine their scores.
      *
      * @param target        The target (key) element. This will be the criteria.
      * @param options       A list of elements to look for the target in.
@@ -93,10 +91,10 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      * @throws IllegalArgumentException If the provided limit is smaller than 1.
      * @see #extractLimited(String, Collection, StringMapper, ScoringMethod, int, int)
      */
-    public List<Result<String>> extractLimited(String target,
-                                               Collection<String> options,
-                                               ScoringMethod scoringMethod,
-                                               int limit) throws IllegalArgumentException {
+    public Collection<Result<String>> extractLimited(String target,
+                                                     Collection<String> options,
+                                                     ScoringMethod scoringMethod,
+                                                     int limit) throws IllegalArgumentException {
         return extractLimited(target, options, scoringMethod, 0, limit);
     }
 
@@ -113,10 +111,10 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      * @throws IllegalArgumentException If the provided limit is smaller than 1.
      * @see #extractLimited(String, Collection, StringMapper, ScoringMethod, int, int)
      */
-    public List<Result<String>> extractLimited(String target,
-                                               Collection<String> options,
-                                               int threshold,
-                                               int limit) throws IllegalArgumentException {
+    public Collection<Result<String>> extractLimited(String target,
+                                                     Collection<String> options,
+                                                     int threshold,
+                                                     int limit) throws IllegalArgumentException {
         return extractLimited(target, options, algorithm.getDefaultScoringMethod(), threshold, limit);
     }
 
@@ -132,11 +130,11 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      * @return A sorted list of all Results whose score is higher than or equal the given threshold.
      * @throws IllegalArgumentException If the provided limit is smaller than 1.
      */
-    public List<Result<String>> extractLimited(String target,
-                                               Collection<String> options,
-                                               ScoringMethod scoringMethod,
-                                               int threshold,
-                                               int limit) throws IllegalArgumentException {
+    public Collection<Result<String>> extractLimited(String target,
+                                                     Collection<String> options,
+                                                     ScoringMethod scoringMethod,
+                                                     int threshold,
+                                                     int limit) throws IllegalArgumentException {
         return extractLimited(target, options, StringMapper.IDENTITY, scoringMethod, threshold, limit);
     }
 
@@ -151,7 +149,7 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      * @return A sorted list of all Results whose score is higher than or equal the given threshold.
      * @see #extractAllSorted(String, Collection, StringMapper, ScoringMethod, int)
      */
-    public List<Result<String>> extractAllSorted(String target, Collection<String> options) {
+    public Collection<Result<String>> extractAllSorted(String target, Collection<String> options) {
         return extractAllSorted(target, options, StringMapper.IDENTITY);
     }
 
@@ -164,7 +162,9 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      * @return A sorted list of all Results whose score is higher than or equal the given threshold.
      * @see #extractAllSorted(String, Collection, StringMapper, ScoringMethod, int)
      */
-    public List<Result<String>> extractAllSorted(String target, Collection<String> options, ScoringMethod scoringMethod) {
+    public Collection<Result<String>> extractAllSorted(String target,
+                                                       Collection<String> options,
+                                                       ScoringMethod scoringMethod) {
         return extractAllSorted(target, options, scoringMethod, 0);
     }
 
@@ -179,7 +179,7 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      * @return A sorted list of all Results whose score is higher than or equal the given threshold.
      * @see #extractAllSorted(String, Collection, StringMapper, ScoringMethod, int)
      */
-    public List<Result<String>> extractAllSorted(String target, Collection<String> options, int threshold) {
+    public Collection<Result<String>> extractAllSorted(String target, Collection<String> options, int threshold) {
         return extractAllSorted(target, options, algorithm.getDefaultScoringMethod(), threshold);
     }
 
@@ -193,10 +193,10 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      * @param threshold     The minimum score of an element to be included in the output list.
      * @return A sorted list of all Results whose score is higher than or equal the given threshold.
      */
-    public List<Result<String>> extractAllSorted(String target,
-                                                 Collection<String> options,
-                                                 ScoringMethod scoringMethod,
-                                                 int threshold) {
+    public Collection<Result<String>> extractAllSorted(String target,
+                                                       Collection<String> options,
+                                                       ScoringMethod scoringMethod,
+                                                       int threshold) {
         return extractAllSorted(target, options, StringMapper.IDENTITY, scoringMethod, threshold);
     }
 
@@ -210,7 +210,7 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      * @return An unsorted list of all Results whose score is higher than or equal the given threshold.
      * @see #extractAll(String, Collection, StringMapper, ScoringMethod, int)
      */
-    public List<Result<String>> extractAll(String target, Collection<String> options) {
+    public Collection<Result<String>> extractAll(String target, Collection<String> options) {
         return extractAll(target, options, StringMapper.IDENTITY);
     }
 
@@ -223,7 +223,9 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      * @return An unsorted list of all Results whose score is higher than or equal the given threshold.
      * @see #extractAll(String, Collection, StringMapper, ScoringMethod, int)
      */
-    public List<Result<String>> extractAll(String target, Collection<String> options, ScoringMethod scoringMethod) {
+    public Collection<Result<String>> extractAll(String target,
+                                                 Collection<String> options,
+                                                 ScoringMethod scoringMethod) {
         return extractAll(target, options, scoringMethod, 0);
     }
 
@@ -237,7 +239,7 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      * @return An unsorted list of all Results whose score is higher than or equal the given threshold.
      * @see #extractAll(String, Collection, StringMapper, ScoringMethod, int)
      */
-    public List<Result<String>> extractAll(String target, Collection<String> options, int threshold) {
+    public Collection<Result<String>> extractAll(String target, Collection<String> options, int threshold) {
         return extractAll(target, options, algorithm.getDefaultScoringMethod(), threshold);
     }
 
@@ -250,10 +252,10 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      * @param threshold     The minimum score of an element to be included in the output list.
      * @return An unsorted list of all Results whose score is higher than or equal the given threshold.
      */
-    public List<Result<String>> extractAll(String target,
-                                           Collection<String> options,
-                                           ScoringMethod scoringMethod,
-                                           int threshold) {
+    public Collection<Result<String>> extractAll(String target,
+                                                 Collection<String> options,
+                                                 ScoringMethod scoringMethod,
+                                                 int threshold) {
         return extractAll(target, options, StringMapper.IDENTITY, scoringMethod, threshold);
     }
 
@@ -306,15 +308,16 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      * @throws IllegalArgumentException If the provided limit is smaller than 1.
      * @see #extractLimited(String, Collection, StringMapper, ScoringMethod, int, int)
      */
-    public <T> List<Result<T>> extractLimited(String target,
-                                              Collection<T> options,
-                                              StringMapper<T> stringMapper,
-                                              int limit) throws IllegalArgumentException {
+    public <T, L extends Collection<Result<T>>> L extractLimited(String target,
+                                                                 Collection<T> options,
+                                                                 StringMapper<T> stringMapper,
+                                                                 int limit) throws IllegalArgumentException {
         return extractLimited(target, options, stringMapper, algorithm.getDefaultScoringMethod(), 0, limit);
     }
 
     /**
-     * Extracts a limited amount of the best results from the provided list, using the provided scoringMethod to determine their scores.
+     * Extracts a limited amount of the best results from the provided list,
+     * using the provided scoringMethod to determine their scores.
      *
      * @param target        The target (key) element. This will be the criteria.
      * @param options       A list of elements to look for the target in.
@@ -326,11 +329,11 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      * @throws IllegalArgumentException If the provided limit is smaller than 1.
      * @see #extractLimited(String, Collection, StringMapper, ScoringMethod, int, int)
      */
-    public <T> List<Result<T>> extractLimited(String target,
-                                              Collection<T> options,
-                                              StringMapper<T> stringMapper,
-                                              ScoringMethod scoringMethod,
-                                              int limit) throws IllegalArgumentException {
+    public <T, L extends Collection<Result<T>>> L extractLimited(String target,
+                                                                 Collection<T> options,
+                                                                 StringMapper<T> stringMapper,
+                                                                 ScoringMethod scoringMethod,
+                                                                 int limit) throws IllegalArgumentException {
         return extractLimited(target, options, stringMapper, scoringMethod, 0, limit);
     }
 
@@ -349,11 +352,11 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      * @throws IllegalArgumentException If the provided limit is smaller than 1.
      * @see #extractLimited(String, Collection, StringMapper, ScoringMethod, int, int)
      */
-    public <T> List<Result<T>> extractLimited(String target,
-                                              Collection<T> options,
-                                              StringMapper<T> stringMapper,
-                                              int threshold,
-                                              int limit) throws IllegalArgumentException {
+    public <T, L extends Collection<Result<T>>> L extractLimited(String target,
+                                                                 Collection<T> options,
+                                                                 StringMapper<T> stringMapper,
+                                                                 int threshold,
+                                                                 int limit) throws IllegalArgumentException {
         return extractLimited(target, options, stringMapper, algorithm.getDefaultScoringMethod(), threshold, limit);
     }
 
@@ -371,15 +374,16 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      * @return A sorted list of all Results whose score is higher than or equal the given threshold.
      * @throws IllegalArgumentException If the provided limit is smaller than 1.
      */
-    public <T> List<Result<T>> extractLimited(String target,
-                                              Collection<T> options,
-                                              StringMapper<T> stringMapper,
-                                              ScoringMethod scoringMethod,
-                                              int threshold,
-                                              int limit) throws IllegalArgumentException {
+    @SuppressWarnings("unchecked")
+    public <T, L extends Collection<Result<T>>> L extractLimited(String target,
+                                                                 Collection<T> options,
+                                                                 StringMapper<T> stringMapper,
+                                                                 ScoringMethod scoringMethod,
+                                                                 int threshold,
+                                                                 int limit) throws IllegalArgumentException {
         if (limit < 1) throw new IllegalArgumentException("Parameter 'limit' must not be smaller than '1'!");
-        List<Result<T>> preResults = extractAllSorted(target, options, stringMapper, scoringMethod, threshold);
-        return Util.sortAndReverse(Util.extractLimitedKHeap(preResults, limit));
+        Collection<Result<T>> preResults = extractAllSorted(target, options, stringMapper, scoringMethod, threshold);
+        return (L) Util.sortAndReverse(Util.extractLimitedKHeap(preResults, limit));
     }
 
     /**
@@ -395,9 +399,9 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      * @return A sorted list of all Results whose score is higher than or equal the given threshold.
      * @see #extractAllSorted(String, Collection, StringMapper, ScoringMethod, int)
      */
-    public <T> List<Result<T>> extractAllSorted(String target,
-                                                Collection<T> options,
-                                                StringMapper<T> stringMapper) {
+    public <T, L extends Collection<Result<T>>> L extractAllSorted(String target,
+                                                                   Collection<T> options,
+                                                                   StringMapper<T> stringMapper) {
         return extractAllSorted(target, options, stringMapper, algorithm.getDefaultScoringMethod(), 0);
     }
 
@@ -412,10 +416,10 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      * @return A sorted list of all Results whose score is higher than or equal the given threshold.
      * @see #extractAllSorted(String, Collection, StringMapper, ScoringMethod, int)
      */
-    public <T> List<Result<T>> extractAllSorted(String target,
-                                                Collection<T> options,
-                                                StringMapper<T> stringMapper,
-                                                ScoringMethod scoringMethod) {
+    public <T, L extends Collection<Result<T>>> L extractAllSorted(String target,
+                                                                   Collection<T> options,
+                                                                   StringMapper<T> stringMapper,
+                                                                   ScoringMethod scoringMethod) {
         return extractAllSorted(target, options, stringMapper, scoringMethod, 0);
     }
 
@@ -432,10 +436,10 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      * @return A sorted list of all Results whose score is higher than or equal the given threshold.
      * @see #extractAllSorted(String, Collection, StringMapper, ScoringMethod, int)
      */
-    public <T> List<Result<T>> extractAllSorted(String target,
-                                                Collection<T> options,
-                                                StringMapper<T> stringMapper,
-                                                int threshold) {
+    public <T, L extends Collection<Result<T>>> L extractAllSorted(String target,
+                                                                   Collection<T> options,
+                                                                   StringMapper<T> stringMapper,
+                                                                   int threshold) {
         return extractAllSorted(target, options, stringMapper, algorithm.getDefaultScoringMethod(), threshold);
     }
 
@@ -451,12 +455,13 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      * @param <T>           Type-variable of the elements.
      * @return A sorted list of all Results whose score is higher than or equal the given threshold.
      */
-    public <T> List<Result<T>> extractAllSorted(String target,
-                                                Collection<T> options,
-                                                StringMapper<T> stringMapper,
-                                                ScoringMethod scoringMethod,
-                                                int threshold) {
-        return Util.sortAndReverse(extractAll(target, options, stringMapper, scoringMethod, threshold));
+    @SuppressWarnings("unchecked")
+    public <T, L extends Collection<Result<T>>> L extractAllSorted(String target,
+                                                                   Collection<T> options,
+                                                                   StringMapper<T> stringMapper,
+                                                                   ScoringMethod scoringMethod,
+                                                                   int threshold) {
+        return (L) Util.sortAndReverse(extractAll(target, options, stringMapper, scoringMethod, threshold));
     }
 
     /**
@@ -471,7 +476,9 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      * @return An unsorted list of all Results whose score is higher than or equal the given threshold.
      * @see #extractAll(String, Collection, StringMapper, ScoringMethod, int)
      */
-    public <T> List<Result<T>> extractAll(String target, Collection<T> options, StringMapper<T> stringMapper) {
+    public <T, L extends Collection<Result<T>>> L extractAll(String target,
+                                                             Collection<T> options,
+                                                             StringMapper<T> stringMapper) {
         return extractAll(target, options, stringMapper, algorithm.getDefaultScoringMethod(), 0);
     }
 
@@ -486,10 +493,10 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      * @return An unsorted list of all Results whose score is higher than or equal the given threshold.
      * @see #extractAll(String, Collection, StringMapper, ScoringMethod, int)
      */
-    public <T> List<Result<T>> extractAll(String target,
-                                          Collection<T> options,
-                                          StringMapper<T> stringMapper,
-                                          ScoringMethod scoringMethod) {
+    public <T, L extends Collection<Result<T>>> L extractAll(String target,
+                                                             Collection<T> options,
+                                                             StringMapper<T> stringMapper,
+                                                             ScoringMethod scoringMethod) {
         return extractAll(target, options, stringMapper, scoringMethod, 0);
     }
 
@@ -505,10 +512,10 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      * @return An unsorted list of all Results whose score is higher than or equal the given threshold.
      * @see #extractAll(String, Collection, StringMapper, ScoringMethod, int)
      */
-    public <T> List<Result<T>> extractAll(String target,
-                                          Collection<T> options,
-                                          StringMapper<T> stringMapper,
-                                          int threshold) {
+    public <T, L extends Collection<Result<T>>> L extractAll(String target,
+                                                             Collection<T> options,
+                                                             StringMapper<T> stringMapper,
+                                                             int threshold) {
         return extractAll(target, options, stringMapper, algorithm.getDefaultScoringMethod(), threshold);
     }
 
@@ -523,12 +530,13 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      * @param <T>           Type-variable of the elements.
      * @return An unsorted list of all Results whose score is higher than or equal the given threshold.
      */
-    public <T> List<Result<T>> extractAll(String target,
-                                          Collection<T> options,
-                                          StringMapper<T> stringMapper,
-                                          ScoringMethod scoringMethod,
-                                          int threshold) {
-        final List<Result<T>> yields = new ArrayList<>();
+    @SuppressWarnings("unchecked")
+    public <T, L extends Collection<Result<T>>> L extractAll(String target,
+                                                             Collection<T> options,
+                                                             StringMapper<T> stringMapper,
+                                                             ScoringMethod scoringMethod,
+                                                             int threshold) {
+        final Collection<Result<T>> yields = Util.sameTypeCollection(options);
         int originIndex = 0;
 
         for (T t : options) {
@@ -539,7 +547,7 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
             originIndex++;
         }
 
-        return yields;
+        return (L) yields;
     }
 
     /**
