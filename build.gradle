@@ -109,6 +109,14 @@ project(':android-compat') {
     }
 }
 
+project(':rymm') {
+    version '1.0.0'
+
+    dependencies {
+        implementation project(':fuzzywuzzy')
+    }
+}
+
 // if we are not on travis, use the publishing file
 if (!isTravis()) {
     apply from: 'gradle/publishing.gradle'

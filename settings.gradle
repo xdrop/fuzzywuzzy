@@ -6,6 +6,9 @@ include ':fuzzywuzzy'
 // Levenshtein algorithm module
 include ':levenshtein'
 
+// Wagner-Fischer algorithm module
+include ':rymm'
+
 // Android attach module
 include ':android-attacher'
 // Android compatibility module for compiling android-attacher module using gradle
