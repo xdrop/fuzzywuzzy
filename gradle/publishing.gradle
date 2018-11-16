@@ -36,7 +36,8 @@ publishing {
                 void accept(Object o1, Object o2) {
                     final String name = (String) o1
                     final Project proj = (Project) o2
-                    gradle.rootProject.publishing.publications.mavenJava.artifact proj.jar
+                    if (!name.toLowerCase().contains("compat")) // if not a compat module
+                        gradle.rootProject.publishing.publications.mavenJava.artifact proj.jar
                 }
             })
 
