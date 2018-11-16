@@ -38,6 +38,9 @@ Download the latest release [here](https://github.com/xdrop/fuzzywuzzy/releases)
 
 #### Calculating ratios using Levenshtein methods
 ```java
+// Import all ScoringMethods from Levenshtein
+import static me.xdrop.fuzzywuzzy.levenshtein.Levenshtein.Methods.*;
+
 SIMPLE_RATIO.apply("mysmilarstring", "myawfullysimilarstirng");
 // Result: 72
 SIMPLE_RATIO.apply("mysmilarstring", "mysimilarstring");
