@@ -1,14 +1,27 @@
 package me.xdrop.fuzzywuzzy.rymm.algorithms;
 
+import me.xdrop.fuzzywuzzy.functions.ScoringFunction;
 import me.xdrop.fuzzywuzzy.rymm.matrix.CostMatrix;
 import me.xdrop.fuzzywuzzy.rymm.matrix.Substitution;
 
 import static me.xdrop.fuzzywuzzy.Util.*;
 
-public class EditDistance {
+public class EditDistance implements ScoringFunction {
     private final static CostMatrix subst = new Substitution();
+    private final boolean intelligent;
 
-    public int get(String base, String target) {
+    public EditDistance(boolean intelligent) {
+        this.intelligent = intelligent;
+    }
+
+    @Override
+    public Integer apply(String base, String target) {
+        int totalLen = base.length() + target.length();
+        int dist = dist(base, target);
+        return (int) Math.round(100 * ((totalLen - dist) / (double) totalLen));
+    }
+
+    private int dist(String base, String target) {
         final char[] s = base.toCharArray();
         final char[] t = target.toCharArray();
         final int m = s.length;
@@ -26,14 +39,18 @@ public class EditDistance {
                     d[i][j] = d[i - 1][j - 1];
                 else {
                     d[i][j] = intMin(new int[]{
-                            d[i - 1][j] + 1, // deletion
-                            d[i][j - 1] + 1, // insertion
-                            d[i - 1][j - 1] + subst.cost(expect, actual)
+                            d[i - 1][j] + (intelligent ? scale(1.6) : scale(1.6)), // TODO deletion
+                            d[i][j - 1] + (intelligent ? scale(0.7) : scale(1.2)), // TODO insertion
+                            d[i - 1][j - 1] + (intelligent ? scale(subst.cost(expect, actual)) : scale(1)) // substitution
                     });
                 }
             }
         }
 
-        return (int) Math.round(100 * (m + n - d[m - 1][n - 1]) / (double) m + n);
+        return d[m - 1][n - 1] / 100;
+    }
+
+    private int scale(double amount) {
+        return (int) Math.round(amount * 100); // multiply by set scale
     }
 }

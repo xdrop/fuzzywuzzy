@@ -76,6 +76,14 @@ project(':levenshtein') {
     }
 }
 
+project(':rymm') {
+    version '1.0.0'
+
+    dependencies {
+        implementation project(':fuzzywuzzy')
+    }
+}
+
 project(':android-attacher') {
     version '0.1.0'
     
@@ -106,14 +114,6 @@ project(':android-compat') {
                 srcDirs = ["src\\"]
             }
         }
-    }
-}
-
-project(':rymm') {
-    version '1.0.0'
-
-    dependencies {
-        implementation project(':fuzzywuzzy')
     }
 }
 

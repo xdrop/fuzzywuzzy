@@ -1,5 +1,7 @@
 package me.xdrop.fuzzywuzzy.rymm.matrix;
 
+import jdk.nashorn.internal.objects.NativeBoolean;
+
 import static me.xdrop.fuzzywuzzy.Util.*;
 
 public class Substitution extends CostMatrix {
@@ -20,15 +22,16 @@ public class Substitution extends CostMatrix {
                     for (final int y : intRange(-1, 1))
                         if ((x < qwerty.length && x > -1) && (y < row.length && y > -1))
                             p = addIntArr(p, qwerty[x][y]);
-                MATRIX[c] = p;
+                MATRIX[c-97] = p;
             }
         }
     }
 
     @Override
     public int cost(final char expected, final char actual) {
-        return findIntArr(MATRIX[Character.toLowerCase(expected)], Character.toLowerCase(actual), -1) == -1
-                ? 20 : 5;
+        return findIntArr(MATRIX[Character.toLowerCase(expected)-97],
+                Character.toLowerCase(actual)-97, -1) == -1
+                ? 3 : 1;
     }
 
     private static int findIntArr(int[] arr, int find, int or) {
