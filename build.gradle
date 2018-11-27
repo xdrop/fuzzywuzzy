@@ -46,12 +46,6 @@ allprojects {
     }
 
     sourceSets {
-        main {
-            java {
-                srcDirs = ["src\\main\\java"]
-            }
-        }
-
         test {
             groovy {
                 srcDirs = ["src\\test\\groovy"]
