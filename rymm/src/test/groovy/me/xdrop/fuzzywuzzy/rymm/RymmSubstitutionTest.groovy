@@ -16,17 +16,9 @@ class RymmSubstitutionTest extends GroovyTestCase {
 
     @Test
     void test() {
-        int[] diffs = new int[1000]
         def target = "goolge"
-        for (int i = 0; i < diffs.length; i++) {
-            def start = nanoTime()
-            fuzzy.extractAllSorted(target, Arrays.asList("google", "bing", "facebook", "linkedin", "twitter", "googleplus", "bingnews", "plexoogl"))
-            def end = nanoTime()
-            diffs[i] = (int) (end - start)
-        }
-        int i = 0
-        for (int diff : diffs) {
-            println "diff#${++i}:$diff"
-        }
+        def result = fuzzy.extractAllSorted(target, Arrays.asList("google", "bing", "facebook", "linkedin", "twitter", "googleplus", "bingnews", "plexoogl"))
+        println "Target: $target"
+        result.forEach(System.out.&println)
     }
 }

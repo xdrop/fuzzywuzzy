@@ -4,6 +4,7 @@ import me.xdrop.fuzzywuzzy.functions.ScoringFunction;
 import me.xdrop.fuzzywuzzy.rymm.matrix.CostMatrix;
 import me.xdrop.fuzzywuzzy.rymm.matrix.Substitution;
 
+import static java.lang.System.out;
 import static me.xdrop.fuzzywuzzy.Util.*;
 
 public class EditDistance implements ScoringFunction {
@@ -18,7 +19,9 @@ public class EditDistance implements ScoringFunction {
     public Integer apply(String base, String target) {
         int totalLen = base.length() + target.length();
         int dist = dist(base, target);
-        return (int) Math.round(100 * ((totalLen - dist) / (double) totalLen));
+        int round = (int) Math.round(100 * ((totalLen - dist) / (double) totalLen));
+        out.printf("score %3d from [%3d,%3d,%3d] [%12s -> %12s]\n", round, base.length(), target.length(), totalLen, base, target);
+        return round;
     }
 
     private int dist(String base, String target) {
@@ -38,14 +41,20 @@ public class EditDistance implements ScoringFunction {
                 if (expect == actual)
                     d[i][j] = d[i - 1][j - 1];
                 else {
-                    d[i][j] = intMin(new int[]{
-                            d[i - 1][j] + (intelligent ? scale(1.6) : scale(1.6)), // TODO deletion
-                            d[i][j - 1] + (intelligent ? scale(0.7) : scale(1.2)), // TODO insertion
-                            d[i - 1][j - 1] + (intelligent ? scale(subst.cost(expect, actual)) : scale(1)) // substitution
-                    });
+                    int deletion = d[i - 1][j] + (intelligent ? scale(1.6) : scale(1.6));
+                    int insertion = d[i][j - 1] + (intelligent ? scale(0.7) : scale(1.2));
+                    int substitution = d[i - 1][j - 1] + (intelligent ? scale(subst.cost(expect, actual)) : scale(1));
+                    int x = intMin(new int[]{deletion, insertion, substitution});
+                    d[i][j] = x;
+
+                    if (x == deletion) out.printf(      "delet -> %c $ %c = %4d [%12s -> %12s]\n", expect, actual, x, base, target);
+                    if (x == insertion) out.printf(     "inser -> %c $ %c = %4d [%12s -> %12s]\n", expect, actual, x, base, target);
+                    if (x == substitution) out.printf(  "subst -> %c $ %c = %4d [%12s -> %12s]\n", expect, actual, x, base, target);
                 }
             }
         }
+
+        out.printf("dist %3d from %3d [%s -> %12s]\n", d[m-1][n-1]/100, d[m-1][n-1], base, target);
 
         return d[m - 1][n - 1] / 100;
     }
