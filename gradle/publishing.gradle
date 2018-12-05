@@ -88,5 +88,6 @@ publishing {
 
 signing {
     useGpgCmd()
-    sign configurations.archives
+    //noinspection GroovyAssignabilityCheck -> Wrong Error
+    sign publishing.publications.mavenJava
 }
