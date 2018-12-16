@@ -1,6 +1,6 @@
 package me.xdrop.matchr.rymm;
 
-import me.xdrop.matchr.FuzzyWuzzy;
+import me.xdrop.matchr.Matchr;
 import me.xdrop.matchr.algorithms.AlgorithmBase;
 import me.xdrop.matchr.algorithms.AlgorithmFactory;
 import me.xdrop.matchr.functions.ScoringFunction;
@@ -30,7 +30,7 @@ public class Rymm extends AlgorithmBase {
         }
     }
 
-    private static class Engine extends FuzzyWuzzy<Rymm> {
+    private static class Engine extends Matchr<Rymm> {
         protected Engine(Rymm algorithm) {
             super(algorithm);
         }

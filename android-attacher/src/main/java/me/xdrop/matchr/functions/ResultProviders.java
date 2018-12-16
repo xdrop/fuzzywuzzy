@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import me.xdrop.matchr.FuzzyWuzzy;
+import me.xdrop.matchr.Matchr;
 import me.xdrop.matchr.algorithms.Algorithm;
 import me.xdrop.matchr.algorithms.AlgorithmFactory;
 import me.xdrop.matchr.model.Result;
@@ -23,14 +23,14 @@ public class ResultProviders {
      * @param <T>                  Type-variable for the element type.
      * @param <A>                  Type-variable for the algorithm.
      * @return A new ResultProvider that only returns the best result.
-     * @see FuzzyWuzzy#extractBest(String, Collection, StringMapper, ScoringMethod)
+     * @see Matchr#extractBest(String, Collection, StringMapper, ScoringMethod)
      */
     public static <T, A extends Algorithm> ResultProvider<T> best(
             final AlgorithmFactory<A> withAlgorithmFactory,
             final StringMapper<T> withStringMapper,
             final ScoringMethod withMethod) {
         return new ResultProvider<T>() {
-            final FuzzyWuzzy<A> fuzzy = FuzzyWuzzy.algorithm(withAlgorithmFactory);
+            final Matchr<A> fuzzy = Matchr.algorithm(withAlgorithmFactory);
             final StringMapper<T> stringMapper = Objects.requireNonNull(withStringMapper);
             final ScoringMethod method = Objects.requireNonNull(withMethod);
 
@@ -51,7 +51,7 @@ public class ResultProviders {
      * @param <T>                  Type-variable for the element type.
      * @param <A>                  Type-variable for the algorithm.
      * @return A new ResultProvider.
-     * @see FuzzyWuzzy#extractLimited(String, Collection, StringMapper, ScoringMethod, int)
+     * @see Matchr#extractLimited(String, Collection, StringMapper, ScoringMethod, int)
      */
     public static <T, A extends Algorithm> ResultProvider<T> limited(
             final AlgorithmFactory<A> withAlgorithmFactory,
@@ -59,7 +59,7 @@ public class ResultProviders {
             final ScoringMethod withMethod,
             final int withLimit) {
         return new ResultProvider<T>() {
-            final FuzzyWuzzy<A> fuzzy = FuzzyWuzzy.algorithm(withAlgorithmFactory);
+            final Matchr<A> fuzzy = Matchr.algorithm(withAlgorithmFactory);
             final StringMapper<T> stringMapper = Objects.requireNonNull(withStringMapper);
             final ScoringMethod method = Objects.requireNonNull(withMethod);
             final int limit = withLimit;
@@ -80,14 +80,14 @@ public class ResultProviders {
      * @param <T>                  Type-variable for the element type.
      * @param <A>                  Type-variable for the algorithm.
      * @return A new ResultProvider.
-     * @see FuzzyWuzzy#extractAllSorted(String, Collection, StringMapper, ScoringMethod)
+     * @see Matchr#extractAllSorted(String, Collection, StringMapper, ScoringMethod)
      */
     public static <T, A extends Algorithm> ResultProvider<T> sorted(
             final AlgorithmFactory<A> withAlgorithmFactory,
             final StringMapper<T> withStringMapper,
             final ScoringMethod withMethod) {
         return new ResultProvider<T>() {
-            final FuzzyWuzzy<A> fuzzy = FuzzyWuzzy.algorithm(withAlgorithmFactory);
+            final Matchr<A> fuzzy = Matchr.algorithm(withAlgorithmFactory);
             final StringMapper<T> stringMapper = Objects.requireNonNull(withStringMapper);
             final ScoringMethod method = Objects.requireNonNull(withMethod);
 
@@ -107,14 +107,14 @@ public class ResultProviders {
      * @param <T>                  Type-variable for the element type.
      * @param <A>                  Type-variable for the algorithm.
      * @return A new ResultProvider.
-     * @see FuzzyWuzzy#extractAll(String, Collection, StringMapper, ScoringMethod)
+     * @see Matchr#extractAll(String, Collection, StringMapper, ScoringMethod)
      */
     public static <T, A extends Algorithm> ResultProvider<T> all(
             final AlgorithmFactory<A> withAlgorithmFactory,
             final StringMapper<T> withStringMapper,
             final ScoringMethod withMethod) {
         return new ResultProvider<T>() {
-            final FuzzyWuzzy<A> fuzzy = FuzzyWuzzy.algorithm(withAlgorithmFactory);
+            final Matchr<A> fuzzy = Matchr.algorithm(withAlgorithmFactory);
             final StringMapper<T> stringMapper = Objects.requireNonNull(withStringMapper);
             final ScoringMethod method = Objects.requireNonNull(withMethod);
 

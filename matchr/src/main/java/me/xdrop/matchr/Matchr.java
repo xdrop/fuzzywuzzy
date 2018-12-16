@@ -11,12 +11,12 @@ import me.xdrop.matchr.model.Result;
 import me.xdrop.matchr.model.ScoringMethod;
 
 /**
- * Facade class for using FuzzyWuzzy.
+ * Facade class for using Matchr.
  * Use {@link #algorithm(AlgorithmFactory)} to create a usable instance.
  *
  * @param <A> The generic-type of the current algorithm.
  */
-public abstract class FuzzyWuzzy<A extends Algorithm> {
+public abstract class Matchr<A extends Algorithm> {
     protected final A algorithm;
 
     /**
@@ -24,7 +24,7 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
      *
      * @param algorithm The algorithm for the instance.
      */
-    protected FuzzyWuzzy(A algorithm) {
+    protected Matchr(A algorithm) {
         this.algorithm = algorithm;
     }
 
@@ -542,13 +542,13 @@ public abstract class FuzzyWuzzy<A extends Algorithm> {
     }
 
     /**
-     * Creates a new FuzzyWuzzy instance using the provided factory.
+     * Creates a new Matchr instance using the provided factory.
      *
-     * @param factory The factory to use to create a new FuzzyWuzzy implementation.
+     * @param factory The factory to use to create a new Matchr implementation.
      * @param <A>     Type-variable of the algorithm.
-     * @return A FuzzyWuzzy interface to use the algorithm.
+     * @return A Matchr interface to use the algorithm.
      */
-    public static <A extends Algorithm> FuzzyWuzzy<A> algorithm(AlgorithmFactory<A> factory) {
+    public static <A extends Algorithm> Matchr<A> algorithm(AlgorithmFactory<A> factory) {
         return factory.craft();
     }
 }

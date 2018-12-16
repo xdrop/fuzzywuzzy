@@ -1,6 +1,6 @@
 package me.xdrop.matchr.levenshtein;
 
-import me.xdrop.matchr.FuzzyWuzzy;
+import me.xdrop.matchr.Matchr;
 import me.xdrop.matchr.algorithms.AlgorithmBase;
 import me.xdrop.matchr.algorithms.AlgorithmFactory;
 import me.xdrop.matchr.functions.ScoringFunction;
@@ -67,7 +67,7 @@ public class Levenshtein extends AlgorithmBase {
     /**
      * Engine implementation for Levenshtein algorithm
      */
-    private static class Engine extends FuzzyWuzzy<Levenshtein> {
+    private static class Engine extends Matchr<Levenshtein> {
         /**
          * Private contructor, used by {@link Factory}.
          *
@@ -90,7 +90,7 @@ public class Levenshtein extends AlgorithmBase {
         }
 
         @Override
-        public FuzzyWuzzy<Levenshtein> craft() {
+        public Matchr<Levenshtein> craft() {
             return new Engine(new Levenshtein());
         }
     }
