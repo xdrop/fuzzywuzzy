@@ -1,13 +1,13 @@
-rootProject.name = 'fuzzywuzzy'
+rootProject.name = 'matchr'
 
 // Core facade module
-include ':fuzzywuzzy'
+include ':matchr'
 
-// Levenshtein algorithm module
-include ':levenshtein'
-
-// Wagner-Fischer algorithm module
+// Rymm module
 include ':rymm'
+
+// FuzzyWuzzy port module
+include ':fuzzywuzzy'
 
 // Android attach module
 include ':android-attacher'

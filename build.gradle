@@ -57,15 +57,15 @@ allprojects {
     }
 }
 
-project(':fuzzywuzzy') {
+project(':matchr') {
     version '2.0.0'
 }
 
-project(':levenshtein') {
+project(':fuzzywuzzy') {
     version '2.0.0'
 
     dependencies {
-        implementation project(':fuzzywuzzy')
+        implementation project(':matchr')
     }
 }
 
@@ -73,7 +73,7 @@ project(':rymm') {
     version '1.0.0'
 
     dependencies {
-        implementation project(':fuzzywuzzy')
+        implementation project(':matchr')
     }
 }
 
@@ -85,7 +85,7 @@ project(':android-attacher') {
     }
     
     dependencies {
-        implementation project(':fuzzywuzzy')
+        implementation project(':matchr')
         
         // Workaround dependency for compiling with android methods baked in
         compileOnly project(':android-compat')

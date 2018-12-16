@@ -39,7 +39,7 @@ Download the latest release [here](https://github.com/xdrop/fuzzywuzzy/releases)
 #### Calculating ratios using Levenshtein methods
 ```java
 // Import all ScoringMethods from Levenshtein
-import static me.xdrop.fuzzywuzzy.levenshtein.Levenshtein.Methods.*;
+import static me.xdrop.matchr.levenshtein.Levenshtein.Methods.*;
 
 SIMPLE_RATIO.apply("mysmilarstring", "myawfullysimilarstirng");
 // Result: 72
@@ -108,12 +108,11 @@ public class Main {
         
         fuzzy.extractBest(search, list, User::getName);
         // Result#toString:
-        // - Result@referent=me.xdrop.fuzzywuzzy.SearchUsers$User@58372a00[string=Kaleidox;score=88;originIndex=1]#81628611
+        matchr
     }
 }
 
-public class User {
-    private final String name;
+publime.xdrop.matchrprivate final String name;
 
     public User(String name) {
         this.name = name;

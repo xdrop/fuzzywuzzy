@@ -28,7 +28,7 @@ publishing {
 
     publications {
         mavenJava(MavenPublication) {
-            artifactId = 'fuzzywuzzy'
+            artifactId = 'matchr'
             from components.java
 
             gradle.rootProject.getChildProjects().forEach(new BiConsumer<? super String, ? super Project>(){
@@ -72,14 +72,14 @@ publishing {
                 }
 
                 scm {
-                    connection = 'scm:git:https://github.com/xdrop/fuzzywuzzy.git'
-                    developerConnection = 'scm:git:git@github.com:xdrop/fuzzywuzzy.git'
-                    url = 'https://github.com/xdrop/fuzzywuzzy'
+                    connection = 'scm:git:https://github.com/xdrop/matchr.git'
+                    developerConnection = 'scm:git:git@github.com:xdrop/matchr.git'
+                    url = 'https://github.com/xdrop/matchr'
                 }
 
                 issueManagement {
                     system = 'GitHub'
-                    url = 'https://github.com/xdrop/fuzzywuzzy/issues'
+                    url = 'https://github.com/xdrop/matchr/issues'
                 }
             }
         }
