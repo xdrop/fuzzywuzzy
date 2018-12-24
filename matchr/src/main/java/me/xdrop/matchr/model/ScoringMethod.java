@@ -13,5 +13,5 @@ public interface ScoringMethod extends ScoringFunction {
      * @param target The second string to compare against.
      * @return The score of the {@code base} string.
      */
-    Integer apply(String base, String target);
+    int apply(String base, String target);
 }

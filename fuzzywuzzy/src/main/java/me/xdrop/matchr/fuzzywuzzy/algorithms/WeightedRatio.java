@@ -2,10 +2,12 @@ package me.xdrop.matchr.fuzzywuzzy.algorithms;
 
 import me.xdrop.matchr.functions.StringMapper;
 
-import static me.xdrop.matchr.fuzzywuzzy.Fuzzywuzzy.Method.*;
+import static me.xdrop.matchr.fuzzywuzzy.Fuzzywuzzy.Ratio.PARTIAL_RATIO;
+import static me.xdrop.matchr.fuzzywuzzy.Fuzzywuzzy.Ratio.SIMPLE_RATIO;
+import static me.xdrop.matchr.fuzzywuzzy.Fuzzywuzzy.TokenRatio.*;
 
 @SuppressWarnings("WeakerAccess")
-public class WeightedRatio extends BasicAlgorithm {
+public class WeightedRatio extends ExtendedRatio {
     public static final double UNBASE_SCALE = .95;
     public static final double PARTIAL_SCALE = .90;
     public static final boolean TRY_PARTIALS = true;

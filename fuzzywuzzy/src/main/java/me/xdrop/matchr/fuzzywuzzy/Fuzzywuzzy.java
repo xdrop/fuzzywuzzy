@@ -12,6 +12,8 @@ import me.xdrop.matchr.fuzzywuzzy.ratios.PartialRatio;
 import me.xdrop.matchr.fuzzywuzzy.ratios.SimpleRatio;
 import me.xdrop.matchr.model.ScoringMethod;
 
+import java.util.ArrayList;
+
 /**
  * Fuzzywuzzy algorithm implementation.
  */
@@ -23,44 +25,52 @@ public class Fuzzywuzzy extends AlgorithmBase {
 
     /**
      * Private constructor; used by {@link Factory}.
-     * Defines default scoring method as {@link Method#SIMPLE_RATIO}
+     * Defines default scoring method as {@link Ratio#SIMPLE_RATIO}
      */
     private Fuzzywuzzy() {
-        super(Method.WEIGHTED_RATIO);
+        super(Ratio.WEIGHTED_RATIO);
+    }
+
+    /**
+     * Predefined Fuzzywuzzy token based scoring methods.
+     */
+    public enum TokenRatio implements ScoringMethod {
+        TOKEN_SORT_SIMPLE(new TokenSort(), Ratio.SIMPLE_RATIO),
+        TOKEN_SET_SIMPLE(new TokenSet(), Ratio.SIMPLE_RATIO),
+        TOKEN_SORT_PARTIAL(new TokenSort(), Ratio.PARTIAL_RATIO),
+        TOKEN_SET_PARTIAL(new TokenSet(), Ratio.PARTIAL_RATIO);
+
+        private final RatioAlgorithm r;
+        private final ScoringFunction f;
+
+        TokenRatio(RatioAlgorithm r, ScoringFunction f) {
+            this.r = r;
+            this.f = f;
+        }
+
+        @Override
+        public int apply(String base, String target) {
+            return r.apply(base, target, f);
+        }
     }
 
     /**
      * Predefined Fuzzywuzzy scoring methods.
      */
-    public enum Method implements ScoringMethod {
+    public enum Ratio implements ScoringMethod {
         SIMPLE_RATIO(new SimpleRatio()),
         PARTIAL_RATIO(new PartialRatio()),
-        WEIGHTED_RATIO(new WeightedRatio()),
-        TOKEN_SORT_SIMPLE(new TokenSort(), SIMPLE_RATIO),
-        TOKEN_SET_SIMPLE(new TokenSet(), SIMPLE_RATIO),
-        TOKEN_SORT_PARTIAL(new TokenSort(), PARTIAL_RATIO),
-        TOKEN_SET_PARTIAL(new TokenSet(), PARTIAL_RATIO);
+        WEIGHTED_RATIO(new WeightedRatio());
 
         private final ScoringFunction scoringFunction;
-        private final Method subMethod;
 
-        <F extends ScoringFunction> Method(F scoringFunction) {
+        Ratio(ScoringFunction scoringFunction) {
             this.scoringFunction = scoringFunction;
-            this.subMethod = null;
-        }
-
-        <F extends ScoringFunction> Method(F scoringFunction, Method subMethod) {
-            this.scoringFunction = scoringFunction;
-            this.subMethod = subMethod;
         }
 
         @Override
-        public Integer apply(String base, String target) {
-            if (scoringFunction instanceof RatioAlgorithm && subMethod != null)
-                return ((RatioAlgorithm) scoringFunction).apply(base, target, subMethod.scoringFunction);
-            else if (scoringFunction instanceof RatioAlgorithm)
-                throw new NullPointerException("No SubMethod defined for method "+name());
-            else return scoringFunction.apply(base, target);
+        public int apply(String base, String target) {
+            return scoringFunction.apply(base, target);
         }
     }
 

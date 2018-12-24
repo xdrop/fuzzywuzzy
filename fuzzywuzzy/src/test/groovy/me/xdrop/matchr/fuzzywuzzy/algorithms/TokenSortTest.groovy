@@ -4,6 +4,10 @@ import me.xdrop.fuzzywuzzy.functions.ScoringFunction
 import me.xdrop.fuzzywuzzy.functions.StringMapper
 import me.xdrop.fuzzywuzzy.levenshtein.ratios.PartialRatio
 import me.xdrop.fuzzywuzzy.levenshtein.ratios.SimpleRatio
+import me.xdrop.matchr.functions.ScoringFunction
+import me.xdrop.matchr.functions.StringMapper
+import me.xdrop.matchr.fuzzywuzzy.ratios.PartialRatio
+import me.xdrop.matchr.fuzzywuzzy.ratios.SimpleRatio
 import org.junit.Test
 
 import static me.xdrop.fuzzywuzzy.levenshtein.Levenshtein.Method.TOKEN_SORT_SIMPLE
@@ -16,14 +20,13 @@ import static org.easymock.EasyMock.replay
 class TokenSortTest extends GroovyTestCase {
     @Test
     void testUsesStringProcessor() {
-        def ts = new TokenSort()
         StringMapper<String> mock = mock(StringMapper)
 
         expect(mock.apply(eq("notthesame"))).andReturn("thesame")
         expect(mock.apply(eq("thesame"))).andReturn("thesame")
         replay(mock)
 
-        assertEquals 100, ts.apply("notthesame", "thesame", mock)
+        assertEquals 100, TokenSet.with(mock).apply("notthesame", "thesame")
     }
 
     @Test
@@ -40,9 +43,7 @@ class TokenSortTest extends GroovyTestCase {
 
     @Test
     void testTokenSort() {
-        def ts = new TokenSort()
-
-        assertEquals 75, ts.apply("test", "pesticide", new PartialRatio())
-        assertEquals 46, ts.apply("test", "pesticide", new SimpleRatio())
+        assertEquals 75, TokenSet.with(new PartialRatio()).apply("test", "pesticide")
+        assertEquals 46, TokenSet.with(new SimpleRatio()).apply("test", "pesticide")
     }
 }

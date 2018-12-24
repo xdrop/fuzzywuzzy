@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import me.xdrop.matchr.functions.StringMapper;
 
-public class DefaultStringFunction implements StringMapper<String> {
+public class DefaultStringProcessor implements StringMapper<String> {
     private final static String pattern = "[^\\p{Alnum}]";
     private final static Pattern r = compilePattern();
 

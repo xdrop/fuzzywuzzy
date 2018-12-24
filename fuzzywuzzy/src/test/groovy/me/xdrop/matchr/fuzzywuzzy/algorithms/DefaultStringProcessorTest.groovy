@@ -7,6 +7,6 @@ class DefaultStringProcessorTest extends GroovyTestCase {
     void testProcess() {
         def inp = "s.trim μεγιουνικουντ n/o/n a.lph.a n.um"
 
-        assertEquals "s trim μεγιουνικουντ n o n a lph a n um", new DefaultStringFunction().apply(inp)
+        assertEquals "s trim μεγιουνικουντ n o n a lph a n um", new DefaultStringProcessor().apply(inp)
     }
 }
