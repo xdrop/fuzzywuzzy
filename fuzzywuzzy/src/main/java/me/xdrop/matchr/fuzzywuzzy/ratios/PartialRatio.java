@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import me.xdrop.matchr.functions.ScoringFunction;
-import me.xdrop.matchr.fuzzywuzzy.diffutils.DiffUtils;
-import me.xdrop.matchr.fuzzywuzzy.diffutils.structs.MatchingBlock;
+import me.xdrop.matchr.fuzzywuzzy.levenshtein.Levenshtein;
+import me.xdrop.matchr.fuzzywuzzy.levenshtein.structs.MatchingBlock;
 
 /**
  * Partial ratio of similarity
@@ -31,7 +31,7 @@ public class PartialRatio implements ScoringFunction {
             longer = s1;
         }
 
-        MatchingBlock[] matchingBlocks = DiffUtils.getMatchingBlocks(shorter, longer);
+        MatchingBlock[] matchingBlocks = Levenshtein.getMatchingBlocks(shorter, longer);
         List<Double> scores = new ArrayList<>();
 
         for (MatchingBlock mb : matchingBlocks) {
@@ -44,7 +44,7 @@ public class PartialRatio implements ScoringFunction {
 
             String long_substr = longer.substring(long_start, long_end);
 
-            double ratio = DiffUtils.getRatio(shorter, long_substr);
+            double ratio = Levenshtein.getRatio(shorter, long_substr);
 
             if (ratio > .995) {
                 return 100;

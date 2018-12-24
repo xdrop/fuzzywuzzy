@@ -1,7 +1,7 @@
 package me.xdrop.matchr.fuzzywuzzy.ratios;
 
 import me.xdrop.matchr.functions.ScoringFunction;
-import me.xdrop.matchr.fuzzywuzzy.diffutils.DiffUtils;
+import me.xdrop.matchr.fuzzywuzzy.levenshtein.Levenshtein;
 
 public class SimpleRatio implements ScoringFunction {
     /**
@@ -13,6 +13,6 @@ public class SimpleRatio implements ScoringFunction {
      */
     @Override
     public Integer apply(String s1, String s2) {
-        return (int) Math.round(100 * DiffUtils.getRatio(s1, s2));
+        return (int) Math.round(100 * Levenshtein.getRatio(s1, s2));
     }
 }

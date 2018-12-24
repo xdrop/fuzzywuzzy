@@ -1,24 +1,22 @@
-package me.xdrop.matchr.fuzzywuzzy.diffutils;
+package me.xdrop.matchr.fuzzywuzzy.levenshtein;
 
-import me.xdrop.matchr.fuzzywuzzy.diffutils.structs.EditOp;
-import me.xdrop.matchr.fuzzywuzzy.diffutils.structs.EditType;
-import me.xdrop.matchr.fuzzywuzzy.diffutils.structs.MatchingBlock;
-import me.xdrop.matchr.fuzzywuzzy.diffutils.structs.OpCode;
+import me.xdrop.matchr.fuzzywuzzy.levenshtein.structs.EditOp;
+import me.xdrop.matchr.fuzzywuzzy.levenshtein.structs.EditType;
+import me.xdrop.matchr.fuzzywuzzy.levenshtein.structs.MatchingBlock;
+import me.xdrop.matchr.fuzzywuzzy.levenshtein.structs.OpCode;
 
 /**
  * This is a port of all the functions needed from python-fuzzywuzzy C implementation.
  * The code was ported line by line but unfortunately it was mostly undocumented,
  * so it is mostly non readable (eg. var names)
  */
-public class DiffUtils {
+public class Levenshtein {
 
     public static EditOp[] getEditOps(String s1, String s2) {
         return getEditOps(s1.length(), s1, s2.length(), s2);
     }
 
-
     private static EditOp[] getEditOps(int len1, String s1, int len2, String s2) {
-
         int len1o, len2o;
         int i;
 
@@ -99,10 +97,8 @@ public class DiffUtils {
     }
 
 
-    private static EditOp[] editOpsFromCostMatrix(int len1, char[] c1, int p1, int o1,
-                                                  int len2, char[] c2, int p2, int o2,
-                                                  int[] matrix) {
-
+    private static EditOp[] editOpsFromCostMatrix(int len1, char[] c1, int p1, int o1, int len2, char[] c2, int p2,
+                                                  int o2, int[] matrix) {
         int i, j, pos;
 
         int ptr;
@@ -216,13 +212,10 @@ public class DiffUtils {
     }
 
     public static MatchingBlock[] getMatchingBlocks(String s1, String s2) {
-
         return getMatchingBlocks(s1.length(), s2.length(), getEditOps(s1, s2));
-
     }
 
     public static MatchingBlock[] getMatchingBlocks(int len1, int len2, OpCode[] ops) {
-
         int n = ops.length;
 
         int noOfMB, i;
@@ -296,7 +289,6 @@ public class DiffUtils {
 
 
     private static MatchingBlock[] getMatchingBlocks(int len1, int len2, EditOp[] ops) {
-
         int n = ops.length;
 
         int numberOfMatchingBlocks, i, spos, dpos;
@@ -457,7 +449,6 @@ public class DiffUtils {
 
 
     private static OpCode[] editOpsToOpCodes(EditOp[] ops, int len1, int len2) {
-
         int n = ops.length;
         int noOfBlocks, i, spos, dpos;
         int o = 0;
@@ -620,7 +611,6 @@ public class DiffUtils {
     }
 
     public static int levEditDistance(String s1, String s2, int xcost) {
-
         int i;
         int half;
 
@@ -800,7 +790,6 @@ public class DiffUtils {
     }
 
     private static int memchr(char[] haystack, int offset, char needle, int num) {
-
         if (num != 0) {
             int p = 0;
 
@@ -820,7 +809,6 @@ public class DiffUtils {
 
 
     public static double getRatio(String s1, String s2) {
-
         int len1 = s1.length();
         int len2 = s2.length();
         int lensum = len1 + len2;
@@ -830,7 +818,4 @@ public class DiffUtils {
         return (lensum - editDistance) / (double) lensum;
 
     }
-
-
-
 }

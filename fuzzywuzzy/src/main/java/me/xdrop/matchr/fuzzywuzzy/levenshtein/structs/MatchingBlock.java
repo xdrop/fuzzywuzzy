@@ -1,4 +1,4 @@
-package me.xdrop.matchr.fuzzywuzzy.diffutils.structs;
+package me.xdrop.matchr.fuzzywuzzy.levenshtein.structs;
 
 public final class MatchingBlock {
     public int spos;
