@@ -10,7 +10,7 @@ import me.xdrop.matchr.model.Result;
 import me.xdrop.matchr.model.ScoringMethod;
 
 /**
- * Utilites class
+ * Utilities class
  */
 public class Util {
     /**

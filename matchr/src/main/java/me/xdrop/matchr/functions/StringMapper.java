@@ -5,7 +5,7 @@ package me.xdrop.matchr.functions;
  *
  * @param <T> The type of the item to transform.
  */
-public interface StringMapper<T> extends Mapper<T, String> {
+public interface StringMapper<T> {
     /**
      * Transforms the input item to a string.
      *
