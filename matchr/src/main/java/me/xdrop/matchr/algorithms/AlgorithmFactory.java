@@ -1,6 +1,5 @@
 package me.xdrop.matchr.algorithms;
 
-import me.xdrop.matchr.Matchr;
 
 /**
  * Interface for a factory for Matchr implementations.
@@ -13,5 +12,5 @@ public interface AlgorithmFactory<A extends Algorithm> {
      *
      * @return A new implementation instance.
      */
-    Matchr<A> craft();
+    A craft();
 }
