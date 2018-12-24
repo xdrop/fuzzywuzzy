@@ -65,20 +65,6 @@ public class Fuzzywuzzy extends AlgorithmBase {
     }
 
     /**
-     * Engine implementation for Fuzzywuzzy algorithm
-     */
-    private static class Engine extends Matchr<Fuzzywuzzy> {
-        /**
-         * Private contructor, used by {@link Factory}.
-         *
-         * @param algo The algorithm to be stored.
-         */
-        private Engine(Fuzzywuzzy algo) {
-            super(algo);
-        }
-    }
-
-    /**
      * Factory implementation for Fuzzywuzzy algorithm
      */
     private static class Factory implements AlgorithmFactory<Fuzzywuzzy> {
@@ -90,8 +76,8 @@ public class Fuzzywuzzy extends AlgorithmBase {
         }
 
         @Override
-        public Matchr<Fuzzywuzzy> craft() {
-            return new Engine(new Fuzzywuzzy());
+        public Fuzzywuzzy craft() {
+            return new Fuzzywuzzy();
         }
     }
 }
