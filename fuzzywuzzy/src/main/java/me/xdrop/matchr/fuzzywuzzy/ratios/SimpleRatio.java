@@ -12,7 +12,7 @@ public class SimpleRatio implements ScoringFunction {
      * @return The resulting ratio of similarity
      */
     @Override
-    public Integer apply(String s1, String s2) {
+    public int apply(String s1, String s2) {
         return (int) Math.round(100 * Levenshtein.getRatio(s1, s2));
     }
 }

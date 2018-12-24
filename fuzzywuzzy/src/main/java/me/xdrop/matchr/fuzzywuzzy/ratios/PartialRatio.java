@@ -19,7 +19,7 @@ public class PartialRatio implements ScoringFunction {
      * @return The partial ratio
      */
     @Override
-    public Integer apply(String s1, String s2) {
+    public int apply(String s1, String s2) {
         String shorter;
         String longer;
 

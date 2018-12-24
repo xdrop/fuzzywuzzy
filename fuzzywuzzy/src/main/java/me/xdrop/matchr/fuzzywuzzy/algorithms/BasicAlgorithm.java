@@ -17,7 +17,7 @@ public abstract class BasicAlgorithm implements ScoringFunction {
 
     public abstract int apply(String s1, String s2, StringMapper<String> stringProcessor);
 
-    public Integer apply(String s1, String s2){
+    public int apply(String s1, String s2){
 
         return apply(s1, s2, this.stringFunction);
 
