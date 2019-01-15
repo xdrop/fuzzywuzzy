@@ -11,12 +11,12 @@ public class Rymm extends AlgorithmBase {
     public final static AlgorithmFactory<Rymm> FACTORY = new Factory();
 
     private Rymm() {
-        super(Method.INTELLIGENT);
+        super(Method.PARTIAL_MATCH);
     }
 
     public enum Method implements ScoringMethod {
-        INTELLIGENT(new EditDistance(true)),
-        NORMAL(new EditDistance(false));
+        PARTIAL_MATCH(new EditDistance(true)),
+        COMPLETE_MATCH(new EditDistance(false));
 
         private final ScoringFunction scoringFunction;
 
