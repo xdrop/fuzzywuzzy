@@ -1,93 +1,53 @@
-import java.util.function.BiConsumer
-
 apply plugin: 'maven-publish'
-apply plugin: 'signing'
 
-publishing {
-    repositories {
-        maven {
-            def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots"
-            def releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2"
-            url = project.version.endsWith("SNAPSHOT") ? snapshotsRepoUrl : releasesRepoUrl
-            name = "Sonatype"
+ext {
+    sonatypeUsername = "" // only temporarily empty for jitpack publication
+    sonatypePassword = "" // only temporarily empty for jitpack publication
+    releaseVersion = project.version.endsWith("-SNAPSHOT")
+}
 
-            credentials {
-                def uName = ""
-                def passwd = ""
-                int r
-                def stream = new FileInputStream(new File(".credentials/sonatype-username.cred"))
-                while ((r = stream.read()) != -1) uName = (uName + (char)r)
-                stream = new FileInputStream(new File(".credentials/sonatype-password.cred"))
-                while ((r = stream.read()) != -1) passwd = (passwd + (char)r)
+allprojects {
+    apply plugin: 'maven-publish'
 
-                username uName
-                password passwd
-            }
-        }
-    }
-
-    publications {
-        mavenJava(MavenPublication) {
-            artifactId = 'fuzzywuzzy'
-            from components.java
-
-            gradle.rootProject.getChildProjects().forEach(new BiConsumer<? super String, ? super Project>(){
-                @Override
-                void accept(Object o1, Object o2) {
-                    final String name = (String) o1
-                    final Project proj = (Project) o2
-                    if (!name.toLowerCase().contains("compat")) // if not a compat module
-                        gradle.rootProject.publishing.publications.mavenJava.artifact proj.jar
+    publishing {
+        repositories {
+            maven {
+                name 'sonatype'
+                if (releaseVersion) {
+                    url 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+                } else {
+                    url 'https://oss.sonatype.org/content/repositories/snapshots/'
                 }
-            })
-
-            pom {
-                name = "FuzzyWuzzy"
-                description = "Fuzzy string matching algorithm for Java"
-                inceptionYear = '2018'
-
-                licenses {
-                    license {
-                        name = 'GPL 3'
-                        url = 'https://www.gnu.org/licenses/gpl-3.0.en.html'
-                    }
-                }
-
-                developers {
-                    developer {
-                        id = "xdrop"
-                        name = "Panayiotis P"
-                        url = "http://www.github.com/xdrop"
-                        timezone = "0"
-                    }
-                }
-
-                contributors {
-                    contributor {
-                        id = "burdoto"
-                        name = "Tobias Burdow"
-                        url = "http://www.github.com/burdoto"
-                        timezone = "+1"
-                    }
-                }
-
-                scm {
-                    connection = 'scm:git:https://github.com/xdrop/fuzzywuzzy.git'
-                    developerConnection = 'scm:git:git@github.com:xdrop/fuzzywuzzy.git'
-                    url = 'https://github.com/xdrop/fuzzywuzzy'
-                }
-
-                issueManagement {
-                    system = 'GitHub'
-                    url = 'https://github.com/xdrop/fuzzywuzzy/issues'
+                credentials {
+                    username sonatypeUsername
+                    password sonatypePassword
                 }
             }
         }
     }
 }
 
-signing {
-    useGpgCmd()
-    //noinspection GroovyAssignabilityCheck -> Wrong Error
-    sign publishing.publications.mavenJava
+// subartifact publications
+subprojects {
+    publishing {
+        publications {
+            javacord(MavenPublication) {
+                from components.java
+                artifact javadocJar
+                artifact sourcesJar
+            }
+        }
+    }
+}
+
+// main artifact publication
+publishing {
+    publications {
+        javacord(MavenPublication) {
+            // add the dependencies to the POM
+            from components.java
+            // but do not try to publish the JAR
+            artifacts.removeAll { !it.classifier && (it.extension == 'jar') }
+        }
+    }
 }

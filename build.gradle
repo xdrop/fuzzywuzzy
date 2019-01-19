@@ -10,7 +10,7 @@ task wrapper(type: Wrapper) {
     distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
 }
 
-allprojects {
+subprojects {
     apply plugin: 'java-library'
     apply plugin: 'groovy'
     
@@ -31,6 +31,24 @@ allprojects {
     jar {
         // add a redundant classifier to the jars; important for adding artifacts to publication
         classifier "sources-${project.name}".toLowerCase()
+    }
+
+    task javadocJar(type: Jar) {
+        group 'build'
+        description 'Assembles a jar archive containing the JavaDoc files.'
+        classifier 'javadoc'
+        from javadoc
+    }
+
+    task sourcesJar(type: Jar) {
+        group 'build'
+        description 'Assembles a jar archive containing the Java source files.'
+        classifier 'sources'
+        from sourceSets.main.allJava
+    }
+    
+    artifacts {
+        archives javadocJar, sourcesJar
     }
 
     javadoc {
