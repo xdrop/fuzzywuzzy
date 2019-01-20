@@ -76,39 +76,6 @@ project(':levenshtein') {
     }
 }
 
-project(':android-attacher') {
-    version '0.1.0'
-    
-    repositories {
-        google()
-    }
-    
-    dependencies {
-        implementation project(':fuzzywuzzy')
-        
-        // Workaround dependency for compiling with android methods baked in
-        compileOnly project(':android-compat')
-
-        println "[INFO] Resolving dependencies of module ${project.name} cannot be finished automatically; " +
-                "you need to set up Android SDK 28 manually as module SDK within your IDE."
-    }
-    
-    test {
-        // DO NOT run tests on Travis because this module additionally requires Android SDK 28 or higher.
-        outputs.upToDateWhen { true }
-    }
-}
-
-project(':android-compat') {
-    sourceSets {
-        main {
-            java {
-                srcDirs = ["src\\"]
-            }
-        }
-    }
-}
-
 // if we are not on travis, use the publishing file
 if (!isTravis()) {
     apply from: 'gradle/publishing.gradle'
