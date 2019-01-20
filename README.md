@@ -34,6 +34,9 @@ compile 'me.xdrop:fuzzywuzzy:2.0.0'
 ### Jar release
 Download the latest release [here](https://github.com/xdrop/fuzzywuzzy/releases) and add to your classpath
 
+## Available Modules
+[Android convenience module](https://github.com/burdoto/matchr-android) by [burdoto](https://github.com/burdoto/)
+
 ## Usage
 
 #### Calculating ratios using Levenshtein methods
