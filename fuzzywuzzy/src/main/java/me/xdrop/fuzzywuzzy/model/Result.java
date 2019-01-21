@@ -89,7 +89,7 @@ public class Result<T> implements Comparable<Result<T>> {
     public boolean equals(Object other) {
         if (!(other instanceof Result)) return false;
         final Result res = (Result) other;
-        return res.isStringReferent == isStringReferent && res.string.equals(string);
+        return res.isStringReferent == isStringReferent && res.referent.equals(referent);
     }
 
     @Override
