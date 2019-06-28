@@ -1,0 +1,14 @@
+import static java.lang.System.getenv
+
+ext {
+    artifactName = 'fuzzywuzzy'
+    projectName = 'FuzzyWuzzy'
+    projectDescription = 'Java fuzzy string matching implemenation of the well known Python\'s fuzzywuzzy algorithm. Fuzzy search for Java'
+
+    snapshot = project.version.endsWith("-SNAPSHOT")
+
+    sonatypeUsername = getenv("sonatypeUsername")
+    sonatypePassword = getenv("sonatypePassword")
+}
+
+ext."signing.password" = getenv("gpgKeyPassword")
