@@ -1,66 +1,63 @@
+buildscript {
+    repositories.gradlePluginPortal()
+    dependencies.classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.21.0"
+}
 
 apply plugin: 'java-library'
 
-project.version = '2.0.0'
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+group 'me.xdrop'
+version '2.0.0'
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.10.2'
+apply from: 'gradle/vars.gradle'
+
+def exportedProjects = [
+        ':fuzzywuzzy',
+        ':levenshtein'
+]
+
+wrapper {
+    gradleVersion = '5.2'
     distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
 }
 
 allprojects {
+    tasks.withType(Javadoc) {
+        options {
+            encoding = 'UTF-8'
+            links = [
+                    "https://docs.oracle.com/javase/8/docs/api/",
+                    "https://docs.oracle.com/javaee/7/api/"
+            ]
+        }
+    }
+}
+
+subprojects {
     apply plugin: 'java-library'
-    apply plugin: 'groovy'
-    
+
     group 'me.xdrop'
 
     sourceCompatibility = 1.7
     targetCompatibility = 1.7
 
-    repositories {
-        jcenter()
+    task sourcesJar(type: Jar) {
+        from sourceSets.main.allJava
+        classifier = "sources"
     }
+
+    task javadocJar(type: Jar) {
+        //javadoc
+        from javadoc.destinationDir
+        classifier = "javadoc"
+    }
+
+    compileJava.options.encoding = 'UTF-8'
+    
+    repositories.jcenter()
 
     dependencies {
         testImplementation 'org.easymock:easymock:3.6'
         testImplementation 'org.codehaus.groovy:groovy-test:2.5.3'
-    }
-    
-    jar {
-        // add a redundant classifier to the jars; important for adding artifacts to publication
-        classifier "sources-${project.name}".toLowerCase()
-    }
-
-    javadoc {
-        source = sourceSets.main.allJava
-        options.encoding = 'UTF-8'
-        options.destinationDirectory = new File("docs\\javadoc")
-        outputs.upToDateWhen { false }
-    }
-
-    compileTestGroovy {
-        // DefaultStringProcessorTest is using special characters
-        options.encoding = 'UTF-8'
-    }
-
-    sourceSets {
-        main {
-            java {
-                srcDirs = ["src\\main\\java"]
-            }
-        }
-
-        test {
-            groovy {
-                srcDirs = ["src\\test\\groovy"]
-            }
-        }
-    }
-    
-    test {
-        outputs.upToDateWhen { false }
     }
 }
 
@@ -72,49 +69,15 @@ project(':levenshtein') {
     version '2.0.0'
 
     dependencies {
-        implementation project(':fuzzywuzzy')
+        api project(':fuzzywuzzy')
     }
 }
 
-project(':android-attacher') {
-    version '0.1.0'
-    
-    repositories {
-        google()
-    }
-    
-    dependencies {
-        implementation project(':fuzzywuzzy')
-        
-        // Workaround dependency for compiling with android methods baked in
-        compileOnly project(':android-compat')
-
-        println "[INFO] Resolving dependencies of module ${project.name} cannot be finished automatically; " +
-                "you need to set up Android SDK 28 manually as module SDK within your IDE."
-    }
-    
-    test {
-        // DO NOT run tests on Travis because this module additionally requires Android SDK 28 or higher.
-        outputs.upToDateWhen { true }
-    }
+task allJavadoc(type: Javadoc) {
+    source exportedProjects.collect { project(it).sourceSets.main.allJava }
+    classpath = files(exportedProjects.collect { project(it).sourceSets.main.compileClasspath })
+    options.encoding = 'UTF-8'
+    options.destinationDirectory(file("./docs/"))
 }
 
-project(':android-compat') {
-    sourceSets {
-        main {
-            java {
-                srcDirs = ["src\\"]
-            }
-        }
-    }
-}
-
-// if we are not on travis, use the publishing file
-if (!isTravis()) {
-    apply from: 'gradle/publishing.gradle'
-}
-
-// utility method to decide whether we are on travis ci machine
-static boolean isTravis() {
-    return System.getenv().containsKey("TRAVIS")
-}
+apply from: 'gradle/publishing.gradle'
