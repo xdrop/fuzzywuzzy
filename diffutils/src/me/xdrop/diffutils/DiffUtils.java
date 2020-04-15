@@ -127,6 +127,18 @@ public class DiffUtils {
 
         while (i > 0 || j > 0) {
 
+            if (i != 0 && j != 0 && matrix[ptr] == matrix[ptr - len2 - 1]
+                    && c1[p1 + i - 1] == c2[p2 + j - 1]) {
+
+                i--;
+                j--;
+                ptr -= len2 + 1;
+                dir = 0;
+
+                continue;
+
+            }
+
             if (dir < 0 && j != 0 && matrix[ptr] == matrix[ptr - 1] + 1) {
 
                 EditOp eop = new EditOp();
@@ -151,18 +163,6 @@ public class DiffUtils {
                 eop.spos = --i + o1;
                 eop.dpos = j + o2;
                 ptr -= len2;
-
-                continue;
-
-            }
-
-            if (i != 0 && j != 0 && matrix[ptr] == matrix[ptr - len2 - 1]
-                    && c1[p1 + i - 1] == c2[p2 + j - 1]) {
-
-                i--;
-                j--;
-                ptr -= len2 + 1;
-                dir = 0;
 
                 continue;
 
