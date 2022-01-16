@@ -1,3 +1,5 @@
+[![Maven Central](https://img.shields.io/maven-central/v/me.xdrop/fuzzywuzzy?logo=apache-maven&style=flat-square)](https://search.maven.org/artifact/me.xdrop/fuzzywuzzy)
+
 # JavaWuzzy
 
 ## FuzzyWuzzy Java Implementation
@@ -16,28 +18,46 @@ this in Java. Enjoy!
 
 
 ## Installation
+
+In Maven and Gradle examples, remember to replace "`VERSION`" with the 
+[latest release](https://search.maven.org/artifact/me.xdrop/fuzzywuzzy) of this
+library.
+
 ### Maven Central
 ```xml
 <dependency>
     <groupId>me.xdrop</groupId>
     <artifactId>fuzzywuzzy</artifactId>
-    <version>1.3.1</version>
+    <version>VERSION</version>
 </dependency>
 ```
 
 ### Gradle
 ```gradle
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
-    implementation 'me.xdrop:fuzzywuzzy:1.3.1'
+    implementation 'me.xdrop:fuzzywuzzy:VERSION'
+}
+```
+
+### JPMS 
+
+If you use Java 9 or newer, and use the Java Platform Module System (JPMS), you will need to add
+the following declarations to your `module-info.java` file:
+
+```java
+module my.modulename.here {
+    requires java.base;
+    requires me.xdrop.fuzzywuzzy;
 }
 ```
 
 ### Jar release
-Download the latest release [here](https://github.com/xdrop/fuzzywuzzy/releases) and add to your classpath
+
+Download the latest release [here](https://github.com/xdrop/fuzzywuzzy/releases) and add to your classpath.
 
 ## Usage
 
