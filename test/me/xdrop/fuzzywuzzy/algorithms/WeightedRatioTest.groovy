@@ -23,9 +23,7 @@ class WeightedRatioTest extends GroovyTestCase {
     }
 
     void testWRatio() {
-
         assertEquals 68, new WeightedRatio().apply("test", "pesticide")
-
     }
 
 }

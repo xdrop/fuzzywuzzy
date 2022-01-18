@@ -14,7 +14,6 @@ class TokenSetTest extends GroovyTestCase {
 
     void testUsesStringProcessor() {
         def ts = new TokenSet()
-
         ToStringFunction<String> mock = mock(ToStringFunction)
 
         expect(mock.apply(eq("notthesame")))
@@ -29,9 +28,7 @@ class TokenSetTest extends GroovyTestCase {
     }
 
     void testUsesRatio(){
-
         def ts = new TokenSet();
-
         def mock = mock(Ratio)
 
         expect(mock.apply(anyObject(String), anyObject(String)))
@@ -41,17 +38,13 @@ class TokenSetTest extends GroovyTestCase {
         replay(mock)
 
         assertEquals 0, ts.apply("one two", "one three", mock)
-
-
     }
 
     void testTokenSet() {
-
         def ts = new TokenSet();
 
         assertEquals 46, ts.apply("test", "pesticide")
         assertEquals 75, ts.apply("test", "pesticide", new PartialRatio())
-
     }
 
 }

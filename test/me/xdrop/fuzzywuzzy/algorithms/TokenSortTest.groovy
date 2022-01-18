@@ -14,9 +14,7 @@ import static org.easymock.EasyMock.replay
 class TokenSortTest extends GroovyTestCase {
 
     void testUsesStringProcessor() {
-
         def ts = new TokenSort()
-
         ToStringFunction<String> mock = mock(ToStringFunction)
 
         expect(mock.apply(eq("notthesame")))
@@ -28,13 +26,10 @@ class TokenSortTest extends GroovyTestCase {
         replay(mock)
 
         assertEquals 100, ts.apply("notthesame", "thesame", mock)
-
     }
 
     void testUsesRatio() {
-
         def ts = new TokenSort();
-
         def mock = mock(Ratio)
 
         expect(mock.apply(anyObject(String), anyObject(String)))
@@ -44,16 +39,13 @@ class TokenSortTest extends GroovyTestCase {
         replay(mock)
 
         assertEquals 0, ts.apply("one two", "one three", mock)
-
     }
 
     void testTokenSort() {
-
         def ts = new TokenSort();
 
         assertEquals 75, ts.apply("test", "pesticide", new PartialRatio())
         assertEquals 46, ts.apply("test", "pesticide", new SimpleRatio())
-
     }
 
 }
