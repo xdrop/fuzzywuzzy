@@ -27,7 +27,7 @@ public class PartialRatio implements Ratio {
         String shorter;
         String longer;
 
-        if (s1.length() < s2.length()){
+        if (s1.length() <= s2.length()){
 
             shorter = s1;
             longer = s2;
