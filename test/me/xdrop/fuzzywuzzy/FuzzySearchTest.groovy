@@ -41,6 +41,9 @@ class FuzzySearchTest extends GroovyTestCase {
 
     void testTokenSetPartial() {
         assertEquals 11, FuzzySearch.tokenSetPartialRatio("fuzzy was a bear", "blind 100")
+        assertEquals 58, FuzzySearch.tokenSetPartialRatio("worm_mikeala", "mikeala rath")
+        assertEquals 80, FuzzySearch.tokenSetPartialRatio("c_wasyluka", "crystal wasyluka")
+        assertEquals 78, FuzzySearch.tokenSetPartialRatio("a_bacdefg", "crystal bacdefg")
         assertEquals 67, FuzzySearch.partialRatio("chicago transit authority" , "cta")
     }
 

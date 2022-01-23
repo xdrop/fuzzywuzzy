@@ -6,7 +6,7 @@ import me.xdrop.fuzzywuzzy.ToStringFunction;
 
 public class DefaultStringFunction implements ToStringFunction<String> {
 
-    private final static String pattern = "[^\\p{Alnum}]";
+    private final static String pattern = "(?ui)\\W";
     private final static Pattern r = compilePattern();
 
 
