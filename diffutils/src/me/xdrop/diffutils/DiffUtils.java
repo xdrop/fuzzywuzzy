@@ -16,6 +16,9 @@ import java.util.Map;
  * so it is mostly non readable (eg. var names)
  */
 public class DiffUtils {
+    /* Set the maximum size of the integer array for storing the
+       matrix to avoid filling up the heap and result in OOM */
+    public static int MAX_MATRIX_SIZE = 100000;
 
     public static EditOp[] getEditOps(String s1, String s2) {
         return getEditOps(s1.length(), s1, s2.length(), s2);
@@ -58,7 +61,16 @@ public class DiffUtils {
         len1++;
         len2++;
 
-        matrix = new int[len2 * len1];
+        /* Special checking to avoid creating a very large integer array
+           which will up the heap and cause OOM. It also avoid possible
+           negative index because of integer wrap around on the result
+           of large number multiplication. */
+        int matrixSize = len2 * len1;
+        if ((matrixSize > DiffUtils.MAX_MATRIX_SIZE) || (matrixSize <= 0)) {
+            throw new IllegalArgumentException("Provided strings are too long to handle.");
+        }
+
+        matrix = new int[matrixSize];
 
         for (i = 0; i < len2; i++)
             matrix[i] = i;
